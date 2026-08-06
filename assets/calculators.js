@@ -13,6 +13,11 @@
   const shareButton = document.querySelector('[data-share-result]');
   let shareText = '';
 
+  form.querySelectorAll('.error').forEach((error) => {
+    error.setAttribute('role', 'status');
+    error.setAttribute('aria-live', 'polite');
+  });
+
   const won = (value) => `${Math.round(value).toLocaleString('ko-KR')}원`;
   const num = (name) => Number(form.elements[name]?.value);
   const value = (name) => String(form.elements[name]?.value || '').trim();
@@ -33,22 +38,27 @@
     return false;
   };
   const range = (name, min, max) => {
+    if (String(form.elements[name]?.value ?? '').trim() === '') return invalidate(name, `${labelText(name)}을(를) 입력해 주세요.`);
     const n = num(name);
     if (!Number.isFinite(n) || n < min || n > max) return invalidate(name, `${labelText(name)}은(는) ${min}~${max} 범위로 입력해 주세요.`);
     return true;
   };
-  const show = (headline, items, note) => {
+  const show = (headline, items, note, options = {}) => {
     resultValue.textContent = headline;
     resultList.innerHTML = items.map(([key, val]) => `<li><span>${escapeHtml(key)}</span><strong>${escapeHtml(val)}</strong></li>`).join('');
     resultNote.textContent = note;
     resultEmpty.hidden = true;
     resultContent.hidden = false;
-    shareText = [`[생활계산소] ${document.querySelector('h1').textContent}`, headline, ...items.map(([k, v]) => `${k}: ${v}`), note].join('\n');
-    const params = new URLSearchParams();
-    [...form.elements].forEach((el) => {
-      if (el.name && el.type !== 'submit' && el.type !== 'button' && String(el.value).trim() !== '') params.set(el.name, el.value);
-    });
-    history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+    shareText = options.shareText || [`[생활계산소] ${document.querySelector('h1').textContent}`, headline, ...items.map(([k, v]) => `${k}: ${v}`), note].join('\n');
+    if (options.updateUrl !== false) {
+      const params = new URLSearchParams();
+      [...form.elements].forEach((el) => {
+        if (el.name && el.type !== 'submit' && el.type !== 'button' && String(el.value).trim() !== '') params.set(el.name, el.value);
+      });
+      history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+    } else {
+      history.replaceState(null, '', location.pathname);
+    }
     resultContent.focus({ preventScroll: true });
   };
 
@@ -112,7 +122,22 @@
         debtors[i][1] -= amount; creditors[j][1] -= amount;
         if (debtors[i][1] < 1) i++; if (creditors[j][1] < 1) j++;
       }
-      show(`1인당 ${won(share)}`, [['총 경비', won(total)], ['참여 인원', `${names.length}명`], ['정산 방법', transfers.length ? transfers.join(' / ') : '추가 송금 없음']], '원 단위 반올림으로 실제 송금 합계에 몇 원의 차이가 생길 수 있습니다.');
+      const participantLines = names.map((name) => `${name}: 최종 부담액 ${won(share)} (결제 ${won(paid[name])})`);
+      const transferLines = transfers.length ? transfers : ['추가 송금 없음'];
+      const expenseShareText = [
+        '[생활계산소] 여행 경비 분배 결과',
+        `총 경비: ${won(total)}`,
+        `1인당 최종 부담액: ${won(share)}`,
+        '',
+        '[참가자별 최종 부담액]',
+        ...participantLines,
+        '',
+        '[송금할 내역]',
+        ...transferLines,
+        '',
+        '원 단위 반올림으로 실제 송금 합계에 몇 원의 차이가 생길 수 있습니다.'
+      ].join('\n');
+      show(`1인당 ${won(share)}`, [['총 경비', won(total)], ['참여 인원', `${names.length}명`], ['정산 방법', transfers.length ? transfers.join(' / ') : '추가 송금 없음']], '원 단위 반올림으로 실제 송금 합계에 몇 원의 차이가 생길 수 있습니다.', { updateUrl: false, shareText: expenseShareText });
     },
     teams() {
       const names = value('names').split(/[\n,]+/).map((s) => s.trim()).filter(Boolean);
@@ -149,5 +174,9 @@
   });
   resultCopy?.addEventListener('click', () => window.copyText(shareText, '결과를 복사했습니다.'));
   shareButton?.addEventListener('click', () => window.copyText(location.href, '입력값이 담긴 주소를 복사했습니다.'));
-  if (restoreQuery() && type !== 'teams') form.requestSubmit();
+  if (type === 'expenses') {
+    if (location.search) history.replaceState(null, '', location.pathname);
+  } else if (restoreQuery() && type !== 'teams') {
+    form.requestSubmit();
+  }
 })();
