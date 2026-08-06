@@ -12,9 +12,12 @@ const routes = [
   'event-drink-calculator', 'moving-box-calculator', 'travel-expense-splitter',
   'random-team-generator', 'about', 'contact', 'privacy', 'terms', 'disclaimer'
 ];
+const calculatorRoutes = new Set(routes.slice(1, 8));
 
 for (const route of routes) {
-  const file = resolve(root, route, 'index.html');
+  const file = calculatorRoutes.has(route)
+    ? resolve(root, 'calculator', route, 'index.html')
+    : resolve(root, route, 'index.html');
   const pageUrl = `${baseUrl}/${route ? `${route}/` : ''}`;
   let html = await readFile(file, 'utf8');
   html = html

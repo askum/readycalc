@@ -28,7 +28,8 @@
 - `privacy/index.html`: 개인정보처리방침 상세 고지
 - `contact/index.html`: 확정되지 않은 운영자 이메일 제거
 - `travel-expense-splitter/index.html`: 공유 URL 버튼 제거 및 안내 수정
-- 7개 계산기 HTML: 공통 설정 로드, breadcrumb 문구 및 정적 자산 버전 정리
+- `calculator/`: 7개 계산기 페이지를 한 폴더 아래에 모아 관리
+- `_redirects`: 계산기 소스 위치를 옮겨도 기존 공개 URL이 유지되도록 Cloudflare Pages 내부 rewrite 적용
 - 메인·소개·약관·면책조항·404 HTML: 공통 설정 로드와 정적 자산 버전 정리
 - `scripts/sync-site-url.mjs`: 기본 URL을 SEO 메타와 검색엔진 파일에 동기화
 - `README.md`: 운영 및 재배포 안내 갱신
@@ -78,13 +79,13 @@ node scripts/sync-site-url.mjs
 
 ## 로컬 테스트 방법
 
-별도의 빌드나 패키지 설치가 필요하지 않습니다.
+Cloudflare Pages의 `_redirects` rewrite까지 포함해 기존 공개 URL을 테스트하려면 Wrangler 개발 서버를 사용합니다.
 
 ```bash
-python3 -m http.server 8080
+npx wrangler pages dev . --port 8787
 ```
 
-브라우저에서 `http://localhost:8080`을 엽니다. 루트 기준 경로를 사용하므로 HTML 파일을 직접 여는 대신 정적 파일 서버로 확인하세요.
+브라우저에서 `http://localhost:8787/meat-calculator/`처럼 기존 공개 URL을 엽니다. 단순 정적 파일 확인만 필요하면 `python3 -m http.server 8080`을 실행하고 `/calculator/meat-calculator/` 같은 실제 폴더 경로로 접근할 수 있습니다.
 
 기본 정적 검사는 다음과 같이 실행할 수 있습니다.
 
@@ -102,7 +103,7 @@ Cloudflare Pages 프로젝트 `readycalc`은 GitHub 저장소 `askum/readycalc`�
 
 ```bash
 git add --all
-git commit -m "Improve shared footer, privacy and accessibility"
+git commit -m "Organize calculator pages"
 git push origin main
 ```
 
@@ -130,8 +131,19 @@ assets/
   styles.css         모바일 우선 공통 스타일
 scripts/
   sync-site-url.mjs  SEO URL 동기화 도구
-각-페이지/index.html
+calculator/
+  meat-calculator/index.html
+  fuel-cost-calculator/index.html
+  camping-food-calculator/index.html
+  event-drink-calculator/index.html
+  moving-box-calculator/index.html
+  travel-expense-splitter/index.html
+  random-team-generator/index.html
+about/ contact/ privacy/ terms/ disclaimer/
 _headers
+_redirects
 robots.txt
 sitemap.xml
 ```
+
+계산기 HTML의 실제 위치는 `calculator/` 아래이지만 공개 URL은 기존과 동일합니다. 예를 들어 `calculator/meat-calculator/index.html`은 Cloudflare Pages에서 `/meat-calculator/`로 제공됩니다. 새 계산기를 추가할 때는 `calculator/`에 페이지를 만든 뒤 `_redirects`, 메인 목록, `sitemap.xml`, `scripts/sync-site-url.mjs`의 경로 목록을 함께 갱신하세요.
