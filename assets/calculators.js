@@ -1,0 +1,153 @@
+(() => {
+  'use strict';
+  const form = document.querySelector('[data-calculator]');
+  if (!form) return;
+
+  const type = form.dataset.calculator;
+  const resultEmpty = document.querySelector('[data-result-empty]');
+  const resultContent = document.querySelector('[data-result-content]');
+  const resultValue = document.querySelector('[data-result-value]');
+  const resultList = document.querySelector('[data-result-list]');
+  const resultNote = document.querySelector('[data-result-note]');
+  const resultCopy = document.querySelector('[data-copy-result]');
+  const shareButton = document.querySelector('[data-share-result]');
+  let shareText = '';
+
+  const won = (value) => `${Math.round(value).toLocaleString('ko-KR')}원`;
+  const num = (name) => Number(form.elements[name]?.value);
+  const value = (name) => String(form.elements[name]?.value || '').trim();
+  const fmt = (value, unit = '') => `${Number(value.toFixed(1)).toLocaleString('ko-KR')}${unit}`;
+  const escapeHtml = (text) => String(text).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+  const labelText = (name) => form.querySelector(`label[for="${form.elements[name]?.id}"]`)?.textContent || name;
+
+  const clearErrors = () => {
+    form.querySelectorAll('[aria-invalid="true"]').forEach((el) => el.removeAttribute('aria-invalid'));
+    form.querySelectorAll('.error').forEach((el) => { el.textContent = ''; });
+  };
+  const invalidate = (name, message) => {
+    const input = form.elements[name];
+    if (!input) return false;
+    input.setAttribute('aria-invalid', 'true');
+    const error = document.getElementById(`${input.id}-error`);
+    if (error) error.textContent = message;
+    return false;
+  };
+  const range = (name, min, max) => {
+    const n = num(name);
+    if (!Number.isFinite(n) || n < min || n > max) return invalidate(name, `${labelText(name)}은(는) ${min}~${max} 범위로 입력해 주세요.`);
+    return true;
+  };
+  const show = (headline, items, note) => {
+    resultValue.textContent = headline;
+    resultList.innerHTML = items.map(([key, val]) => `<li><span>${escapeHtml(key)}</span><strong>${escapeHtml(val)}</strong></li>`).join('');
+    resultNote.textContent = note;
+    resultEmpty.hidden = true;
+    resultContent.hidden = false;
+    shareText = [`[생활계산소] ${document.querySelector('h1').textContent}`, headline, ...items.map(([k, v]) => `${k}: ${v}`), note].join('\n');
+    const params = new URLSearchParams();
+    [...form.elements].forEach((el) => {
+      if (el.name && el.type !== 'submit' && el.type !== 'button' && String(el.value).trim() !== '') params.set(el.name, el.value);
+    });
+    history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+    resultContent.focus({ preventScroll: true });
+  };
+
+  const calculators = {
+    meat() {
+      if (![range('adults', 0, 100), range('children', 0, 100), range('meals', 1, 10)].every(Boolean)) return;
+      const adults = num('adults'); const children = num('children');
+      if (adults + children < 1) return invalidate('adults', '전체 인원은 1명 이상이어야 합니다.');
+      const factor = Number(value('appetite'));
+      const grams = (adults * 250 + children * 150) * num('meals') * factor;
+      show(fmt(grams / 1000, 'kg'), [['600g 팩 기준', `${Math.ceil(grams / 600)}팩`], ['1인·1끼 평균', fmt(grams / (adults + children) / num('meals'), 'g')], ['여유분 포함 여부', factor > 1 ? '넉넉하게 포함' : factor < 1 ? '가볍게 계산' : '표준']], '부위가 여러 가지라면 총량을 삼겹살 60%, 목살 40%처럼 나눠 준비해 보세요.');
+    },
+    fuel() {
+      if (![range('distance', 1, 10000), range('efficiency', 1, 50), range('price', 500, 5000), range('toll', 0, 1000000), range('people', 1, 100)].every(Boolean)) return;
+      const liters = num('distance') / num('efficiency');
+      const fuelCost = liters * num('price'); const total = fuelCost + num('toll');
+      show(won(total), [['예상 연료량', fmt(liters, 'L')], ['순수 주유비', won(fuelCost)], ['통행료 포함', won(total)], ['1인당 분담액', won(total / num('people'))]], '실제 연비와 유가, 우회·정체 상황에 따라 달라질 수 있습니다.');
+    },
+    camping() {
+      if (![range('adults', 0, 30), range('children', 0, 30), range('nights', 1, 14)].every(Boolean)) return;
+      const people = num('adults') + num('children');
+      if (people < 1) return invalidate('adults', '전체 인원은 1명 이상이어야 합니다.');
+      const eq = num('adults') + num('children') * .6;
+      const meals = num('nights') * 2 + 1; const factor = Number(value('style'));
+      const rice = eq * meals * 180 * factor; const meat = eq * meals * 200 * factor;
+      const water = people * (num('nights') + 1) * 2 * factor;
+      show(`${people}명 · ${meals}끼`, [['쌀', fmt(rice / 1000, 'kg')], ['고기·단백질', fmt(meat / 1000, 'kg')], ['생수', fmt(water, 'L')], ['라면 비상식', `${Math.ceil(eq * .7)}개`]], '반찬·간식은 취향 차이가 커서 별도로 추가하고, 식수와 세척용 물을 구분해 준비하세요.');
+    },
+    drinks() {
+      if (![range('guests', 1, 1000), range('hours', 1, 24)].every(Boolean)) return;
+      const guests = num('guests'); const hours = num('hours'); const weather = Number(value('weather'));
+      const beverage = guests * (.6 + Math.max(0, hours - 2) * .15) * weather;
+      const cans = Math.ceil(beverage / .355); const ice = guests * .45 * weather;
+      show(`${fmt(beverage, 'L')} 준비`, [['355mL 캔 기준', `${cans}캔`], ['얼음', fmt(ice, 'kg')], ['500mL 생수', `${Math.ceil(guests * .8 * weather)}병`], ['예비분', '계산값에 약 10% 반영']], '주류는 참석자 연령과 행사 성격을 확인해 별도로 계산하고, 얼음은 음료용과 보냉용을 나눠 담으세요.');
+    },
+    boxes() {
+      if (![range('people', 1, 20), range('rooms', 1, 20), range('years', 0, 50)].every(Boolean)) return;
+      const factor = Number(value('amount'));
+      const boxes = Math.ceil((num('people') * 8 + num('rooms') * 6 + num('years') * 1.5) * factor);
+      show(`${boxes}개`, [['소형 박스 권장', `${Math.ceil(boxes * .35)}개`], ['중형 박스 권장', `${Math.ceil(boxes * .5)}개`], ['대형 박스 권장', `${Math.max(0, boxes - Math.ceil(boxes * .35) - Math.ceil(boxes * .5))}개`], ['완충재', `${Math.ceil(boxes / 5)}롤 내외`]], '책과 식기는 작은 박스에, 침구와 옷은 큰 박스에 담아 한 상자가 지나치게 무거워지지 않게 하세요.');
+    },
+    expenses() {
+      const names = value('names').split(',').map((s) => s.trim()).filter(Boolean);
+      if (names.length < 2 || names.length > 30) return invalidate('names', '이름을 쉼표로 구분해 2~30명 입력해 주세요.');
+      if (new Set(names).size !== names.length) return invalidate('names', '중복되지 않는 이름을 입력해 주세요.');
+      const paid = Object.fromEntries(names.map((name) => [name, 0]));
+      const lines = value('payments').split('\n').map((s) => s.trim()).filter(Boolean);
+      if (!lines.length) return invalidate('payments', '결제 내역을 한 줄 이상 입력해 주세요.');
+      for (const [i, line] of lines.entries()) {
+        const split = line.split(','); const payer = split[0]?.trim(); const amount = Number(split[1]?.replace(/[^0-9.-]/g, ''));
+        if (!(payer in paid) || !Number.isFinite(amount) || amount <= 0) return invalidate('payments', `${i + 1}번째 줄을 “이름, 금액” 형식으로 확인해 주세요.`);
+        paid[payer] += amount;
+      }
+      const total = Object.values(paid).reduce((a, b) => a + b, 0); const share = total / names.length;
+      const creditors = names.map((name) => [name, paid[name] - share]).filter(([, d]) => d > .5).sort((a,b) => b[1]-a[1]);
+      const debtors = names.map((name) => [name, share - paid[name]]).filter(([, d]) => d > .5).sort((a,b) => b[1]-a[1]);
+      const transfers = []; let i = 0; let j = 0;
+      while (i < debtors.length && j < creditors.length) {
+        const amount = Math.min(debtors[i][1], creditors[j][1]);
+        transfers.push(`${debtors[i][0]} → ${creditors[j][0]} ${won(amount)}`);
+        debtors[i][1] -= amount; creditors[j][1] -= amount;
+        if (debtors[i][1] < 1) i++; if (creditors[j][1] < 1) j++;
+      }
+      show(`1인당 ${won(share)}`, [['총 경비', won(total)], ['참여 인원', `${names.length}명`], ['정산 방법', transfers.length ? transfers.join(' / ') : '추가 송금 없음']], '원 단위 반올림으로 실제 송금 합계에 몇 원의 차이가 생길 수 있습니다.');
+    },
+    teams() {
+      const names = value('names').split(/[\n,]+/).map((s) => s.trim()).filter(Boolean);
+      if (names.length < 2 || names.length > 200) return invalidate('names', '이름을 2~200명 입력해 주세요.');
+      if (new Set(names).size !== names.length) return invalidate('names', '중복된 이름이 있습니다. 구분할 수 있게 수정해 주세요.');
+      if (!range('count', 2, Math.min(20, names.length))) return;
+      const shuffled = [...names];
+      for (let i = shuffled.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; }
+      const teams = Array.from({ length: num('count') }, () => []);
+      shuffled.forEach((name, i) => teams[i % teams.length].push(name));
+      const html = teams.map((team, i) => `<section class="team"><h3>${i + 1}팀</h3><ol>${team.map((name) => `<li>${escapeHtml(name)}</li>`).join('')}</ol></section>`).join('');
+      resultValue.textContent = `${teams.length}개 팀 완성`;
+      resultList.innerHTML = `<li class="team-columns" style="display:grid">${html}</li>`;
+      resultNote.textContent = '다시 배정 버튼을 누르면 순서가 새로 섞입니다.';
+      resultEmpty.hidden = true; resultContent.hidden = false; resultContent.focus({ preventScroll: true });
+      shareText = [`[생활계산소] 랜덤 팀 배정`, ...teams.map((team, i) => `${i + 1}팀: ${team.join(', ')}`)].join('\n');
+      history.replaceState(null, '', `${location.pathname}?count=${num('count')}`);
+    }
+  };
+
+  const restoreQuery = () => {
+    const params = new URLSearchParams(location.search);
+    let restored = false;
+    params.forEach((val, key) => { if (form.elements[key]) { form.elements[key].value = val; restored = true; } });
+    return restored;
+  };
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault(); clearErrors(); calculators[type]?.();
+    form.querySelector('[aria-invalid="true"]')?.focus();
+  });
+  form.addEventListener('reset', () => {
+    setTimeout(() => { clearErrors(); resultEmpty.hidden = false; resultContent.hidden = true; history.replaceState(null, '', location.pathname); }, 0);
+  });
+  resultCopy?.addEventListener('click', () => window.copyText(shareText, '결과를 복사했습니다.'));
+  shareButton?.addEventListener('click', () => window.copyText(location.href, '입력값이 담긴 주소를 복사했습니다.'));
+  if (restoreQuery() && type !== 'teams') form.requestSubmit();
+})();
