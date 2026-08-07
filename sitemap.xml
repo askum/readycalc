@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://readycalc.pages.dev/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://readycalc.pages.dev/meat-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://readycalc.pages.dev/fuel-cost-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://readycalc.pages.dev/camping-food-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://readycalc.pages.dev/event-drink-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://readycalc.pages.dev/moving-box-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://readycalc.pages.dev/travel-expense-splitter/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://readycalc.pages.dev/random-team-generator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://readycalc.pages.dev/about/</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://readycalc.pages.dev/contact/</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://readycalc.pages.dev/privacy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://readycalc.pages.dev/terms/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://readycalc.pages.dev/disclaimer/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://readytools.kr/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://readytools.kr/meat-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://readytools.kr/fuel-cost-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://readytools.kr/camping-food-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://readytools.kr/event-drink-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://readytools.kr/moving-box-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://readytools.kr/travel-expense-splitter/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://readytools.kr/random-team-generator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://readytools.kr/about/</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://readytools.kr/contact/</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://readytools.kr/privacy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://readytools.kr/terms/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://readytools.kr/disclaimer/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
