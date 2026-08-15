@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>택배 박스 크기 추천 | 박스 호수·예상 택배비 계산기</title>
+  <meta name="description" content="물품의 가로·세로·높이와 무게를 입력하면 포장 여유를 반영한 택배 박스 호수급과 우체국 창구 등기소포 예상 택배비를 계산합니다.">
+  <link rel="canonical" href="https://readytools.kr/parcel-box-calculator/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
+  <meta property="og:title" content="택배 박스 크기 추천 | 생활계산소"><meta property="og:description" content="가로·세로·높이·무게로 맞는 박스 호수급과 예상 택배비를 확인하세요."><meta property="og:url" content="https://readytools.kr/parcel-box-calculator/"><meta property="og:image" content="https://readytools.kr/assets/og.png"><meta property="og:image:alt" content="생활계산소 택배 박스 크기 추천">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="택배 박스 크기 추천 | 생활계산소"><meta name="twitter:description" content="물품 크기와 무게로 박스 호수급과 우체국 예상 택배비를 계산하세요."><meta name="twitter:image" content="https://readytools.kr/assets/og.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=20260815-8"><script src="/assets/site-config.js?v=20260815-8"></script><script src="/assets/head.js?v=20260815-8"></script><script src="/assets/site.js?v=20260815-8" defer></script><script src="/assets/calculators.js?v=20260815-8" defer></script>
+  <script type="application/ld+json" data-breadcrumb-schema>{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"택배 박스 크기 추천","url":"https://readytools.kr/parcel-box-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"JavaScript 사용 가능 브라우저","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"inLanguage":"ko-KR","description":"물품 크기와 무게로 대표 택배 박스 호수급 및 우체국 창구 등기소포 예상 요금을 계산하는 무료 도구"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산소","item":"https://readytools.kr/"},{"@type":"ListItem","position":2,"name":"전체 계산기","item":"https://readytools.kr/#tools"},{"@type":"ListItem","position":3,"name":"택배 박스 크기 추천","item":"https://readytools.kr/parcel-box-calculator/"}]}]}</script>
+</head>
+<body><div data-site-header></div>
+<main id="main"><div class="container">
+  <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">택배 박스 크기 추천</li></ol></nav>
+  <section class="hero"><p class="eyebrow">Pack it right</p><h1>택배 박스 크기 추천</h1><p>보낼 물건의 크기와 포장 완료 무게로 박스 호수급과 예상 택배비를 확인하세요.</p></section>
+  <section class="calculator-layout" aria-label="택배 박스와 요금 계산">
+    <form class="panel form-grid" data-calculator="parcel-box" novalidate>
+      <p class="notice">물건 자체의 가장 긴 면을 가로로 보고 cm 단위로 재세요. 계산 시 각 변에 포장 여유 2cm를 더합니다.</p>
+      <div class="field-row"><div class="field"><label for="width">물품 가로(cm)</label><input id="width" name="width" type="number" inputmode="decimal" min="1" max="200" step="0.1" value="30" aria-describedby="width-error"><p class="error" id="width-error"></p></div><div class="field"><label for="depth">물품 세로(cm)</label><input id="depth" name="depth" type="number" inputmode="decimal" min="1" max="200" step="0.1" value="20" aria-describedby="depth-error"><p class="error" id="depth-error"></p></div></div>
+      <div class="field-row"><div class="field"><label for="height">물품 높이(cm)</label><input id="height" name="height" type="number" inputmode="decimal" min="1" max="200" step="0.1" value="15" aria-describedby="height-error"><p class="error" id="height-error"></p></div><div class="field"><label for="weight">포장 완료 예상 무게(kg)</label><input id="weight" name="weight" type="number" inputmode="decimal" min="0.01" max="100" step="0.01" value="2" aria-describedby="weight-hint weight-error"><p class="hint" id="weight-hint">박스와 완충재 무게까지 포함해 입력하면 요금 추정이 더 정확합니다.</p><p class="error" id="weight-error"></p></div></div>
+      <div class="button-row"><button class="button button-primary" type="submit">박스 크기와 택배비 계산하기</button><button class="button button-secondary" type="reset">입력 초기화</button></div>
+    </form>
+    <aside class="panel result-panel" aria-live="polite" aria-label="택배 박스 계산 결과"><div class="result-empty" data-result-empty>크기와 무게를 입력하고<br>계산하기를 눌러주세요.</div><div class="result-content" data-result-content tabindex="-1" hidden><span class="result-kicker">추천 박스 호수급</span><div class="result-value" data-result-value></div><ul class="result-list" data-result-list></ul><p class="notice" data-result-note></p><div class="button-row"><button class="button button-primary" type="button" data-copy-result>계산 결과 복사</button><button class="button button-secondary" type="button" data-share-result>계산 결과 공유</button></div></div></aside>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 결과 아래 --><span>광고</span></div>
+  <article class="section content-copy">
+    <h2>택배 박스 호수와 예상 택배비 계산 원리</h2>
+    <p>택배 박스 크기 추천 계산기는 입력한 물품의 가로, 세로, 높이에 각각 2cm의 포장 여유를 더한 뒤 대표적인 시중 택배 박스 규격과 비교합니다. 물품은 박스 안에서 방향을 바꿔 담을 수 있으므로 세 변을 작은 순서대로 정렬해 가장 작은 박스부터 들어가는지 확인합니다. 예를 들어 30×20×15cm 물품은 포장 여유를 반영하면 32×22×17cm가 필요하고, 이 크기를 수용하는 대표 규격 중 가장 작은 호수급을 추천합니다. 깨지기 쉬운 물건, 모서리가 날카로운 물건, 의류처럼 눌리는 물건은 필요한 완충 공간이 달라질 수 있으므로 결과를 출발점으로 사용하세요.</p>
+    <p>‘1호’, ‘2호’, ‘4호’ 같은 택배 박스 호수는 법으로 통일된 전국 공통 내경 규격이 아닙니다. 우체국이나 포장재 판매처, 택배사에 따라 같은 호수라도 가로·세로·높이와 골판지 두께가 다를 수 있습니다. 그래서 이 도구는 1호급 22×19×9cm, 2호급 27×18×15cm, 3호급 34×25×21cm, 4호급 41×31×28cm, 5호급 48×38×34cm, 6호급 52×48×40cm를 대표 비교값으로 사용합니다. 주문 전에는 결과에 표시된 호수만 보지 말고 실제 상품의 내경이 물품과 완충재를 수용하는지 반드시 확인해야 합니다.</p>
+    <p>예상 택배비는 <a href="https://www.koreapost.go.kr/kpost/subIndex/201.do?pSiteIdx=125" rel="external">우정사업본부 국내소포 요금표</a>의 창구접수 등기소포 기준으로 계산합니다. 2025년 6월 1일부터 적용된 일반 국내 요금은 중량 단계와 크기 단계가 다르면 더 높은 단계를 사용합니다. 크기는 포장한 박스의 가로·세로·높이 합계이며, 이 계산기는 추천 박스의 대표 외경 합계를 이용합니다. 입력 무게가 3kg 이하여도 박스 합계가 100cm를 넘으면 크기 단계 때문에 요금이 올라갈 수 있습니다. 반대로 작은 박스라도 무게가 무거우면 중량 단계의 요금이 적용됩니다.</p>
+    <p>우체국 국내소포는 최대 30kg, 세 변의 합 160cm, 가장 긴 한 변 100cm 이내만 취급합니다. 계산 결과의 예상액에는 박스 구매비, 제주 익일배달 차액, 착불 수수료, 보험취급 수수료, 도서지역 조건, 사전접수 할인이나 개별 택배 계약 운임이 포함되지 않습니다. 편의점 택배와 민간 택배사는 별도 요금표를 사용하므로 실제 접수 전에 이용할 서비스의 최신 조건을 확인하세요. 물품의 파손 가능성과 내용물 제한도 운임과 별개의 접수 조건입니다.</p>
+    <h2>택배 박스 추천 예시</h2>
+    <div class="content-grid three"><section class="info-card"><h3>작은 생활용품</h3><p>20×15×7cm, 1kg 물품은 포장 여유를 더해 약 22×17×9cm가 필요합니다. 대표 규격으로는 1호급부터 비교합니다.</p></section><section class="info-card"><h3>신발 상자 크기</h3><p>30×20×15cm, 2kg이면 약 32×22×17cm 공간이 필요해 3호급이 추천될 수 있습니다. 완충재 두께를 함께 확인하세요.</p></section><section class="info-card"><h3>부피 큰 물품</h3><p>45×35×30cm, 8kg이면 5호급 이상을 검토합니다. 크기 합과 무게 중 더 높은 우체국 요금 단계가 적용됩니다.</p></section></div>
+  </article>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 설명 중간 --><span>광고</span></div>
+  <section class="section faq"><h2>택배 박스 계산기 FAQ</h2>
+    <details><summary>박스 호수는 모든 판매처가 같나요?</summary><p>아닙니다. 호수 명칭은 판매처마다 실제 가로·세로·높이가 다를 수 있으므로 표시된 대표 규격과 구매할 박스의 내경을 비교하세요.</p></details>
+    <details><summary>왜 물품 크기에 2cm를 더하나요?</summary><p>박스 벽과 얇은 완충재가 들어갈 최소 여유를 만들기 위한 일반 가정입니다. 유리나 전자제품은 더 많은 공간이 필요할 수 있습니다.</p></details>
+    <details><summary>무게는 물건만 재면 되나요?</summary><p>실제 택배 요금은 포장 완료 상태의 무게를 사용하므로 박스, 테이프와 완충재를 포함한 예상 무게를 입력하는 편이 좋습니다.</p></details>
+    <details><summary>표시된 택배비가 결제 금액과 다른 이유는 무엇인가요?</summary><p>이 도구는 우체국 창구 등기소포의 일반 국내 요금만 사용합니다. 제주, 부가취급, 할인, 민간 택배 계약과 접수처별 조건은 다를 수 있습니다.</p></details>
+    <details><summary>30kg이 넘거나 세 변의 합이 160cm를 넘으면 어떻게 하나요?</summary><p>우체국 국내소포 접수 규격을 초과합니다. 물품을 안전하게 나누거나 대형 화물 운송 서비스를 별도로 확인하세요.</p></details>
+    <details><summary>깨지기 쉬운 물건도 추천 호수 그대로 쓰면 되나요?</summary><p>아닙니다. 에어캡과 모서리 보호대가 충분히 들어가도록 한 단계 큰 박스를 검토하고, 흔들림이 없게 빈 공간을 채우세요.</p></details>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 관련 계산기 위 --><span>광고</span></div>
+  <section class="section"><h2>함께 쓰기 좋은 계산기</h2><div class="tools-grid"><a class="tool-card" href="/moving-box-calculator/"><span class="tool-icon" aria-hidden="true">📦</span><h3>이사 박스 수</h3><p>이삿짐에 필요한 박스 개수 계산</p></a><a class="tool-card" href="/unit-converter/"><span class="tool-icon" aria-hidden="true">📏</span><h3>단위 변환기</h3><p>길이와 무게 단위 빠르게 변환</p></a><a class="tool-card" href="/text-tools/"><span class="tool-icon" aria-hidden="true">📝</span><h3>텍스트 도구</h3><p>주소와 문구를 보기 좋게 정리</p></a></div></section>
+</div></main><div data-site-footer></div></body></html>

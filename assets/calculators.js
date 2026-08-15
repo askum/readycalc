@@ -13,7 +13,8 @@
   const shareButton = document.querySelector('[data-share-result]');
   const persistentTypes = new Set([
     'chicken', 'company-drinks', 'pizza', 'packing-list', 'currency-exchange',
-    'travel-budget', 'international-cost'
+    'travel-budget', 'international-cost', 'parcel-box', 'first-birthday-food',
+    'cake-size'
   ]);
   const storageKey = `living-calc-inputs:${type}`;
   let shareText = '';
@@ -30,6 +31,15 @@
     microwave: { name: '전자레인지', power: 1000, hours: 0.2, days: 30, duty: 100, note: '하루 합계 약 12분 사용하는 예시입니다.' },
     induction: { name: '인덕션', power: 2000, hours: 1, days: 30, duty: 60, note: '화력 조절로 최대 출력이 계속 유지되지 않는 점을 반영했습니다.' }
   };
+
+  const parcelBoxes = [
+    { label: '1호급', dimensions: [22, 19, 9] },
+    { label: '2호급', dimensions: [27, 18, 15] },
+    { label: '3호급', dimensions: [34, 25, 21] },
+    { label: '4호급', dimensions: [41, 31, 28] },
+    { label: '5호급', dimensions: [48, 38, 34] },
+    { label: '6호급', dimensions: [52, 48, 40] }
+  ];
 
   const scrollToResultOnMobile = () => {
     if (!window.matchMedia('(max-width: 899px)').matches) return;
@@ -149,6 +159,96 @@
         ['연간 예상 사용량', fmt(yearlyKwh, 'kWh')],
         ['연간 예상 추가 요금', won(yearlyCost)]
       ], '입력한 유효 단가를 곱한 가전의 추가 사용분 추정치입니다. 실제 청구액은 누진 구간, 기본요금, 조정요금, 세금과 사용 환경에 따라 달라집니다.', { updateUrl: false });
+    },
+    'parcel-box'() {
+      if (![range('width', 1, 200), range('depth', 1, 200), range('height', 1, 200), range('weight', .01, 100)].every(Boolean)) return;
+      const itemDimensions = [num('width'), num('depth'), num('height')];
+      const packedDimensions = itemDimensions.map((dimension) => dimension + 2);
+      const sortedItem = [...packedDimensions].sort((a, b) => a - b);
+      const recommended = parcelBoxes.find((box) => {
+        const sortedBox = [...box.dimensions].sort((a, b) => a - b);
+        return sortedItem.every((dimension, index) => dimension <= sortedBox[index]);
+      });
+      const shippingDimensions = recommended?.dimensions || packedDimensions;
+      const sizeSum = shippingDimensions.reduce((sum, dimension) => sum + dimension, 0);
+      const longestSide = Math.max(...shippingDimensions);
+      const weight = num('weight');
+      const weightRank = weight <= 3 ? 0 : weight <= 5 ? 1 : weight <= 7 ? 2 : weight <= 10 ? 3 : weight <= 15 ? 4 : weight <= 20 ? 5 : weight <= 25 ? 6 : weight <= 30 ? 7 : 8;
+      const sizeRank = sizeSum <= 80 ? 0 : sizeSum <= 100 ? 1 : sizeSum <= 120 ? 3 : sizeSum <= 160 ? 7 : 8;
+      const feeRank = Math.max(weightRank, sizeRank);
+      const registeredParcelFees = [4000, 4500, 5000, 6000, 7000, 8000, 11000, 13000];
+      const accepted = feeRank < registeredParcelFees.length && longestSide <= 100;
+      const boxDimensions = recommended ? `${recommended.dimensions.join(' × ')}cm` : `${packedDimensions.map((n) => fmt(n)).join(' × ')}cm 이상`;
+      const headline = recommended ? recommended.label : '맞춤 박스 필요';
+      show(headline, [
+        ['추천 박스 규격', boxDimensions],
+        ['택배 크기 합계', `${fmt(sizeSum, 'cm')}`],
+        ['입력 무게', `${fmt(weight, 'kg')}`],
+        ['우체국 창구 등기소포 예상', accepted ? won(registeredParcelFees[feeRank]) : '접수 규격 초과']
+      ], accepted
+        ? '물품 각 변에 2cm의 포장 여유를 더했습니다. 박스 호수와 내경은 판매처마다 다르며, 요금은 2025년 6월 1일 적용 우체국 창구 등기소포 기준의 일반 국내 예상액입니다.'
+        : '우체국 국내소포는 30kg 이하, 세 변의 합 160cm 이하, 한 변 100cm 이내만 접수합니다. 물품을 나누거나 운송 업체에 별도 문의하세요.', { updateUrl: false });
+    },
+    'first-birthday-food'() {
+      if (![range('adults', 0, 500), range('children', 0, 300), range('hours', 1, 6)].every(Boolean)) return;
+      const adults = num('adults'); const children = num('children');
+      if (adults + children < 1) return invalidate('adults', '전체 참석 인원은 1명 이상이어야 합니다.');
+      const styles = {
+        meal: { name: '식사 중심', rice: 1, main: 180, side: 260, fruit: 150, drink: .5 },
+        buffet: { name: '뷔페·여러 메뉴', rice: .85, main: 150, side: 220, fruit: 130, drink: .45 },
+        snack: { name: '다과 중심', rice: .35, main: 80, side: 130, fruit: 100, drink: .4 }
+      };
+      const style = styles[value('style')] || styles.buffet;
+      const reserve = Number(value('reserve'));
+      const adultEquivalent = adults + children * .6;
+      const guestCount = adults + children;
+      const drinkTimeFactor = 1 + Math.max(0, num('hours') - 2) * .2;
+      const ricePortions = Math.ceil(adultEquivalent * style.rice * reserve);
+      const mainKg = adultEquivalent * style.main * reserve / 1000;
+      const sideKg = adultEquivalent * style.side * reserve / 1000;
+      const fruitKg = adultEquivalent * style.fruit * reserve / 1000;
+      const drinks = guestCount * style.drink * drinkTimeFactor * reserve;
+      show(`${Math.ceil(adultEquivalent * reserve)}인분 기준`, [
+        ['준비 방식', style.name],
+        ['밥·면 등 식사', `${ricePortions}인분`],
+        ['고기·생선 등 메인', fmt(mainKg, 'kg')],
+        ['전·샐러드·반찬 합계', fmt(sideKg, 'kg')],
+        ['과일·후식', fmt(fruitKg, 'kg')],
+        ['물·음료', fmt(drinks, 'L')]
+      ], '어린이는 성인의 60%로 환산하고 선택한 여유분을 더한 일반 준비량입니다. 케이터링 메뉴 수, 손님 연령, 행사 시간과 음식 보관 환경에 따라 조정하세요.', { updateUrl: false });
+    },
+    'cake-size'() {
+      if (![range('adults', 0, 300), range('children', 0, 200)].every(Boolean)) return;
+      const adults = num('adults'); const children = num('children');
+      if (adults + children < 1) return invalidate('adults', '케이크를 먹을 인원은 1명 이상이어야 합니다.');
+      const factors = { afterMeal: .8, mainDessert: 1.1, otherDesserts: .65 };
+      const factor = factors[value('occasion')] || factors.afterMeal;
+      const servings = Math.max(1, Math.ceil((adults + children * .6) * factor));
+      const cakeSizes = [
+        { label: '미니', diameter: 12, capacity: 3 },
+        { label: '1호', diameter: 15, capacity: 6 },
+        { label: '2호', diameter: 18, capacity: 10 },
+        { label: '3호', diameter: 21, capacity: 15 },
+        { label: '4호', diameter: 24, capacity: 20 },
+        { label: '5호', diameter: 27, capacity: 25 }
+      ];
+      const recommendations = [];
+      let remaining = servings;
+      while (remaining > 25) {
+        recommendations.push(cakeSizes[5]);
+        remaining -= 25;
+      }
+      if (remaining > 0) recommendations.push(cakeSizes.find((size) => remaining <= size.capacity) || cakeSizes[5]);
+      const grouped = recommendations.reduce((map, size) => map.set(size.label, (map.get(size.label) || 0) + 1), new Map());
+      const recommendationText = [...grouped].map(([label, count]) => `${label}${count > 1 ? ` ${count}개` : ''}`).join(' + ');
+      const totalCapacity = recommendations.reduce((sum, size) => sum + size.capacity, 0);
+      const diameterText = recommendations.map((size) => `${size.label} 약 ${size.diameter}cm`).join(' · ');
+      show(recommendationText, [
+        ['필요 조각 수', `${servings}조각 내외`],
+        ['대표 지름', diameterText],
+        ['추천 구성의 여유', `${Math.max(0, totalCapacity - servings)}조각`],
+        ['성인 환산 인원', fmt(adults + children * .6, '명')]
+      ], '케이크 호수와 실제 지름·높이·제공 인원은 제과점마다 다릅니다. 주문할 매장의 규격표와 커팅 방식, 다른 디저트 양을 확인한 뒤 최종 주문하세요.', { updateUrl: false });
     },
     chicken() {
       if (![range('adults', 0, 100), range('children', 0, 100)].every(Boolean)) return;

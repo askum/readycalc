@@ -21,6 +21,9 @@
   <url><loc>https://readytools.kr/password-generator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://readytools.kr/text-tools/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://readytools.kr/electricity-cost-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://readytools.kr/parcel-box-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://readytools.kr/first-birthday-food-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://readytools.kr/cake-size-calculator/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://readytools.kr/about/</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
   <url><loc>https://readytools.kr/contact/</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
   <url><loc>https://readytools.kr/privacy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>

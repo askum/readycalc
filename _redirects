@@ -61,3 +61,12 @@
 /electricity-cost-calculator /calculator/electricity-cost-calculator/ 200
 /electricity-cost-calculator/ /calculator/electricity-cost-calculator/ 200
 /electricity-cost-calculator/* /calculator/electricity-cost-calculator/:splat 200
+/parcel-box-calculator /calculator/parcel-box-calculator/ 200
+/parcel-box-calculator/ /calculator/parcel-box-calculator/ 200
+/parcel-box-calculator/* /calculator/parcel-box-calculator/:splat 200
+/first-birthday-food-calculator /calculator/first-birthday-food-calculator/ 200
+/first-birthday-food-calculator/ /calculator/first-birthday-food-calculator/ 200
+/first-birthday-food-calculator/* /calculator/first-birthday-food-calculator/:splat 200
+/cake-size-calculator /calculator/cake-size-calculator/ 200
+/cake-size-calculator/ /calculator/cake-size-calculator/ 200
+/cake-size-calculator/* /calculator/cake-size-calculator/:splat 200

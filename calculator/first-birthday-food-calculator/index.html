@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>돌잔치 음식량 계산기 | 인원별 식사·음료 준비량</title>
+  <meta name="description" content="돌잔치 성인·아이 인원과 행사 시간, 식사 방식, 여유분을 반영해 밥·면, 메인 요리, 반찬, 과일과 음료 준비량을 계산하세요.">
+  <link rel="canonical" href="https://readytools.kr/first-birthday-food-calculator/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
+  <meta property="og:title" content="돌잔치 음식량 계산기 | 생활계산소"><meta property="og:description" content="성인과 어린이 수에 맞는 돌잔치 음식과 음료 준비량을 계산하세요."><meta property="og:url" content="https://readytools.kr/first-birthday-food-calculator/"><meta property="og:image" content="https://readytools.kr/assets/og.png"><meta property="og:image:alt" content="생활계산소 돌잔치 음식량 계산기">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="돌잔치 음식량 계산기 | 생활계산소"><meta name="twitter:description" content="돌잔치 인원과 식사 방식별 음식 준비량을 확인하세요."><meta name="twitter:image" content="https://readytools.kr/assets/og.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=20260815-8"><script src="/assets/site-config.js?v=20260815-8"></script><script src="/assets/head.js?v=20260815-8"></script><script src="/assets/site.js?v=20260815-8" defer></script><script src="/assets/calculators.js?v=20260815-8" defer></script>
+  <script type="application/ld+json" data-breadcrumb-schema>{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"돌잔치 음식량 계산기","url":"https://readytools.kr/first-birthday-food-calculator/","applicationCategory":"LifestyleApplication","operatingSystem":"Any","browserRequirements":"JavaScript 사용 가능 브라우저","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"inLanguage":"ko-KR","description":"돌잔치 참석 인원과 식사 방식에 따른 음식 및 음료 준비량을 계산하는 무료 웹 계산기"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산소","item":"https://readytools.kr/"},{"@type":"ListItem","position":2,"name":"전체 계산기","item":"https://readytools.kr/#tools"},{"@type":"ListItem","position":3,"name":"돌잔치 음식량 계산기","item":"https://readytools.kr/first-birthday-food-calculator/"}]}]}</script>
+</head>
+<body><div data-site-header></div>
+<main id="main"><div class="container">
+  <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">돌잔치 음식량 계산기</li></ol></nav>
+  <section class="hero"><p class="eyebrow">Celebrate the first</p><h1>돌잔치 음식량 계산기</h1><p>초대 인원과 상차림 방식에 맞춰 식사, 메인 요리, 반찬, 과일과 음료 준비량을 정리하세요.</p></section>
+  <section class="calculator-layout" aria-label="돌잔치 음식량 계산">
+    <form class="panel form-grid" data-calculator="first-birthday-food" novalidate>
+      <div class="field-row"><div class="field"><label for="adults">성인 인원</label><input id="adults" name="adults" type="number" inputmode="numeric" min="0" max="500" step="1" value="40" aria-describedby="adults-error"><p class="error" id="adults-error"></p></div><div class="field"><label for="children">어린이 인원</label><input id="children" name="children" type="number" inputmode="numeric" min="0" max="300" step="1" value="10" aria-describedby="children-hint children-error"><p class="hint" id="children-hint">유아·초등 저학년처럼 성인보다 적게 먹는 인원 기준입니다.</p><p class="error" id="children-error"></p></div></div>
+      <div class="field"><label for="style">음식 제공 방식</label><select id="style" name="style"><option value="meal">식사 중심 상차림</option><option value="buffet" selected>뷔페·여러 메뉴</option><option value="snack">다과 중심 모임</option></select></div>
+      <div class="field-row"><div class="field"><label for="hours">행사 시간</label><input id="hours" name="hours" type="number" inputmode="decimal" min="1" max="6" step="0.5" value="2" aria-describedby="hours-error"><p class="error" id="hours-error"></p></div><div class="field"><label for="reserve">준비 여유분</label><select id="reserve" name="reserve"><option value="1">여유분 없음</option><option value="1.1" selected>10% 여유</option><option value="1.15">15% 넉넉하게</option></select></div></div>
+      <div class="button-row"><button class="button button-primary" type="submit">돌잔치 음식량 계산하기</button><button class="button button-secondary" type="reset">입력 초기화</button></div>
+    </form>
+    <aside class="panel result-panel" aria-live="polite" aria-label="돌잔치 음식량 결과"><div class="result-empty" data-result-empty>참석 인원과 행사 조건을 입력하고<br>계산하기를 눌러주세요.</div><div class="result-content" data-result-content tabindex="-1" hidden><span class="result-kicker">추천 준비량</span><div class="result-value" data-result-value></div><ul class="result-list" data-result-list></ul><p class="notice" data-result-note></p><div class="button-row"><button class="button button-primary" type="button" data-copy-result>계산 결과 복사</button><button class="button button-secondary" type="button" data-share-result>계산 결과 공유</button></div></div></aside>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 결과 아래 --><span>광고</span></div>
+  <article class="section content-copy">
+    <h2>돌잔치 음식량은 어떻게 계산하나요?</h2>
+    <p>돌잔치 음식량 계산기는 성인 참석자와 어린이 참석자를 같은 양으로 단순 합산하지 않습니다. 어린이 한 명을 성인 식사량의 약 60%로 환산해 ‘성인 환산 인원’을 만들고, 선택한 음식 제공 방식과 여유분을 곱합니다. 예를 들어 성인 40명과 어린이 10명이면 기본 환산 인원은 46명입니다. 10% 여유를 선택하면 약 51인분을 준비 기준으로 제시합니다. 아직 이유식을 먹는 영아, 청소년처럼 성인과 비슷하게 먹는 손님, 식사하지 않고 인사만 하는 손님이 많다면 어린이 수나 여유분을 실제 초대 명단에 맞게 조정하세요.</p>
+    <p>식사 중심 상차림은 밥이나 면 1인분, 고기·생선 같은 메인 요리 약 180g, 전·샐러드·반찬을 합해 약 260g을 성인 환산 1명 기준으로 사용합니다. 여러 음식을 조금씩 담는 뷔페 방식은 밥·면 0.85인분, 메인 150g, 반찬류 합계 220g을 적용합니다. 케이크와 핑거푸드 위주의 다과 모임은 식사 항목의 비중을 낮춰 계산합니다. 결과의 반찬 합계는 전 한 종류의 무게가 아니라 잡채, 샐러드, 김치, 전과 곁들임을 모두 합친 양이므로 실제 메뉴 수로 나누어 발주해야 합니다.</p>
+    <p>과일과 후식은 식사 중심 150g, 뷔페 130g, 다과 중심 100g을 성인 환산 1명 기준으로 잡습니다. 물과 음료는 어린이를 포함한 실제 참석 인원에 기본 0.4~0.5L를 곱하고, 행사가 2시간보다 길면 시간당 20%씩 늘립니다. 여름철 야외 행사, 실내 온도가 높은 장소, 주차와 이동 시간이 긴 장소라면 생수를 별도로 넉넉히 준비하세요. 반대로 호텔이나 뷔페 업체가 기본 음료를 제공한다면 중복 주문이 되지 않도록 계약서의 포함 항목을 먼저 확인하는 것이 좋습니다.</p>
+    <p>돌잔치는 예약 인원과 실제 방문 인원의 차이가 생기기 쉬운 행사입니다. 참석 확정 답변, 가족 단위의 어린이 연령, 행사 시작 시간, 다른 돌상 음식과 답례품 제공 여부가 남는 음식량에 영향을 줍니다. 이 계산기는 장보기나 케이터링 상담 전에 규모를 가늠하는 일반 추정치이며 위생적인 보관 시간과 조리 시설 용량을 판단하지 않습니다. 최종 주문은 행사장과 케이터링 업체의 최소 주문 단위, 보증 인원 변경 마감일, 음식 리필 방식과 잔여 음식 반출 규정을 함께 확인해 결정하세요.</p>
+    <h2>돌잔치 음식 준비 예시</h2>
+    <div class="content-grid three"><section class="info-card"><h3>가족 중심 20명</h3><p>성인 16명, 어린이 4명의 뷔페형 모임은 성인 환산 약 18.4명입니다. 10% 여유를 더해 약 21인분 기준으로 준비합니다.</p></section><section class="info-card"><h3>식사 중심 50명</h3><p>성인 40명, 어린이 10명이 식사를 충분히 하는 행사라면 밥·면과 메인 요리를 식사 중심 기준으로 잡고 음료를 별도 확인합니다.</p></section><section class="info-card"><h3>오후 다과 30명</h3><p>식사 시간 이후 케이크와 핑거푸드를 제공한다면 다과 중심을 선택해 식사량을 낮추고, 케이크 호수는 별도 계산기로 확인합니다.</p></section></div>
+  </article>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 설명 중간 --><span>광고</span></div>
+  <section class="section faq"><h2>돌잔치 음식량 FAQ</h2>
+    <details><summary>어린이는 왜 성인의 60%로 계산하나요?</summary><p>유아와 어린이가 평균적으로 성인보다 적게 먹는 점을 단순화한 기준입니다. 청소년이나 식사량이 큰 어린이는 성인 인원에 포함해 계산하세요.</p></details>
+    <details><summary>예약 인원보다 몇 퍼센트 여유 있게 준비해야 하나요?</summary><p>참석 여부가 확실하고 메뉴가 많은 뷔페는 10%가 일반적인 출발점입니다. 현장 방문 가능성이 크거나 리필이 어려우면 15%를 검토하세요.</p></details>
+    <details><summary>케이크도 과일·후식 무게에 포함되나요?</summary><p>결과의 과일·후식은 과일과 작은 디저트 준비량을 가늠하는 값입니다. 메인 케이크는 케이크 호수 계산기로 따로 정하는 편이 정확합니다.</p></details>
+    <details><summary>주류는 왜 계산하지 않나요?</summary><p>가족 구성과 이동 수단에 따라 편차가 크기 때문입니다. 주류가 필요한 행사라면 회식 술 계산기의 수량을 참고하되 음주를 권하지 않도록 준비하세요.</p></details>
+    <details><summary>뷔페 업체의 보증 인원과 계산 결과가 다르면 무엇을 따르나요?</summary><p>계약된 업체의 최소 보증 인원, 리필 방식과 1인분 규격을 우선 확인하고 이 결과는 메뉴별 상담을 위한 참고값으로 사용하세요.</p></details>
+    <details><summary>남은 음식을 포장해도 되나요?</summary><p>행사장 규정과 상온 노출 시간을 확인해야 합니다. 조리 후 오래 지난 음식은 반출이 가능하더라도 식품 안전을 위해 폐기하는 편이 안전할 수 있습니다.</p></details>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 관련 계산기 위 --><span>광고</span></div>
+  <section class="section"><h2>함께 쓰기 좋은 계산기</h2><div class="tools-grid"><a class="tool-card" href="/cake-size-calculator/"><span class="tool-icon" aria-hidden="true">🎂</span><h3>케이크 몇 호?</h3><p>인원과 제공 방식에 맞는 케이크 크기</p></a><a class="tool-card" href="/event-drink-calculator/"><span class="tool-icon" aria-hidden="true">🧊</span><h3>행사 음료·얼음</h3><p>참석자와 날씨에 맞는 음료 수량</p></a><a class="tool-card" href="/company-dinner-drink-calculator/"><span class="tool-icon" aria-hidden="true">🍻</span><h3>회식 술 계산기</h3><p>소주·맥주와 생수 준비량</p></a></div></section>
+</div></main><div data-site-footer></div></body></html>
