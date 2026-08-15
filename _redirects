@@ -58,3 +58,6 @@
 /text-tools /calculator/text-tools/ 200
 /text-tools/ /calculator/text-tools/ 200
 /text-tools/* /calculator/text-tools/:splat 200
+/electricity-cost-calculator /calculator/electricity-cost-calculator/ 200
+/electricity-cost-calculator/ /calculator/electricity-cost-calculator/ 200
+/electricity-cost-calculator/* /calculator/electricity-cost-calculator/:splat 200

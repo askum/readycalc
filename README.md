@@ -24,6 +24,7 @@
 - QR 코드 생성기
 - 비밀번호 생성기
 - 텍스트 도구
+- 전기요금 계산기
 - 사이트 소개
 - 문의하기
 - 개인정보처리방침
@@ -36,13 +37,15 @@
 - `assets/site.js`: 공통 푸터, 계산기 안내, BreadcrumbList 구조화 데이터
 - `assets/calculators.js`: 빈 값 검증, 오류 안내, 여행 경비 결과 복사 및 URL 개인정보 보호
 - `assets/utilities.js`: 단위·날짜·QR·비밀번호·텍스트 도구의 로컬 처리, 검증, 복사와 공유
+- `assets/home.js`: 메인 카테고리 필터, 실시간 검색과 검색 결과 안내
+- `index.html`: 인기 TOP 5, 최신 계산기, 8개 카테고리와 20개 계산기 검색 UI
 - `assets/styles.css`: 모바일 터치 영역, 긴 결과, 카드·표·버튼 반응형 처리
 - `assets/favicon.svg`, `assets/head.js`: 공통 파비콘과 브라우저 테마 색상 적용
 - `_headers`: 파일명 고정 CSS·JavaScript가 이전 버전으로 남지 않도록 재검증 캐시 정책 적용
 - `privacy/index.html`: 개인정보처리방침 상세 고지
 - `contact/index.html`: 확정되지 않은 운영자 이메일 제거
 - `travel-expense-splitter/index.html`: 공유 URL 버튼 제거 및 안내 수정
-- `calculator/`: 19개 계산기·도구 페이지를 한 폴더 아래에 모아 관리
+- `calculator/`: 20개 계산기·도구 페이지를 한 폴더 아래에 모아 관리
 - `_redirects`: 계산기 소스 위치를 옮겨도 기존 공개 URL이 유지되도록 Cloudflare Pages 내부 rewrite 적용
 - 메인·소개·약관·면책조항·404 HTML: 공통 설정 로드와 정적 자산 버전 정리
 - `scripts/sync-site-url.mjs`: 기본 URL을 SEO 메타와 검색엔진 파일에 동기화
@@ -62,6 +65,7 @@
 - `calculator/qr-code-generator/index.html`: 외부 API 없는 QR SVG 생성
 - `calculator/password-generator/index.html`: Web Crypto 기반 무작위 비밀번호 생성
 - `calculator/text-tools/index.html`: 글자 수 분석과 공백·줄 정리
+- `calculator/electricity-cost-calculator/index.html`: 10개 가전의 월 전력사용량과 예상 추가 요금 계산
 
 위 신규 페이지는 각자 고유한 SEO 메타, WebApplication·BreadcrumbList 구조화 데이터, 800자 이상의 계산 설명, 예시 3개 이상, FAQ 5개 이상과 관련 계산기 링크를 포함합니다.
 
@@ -154,6 +158,7 @@ npx wrangler pages deploy . --project-name readycalc
 assets/
   calculators.js     계산, 검증, 결과 복사 로직
   utilities.js       단위·날짜·QR·비밀번호·텍스트 도구 로직
+  home.js            메인 카테고리와 검색 필터 로직
   favicon.svg        공통 파비콘
   head.js            광고 등 공통 head 코드 진입점
   site-config.js     기본 URL과 공통 검토일
@@ -181,6 +186,7 @@ calculator/
   qr-code-generator/index.html
   password-generator/index.html
   text-tools/index.html
+  electricity-cost-calculator/index.html
 about/ contact/ privacy/ terms/ disclaimer/
 _headers
 _redirects

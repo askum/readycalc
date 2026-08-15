@@ -18,6 +18,19 @@
   const storageKey = `living-calc-inputs:${type}`;
   let shareText = '';
 
+  const electricityPresets = {
+    aircon: { name: '에어컨', power: 1000, hours: 8, days: 30, duty: 60, note: '설정 온도에 도달하면 압축기가 쉬는 시간을 고려한 예시입니다.' },
+    fan: { name: '선풍기', power: 45, hours: 8, days: 30, duty: 100, note: '일반 가정용 선풍기의 연속 운전 예시입니다.' },
+    dehumidifier: { name: '제습기', power: 300, hours: 8, days: 30, duty: 70, note: '습도에 따라 압축기가 멈추는 시간을 반영한 예시입니다.' },
+    dryer: { name: '건조기', power: 2400, hours: 1.5, days: 12, duty: 75, note: '주 3회 정도 사용하는 고온 건조 코스 예시입니다.' },
+    washer: { name: '세탁기', power: 500, hours: 1.2, days: 12, duty: 60, note: '주 3회 표준 세탁 코스를 사용하는 예시입니다.' },
+    tv: { name: 'TV', power: 120, hours: 5, days: 30, duty: 100, note: '중형 LED TV를 매일 시청하는 예시입니다.' },
+    computer: { name: '컴퓨터', power: 350, hours: 5, days: 30, duty: 70, note: '데스크톱과 모니터를 함께 사용하는 예시입니다.' },
+    refrigerator: { name: '냉장고', power: 150, hours: 24, days: 30, duty: 35, note: '24시간 연결되지만 압축기가 간헐적으로 작동하는 점을 반영했습니다.' },
+    microwave: { name: '전자레인지', power: 1000, hours: 0.2, days: 30, duty: 100, note: '하루 합계 약 12분 사용하는 예시입니다.' },
+    induction: { name: '인덕션', power: 2000, hours: 1, days: 30, duty: 60, note: '화력 조절로 최대 출력이 계속 유지되지 않는 점을 반영했습니다.' }
+  };
+
   const scrollToResultOnMobile = () => {
     if (!window.matchMedia('(max-width: 899px)').matches) return;
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
@@ -120,6 +133,22 @@
       const beverage = guests * (.6 + Math.max(0, hours - 2) * .15) * weather;
       const cans = Math.ceil(beverage / .355); const ice = guests * .45 * weather;
       show(`${fmt(beverage, 'L')} 준비`, [['355mL 캔 기준', `${cans}캔`], ['얼음', fmt(ice, 'kg')], ['500mL 생수', `${Math.ceil(guests * .8 * weather)}병`], ['예비분', '계산값에 약 10% 반영']], '주류는 참석자 연령과 행사 성격을 확인해 별도로 계산하고, 얼음은 음료용과 보냉용을 나눠 담으세요.');
+    },
+    electricity() {
+      if (![range('power', 1, 10000), range('hours', .1, 24), range('days', 1, 31), range('quantity', 1, 20), range('duty', 1, 100), range('rate', 1, 2000)].every(Boolean)) return;
+      const appliance = electricityPresets[value('appliance')];
+      const dailyKwh = num('power') / 1000 * num('hours') * num('quantity') * num('duty') / 100;
+      const monthlyKwh = dailyKwh * num('days');
+      const monthlyCost = monthlyKwh * num('rate');
+      const yearlyKwh = monthlyKwh * 12;
+      const yearlyCost = monthlyCost * 12;
+      show(`${won(monthlyCost)} / 월`, [
+        ['선택 가전', appliance?.name || '직접 입력'],
+        ['하루 예상 사용량', fmt(dailyKwh, 'kWh')],
+        ['월 예상 사용량', fmt(monthlyKwh, 'kWh')],
+        ['연간 예상 사용량', fmt(yearlyKwh, 'kWh')],
+        ['연간 예상 추가 요금', won(yearlyCost)]
+      ], '입력한 유효 단가를 곱한 가전의 추가 사용분 추정치입니다. 실제 청구액은 누진 구간, 기본요금, 조정요금, 세금과 사용 환경에 따라 달라집니다.', { updateUrl: false });
     },
     chicken() {
       if (![range('adults', 0, 100), range('children', 0, 100)].every(Boolean)) return;
@@ -338,6 +367,22 @@
       return restored;
     } catch (_) { return false; }
   };
+
+  if (type === 'electricity') {
+    const applyElectricityPreset = () => {
+      const preset = electricityPresets[value('appliance')];
+      if (!preset) return;
+      form.elements.power.value = preset.power;
+      form.elements.hours.value = preset.hours;
+      form.elements.days.value = preset.days;
+      form.elements.duty.value = preset.duty;
+      const note = document.querySelector('[data-appliance-note]');
+      if (note) note.textContent = preset.note + ' 제품 라벨의 소비전력을 확인해 수정하세요.';
+    };
+    form.elements.appliance.addEventListener('change', applyElectricityPreset);
+    form.addEventListener('reset', () => setTimeout(applyElectricityPreset, 0));
+    applyElectricityPreset();
+  }
 
   form.addEventListener('submit', (event) => {
     event.preventDefault(); clearErrors(); saveInputs(); calculators[type]?.();

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>전기요금 계산기 | 가전제품 월 전기 사용량 계산</title>
+  <meta name="description" content="에어컨, 선풍기, 제습기, 건조기, 세탁기, TV, 컴퓨터, 냉장고, 전자레인지, 인덕션의 월 전력사용량과 예상 추가 전기요금을 계산하세요.">
+  <link rel="canonical" href="https://readytools.kr/electricity-cost-calculator/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
+  <meta property="og:title" content="전기요금 계산기 | 생활계산소"><meta property="og:description" content="가전제품의 소비전력과 사용시간으로 월 전력사용량과 예상 추가 요금을 확인하세요."><meta property="og:url" content="https://readytools.kr/electricity-cost-calculator/"><meta property="og:image" content="https://readytools.kr/assets/og.png"><meta property="og:image:alt" content="생활계산소 전기요금 계산기">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="전기요금 계산기 | 생활계산소"><meta name="twitter:description" content="에어컨부터 냉장고까지 가전별 월 예상 전기요금을 계산하세요."><meta name="twitter:image" content="https://readytools.kr/assets/og.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=20260815-7"><script src="/assets/site-config.js?v=20260815-7"></script><script src="/assets/head.js?v=20260815-7"></script><script src="/assets/site.js?v=20260815-7" defer></script><script src="/assets/calculators.js?v=20260815-7" defer></script>
+  <script type="application/ld+json" data-breadcrumb-schema>{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"전기요금 계산기","url":"https://readytools.kr/electricity-cost-calculator/","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"JavaScript 사용 가능 브라우저","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"inLanguage":"ko-KR","description":"가전제품 소비전력과 사용시간으로 월 전력사용량과 예상 추가 전기요금을 계산하는 무료 웹 계산기"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산소","item":"https://readytools.kr/"},{"@type":"ListItem","position":2,"name":"전체 계산기","item":"https://readytools.kr/#tools"},{"@type":"ListItem","position":3,"name":"전기요금 계산기","item":"https://readytools.kr/electricity-cost-calculator/"}]}]}</script>
+</head>
+<body><div data-site-header></div>
+<main id="main"><div class="container">
+  <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">전기요금 계산기</li></ol></nav>
+  <section class="hero"><p class="eyebrow">Know your watts</p><h1>전기요금 계산기</h1><p>가전제품의 소비전력과 사용시간으로 한 달 전력사용량과 예상 추가 요금을 확인하세요.</p></section>
+  <section class="calculator-layout" aria-label="가전제품 전기요금 계산">
+    <form class="panel form-grid" data-calculator="electricity" novalidate>
+      <div class="field"><label for="appliance">가전제품</label><select id="appliance" name="appliance" aria-describedby="appliance-note"><option value="aircon">에어컨</option><option value="fan">선풍기</option><option value="dehumidifier">제습기</option><option value="dryer">건조기</option><option value="washer">세탁기</option><option value="tv">TV</option><option value="computer">컴퓨터</option><option value="refrigerator">냉장고</option><option value="microwave">전자레인지</option><option value="induction">인덕션</option></select><p class="hint" id="appliance-note" data-appliance-note aria-live="polite"></p></div>
+      <div class="field-row"><div class="field"><label for="power">소비전력(W)</label><input id="power" name="power" type="number" inputmode="decimal" min="1" max="10000" step="1" value="1000" aria-describedby="power-error"><p class="error" id="power-error"></p></div><div class="field"><label for="quantity">사용 대수</label><input id="quantity" name="quantity" type="number" inputmode="numeric" min="1" max="20" step="1" value="1" aria-describedby="quantity-error"><p class="error" id="quantity-error"></p></div></div>
+      <div class="field-row"><div class="field"><label for="hours">하루 사용시간</label><input id="hours" name="hours" type="number" inputmode="decimal" min="0.1" max="24" step="0.1" value="8" aria-describedby="hours-error"><p class="error" id="hours-error"></p></div><div class="field"><label for="days">한 달 사용일수</label><input id="days" name="days" type="number" inputmode="numeric" min="1" max="31" step="1" value="30" aria-describedby="days-error"><p class="error" id="days-error"></p></div></div>
+      <div class="field"><label for="duty">실제 작동률(%)</label><input id="duty" name="duty" type="number" inputmode="decimal" min="1" max="100" step="1" value="60" aria-describedby="duty-hint duty-error"><p class="hint" id="duty-hint">압축기·히터가 계속 최대 출력으로 돌지 않는 가전의 작동 비율입니다.</p><p class="error" id="duty-error"></p></div>
+      <div class="field"><label for="rate">추정 단가(원/kWh)</label><input id="rate" name="rate" type="number" inputmode="decimal" min="1" max="2000" step="1" value="200" aria-describedby="rate-hint rate-error"><p class="hint" id="rate-hint">200원은 비교용 초기값입니다. 최근 고지서의 총청구액÷사용량으로 구한 평균 단가를 넣으면 더 현실적인 추정이 됩니다.</p><p class="error" id="rate-error"></p></div>
+      <div class="button-row"><button class="button button-primary" type="submit">전기요금 계산하기</button><button class="button button-secondary" type="reset">입력 초기화</button></div>
+    </form>
+    <aside class="panel result-panel" aria-live="polite" aria-label="전기요금 계산 결과"><div class="result-empty" data-result-empty>가전과 사용시간을 확인하고<br>계산하기를 눌러주세요.</div><div class="result-content" data-result-content tabindex="-1" hidden><span class="result-kicker">예상 추가 사용분</span><div class="result-value" data-result-value></div><ul class="result-list" data-result-list></ul><p class="notice" data-result-note></p><div class="button-row"><button class="button button-primary" type="button" data-copy-result>계산 결과 복사</button><button class="button button-secondary" type="button" data-share-result>도구 주소 공유</button></div></div></aside>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 결과 아래 --><span>광고</span></div>
+  <article class="section content-copy">
+    <h2>가전제품 전기요금 계산 원리</h2>
+    <p>전기요금 계산기의 첫 단계는 가전제품이 실제로 소비할 전력량을 킬로와트시(kWh)로 바꾸는 것입니다. 제품 라벨에 적힌 소비전력 W를 1,000으로 나누고 하루 사용시간, 한 달 사용일수, 사용 대수를 곱합니다. 여기에 실제 작동률을 적용하면 월 예상 사용량이 됩니다. 예를 들어 소비전력 1,000W인 에어컨을 하루 8시간씩 30일 사용하고 압축기가 평균 60% 시간 동안 작동한다고 가정하면 1kW × 8시간 × 30일 × 0.6 = 144kWh입니다.</p>
+    <p>에어컨, 제습기, 냉장고와 인덕션처럼 설정 온도나 화력에 따라 켜졌다 꺼지는 제품은 정격 소비전력을 사용시간 내내 그대로 곱하면 실제보다 크게 계산될 수 있습니다. 그래서 이 계산기는 ‘실제 작동률’을 따로 입력합니다. 선풍기나 TV처럼 사용 중 출력 변화가 비교적 작은 기기는 100%에 가깝게, 압축기나 히터가 간헐적으로 작동하는 기기는 제품의 에너지 소비효율 표시와 실제 사용 패턴을 참고해 수정하세요. 제공되는 프리셋은 입력을 돕는 일반적인 예시이며 특정 제품의 보증값이 아닙니다.</p>
+    <p>예상 추가 요금은 월 사용량에 입력한 추정 단가를 곱해 계산합니다. 초기값 200원/kWh는 가전끼리 상대적인 비용을 비교하기 위한 편의값이지 한국전력의 고정 요금단가가 아닙니다. 주택용 전기요금은 월 전체 사용량의 누진 구간, 주택용 저압·고압 여부, 기본요금, 연료비조정요금, 기후환경요금, 부가가치세와 전력산업기반기금 등에 따라 달라질 수 있습니다. 최근 고지서의 총 청구액을 사용량으로 나눈 평균 단가를 입력하면 현재 가정의 지출 수준에 가까운 참고값을 얻을 수 있습니다.</p>
+    <p>이 계산 결과는 선택한 가전이 추가로 사용하는 전력량을 추정하는 용도입니다. 가정 전체 청구액을 정확히 계산하려면 다른 가전과 대기전력을 포함한 검침 사용량, 계약 종류, 할인 조건과 계절별 기준을 함께 확인해야 합니다. 정확한 청구 예상은 <a href="https://home.kepco.co.kr/kepco/front/html/CY/J/A/CYJAPP010.html" rel="external">한국전력 전기요금 계산기</a>를 이용하고, 생활계산소에서는 에어컨과 건조기처럼 어떤 가전이 사용량에 더 큰 영향을 주는지 비교하는 데 활용하세요.</p>
+    <h2>가전별 계산 예시</h2>
+    <div class="content-grid three">
+      <section class="info-card"><h3>에어컨</h3><p>1,000W, 하루 8시간, 30일, 작동률 60%이면 월 144kWh입니다. 단가 200원 기준 약 28,800원의 추가 사용분입니다.</p></section>
+      <section class="info-card"><h3>냉장고</h3><p>150W, 하루 24시간, 30일, 작동률 35%이면 월 37.8kWh입니다. 단가 200원 기준 약 7,560원입니다.</p></section>
+      <section class="info-card"><h3>건조기</h3><p>2,400W, 회당 1.5시간으로 월 12일, 작동률 75%이면 월 32.4kWh입니다. 단가 200원 기준 약 6,480원입니다.</p></section>
+    </div>
+  </article>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 설명 중간 --><span>광고</span></div>
+  <section class="section faq"><h2>전기요금 계산기 FAQ</h2>
+    <details><summary>소비전력은 어디에서 확인하나요?</summary><p>제품 뒷면이나 전원 어댑터의 정격 라벨, 사용설명서와 에너지 소비효율 표시에서 W 값을 확인하세요.</p></details>
+    <details><summary>작동률은 왜 필요한가요?</summary><p>냉장고와 에어컨은 전원에 연결된 시간 내내 압축기가 최대 출력으로 돌지 않기 때문에 실제 운전 비율을 반영하기 위해 사용합니다.</p></details>
+    <details><summary>200원/kWh가 실제 전기요금 단가인가요?</summary><p>아닙니다. 비교를 위한 초기값입니다. 실제 요금은 가정 전체 사용량과 누진 구간, 계약 종류와 각종 조정·세금에 따라 달라집니다.</p></details>
+    <details><summary>대기전력도 포함되나요?</summary><p>입력한 소비전력과 시간만 반영합니다. 꺼진 상태의 대기전력을 포함하려면 대기전력 W와 24시간을 별도로 계산해 더하세요.</p></details>
+    <details><summary>인버터 에어컨은 어떻게 입력하나요?</summary><p>설정 온도와 외부 기온에 따라 출력이 크게 변하므로 제품의 월간 에너지 비용 표시를 참고하거나 작동률을 낮춰 여러 조건을 비교하세요.</p></details>
+    <details><summary>계산값이 고지서와 다른 이유는 무엇인가요?</summary><p>고지서는 가정 전체 가전의 사용량과 누진 구간, 기본요금, 조정요금, 세금과 할인까지 반영하지만 이 도구는 선택한 가전의 추가 사용분만 추정합니다.</p></details>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 관련 계산기 위 --><span>광고</span></div>
+  <section class="section"><h2>함께 쓰기 좋은 계산기</h2><div class="tools-grid">
+    <a class="tool-card" href="/unit-converter/"><span class="tool-icon" aria-hidden="true">📏</span><h3>단위 변환기</h3><p>데이터·무게·길이 단위 변환</p></a>
+    <a class="tool-card" href="/travel-budget-calculator/"><span class="tool-icon" aria-hidden="true">💰</span><h3>여행 예산</h3><p>전체 예산과 1인당 비용 계산</p></a>
+    <a class="tool-card" href="/moving-box-calculator/"><span class="tool-icon" aria-hidden="true">📦</span><h3>이사 박스 수</h3><p>이사 준비량 미리 계산</p></a>
+  </div></section>
+</div></main><div data-site-footer></div></body></html>
