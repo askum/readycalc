@@ -21,9 +21,13 @@
   const scrollToResultOnMobile = () => {
     if (!window.matchMedia('(max-width: 899px)').matches) return;
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-    requestAnimationFrame(() => {
-      resultContent.closest('.result-panel')?.scrollIntoView({ behavior, block: 'start' });
-    });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        const resultPanel = resultContent.closest('.result-panel');
+        if (!resultPanel) return;
+        const headerHeight = document.querySelector('.site-header')?.offsetHeight || 68;
+        const top = window.scrollY + resultPanel.getBoundingClientRect().top - headerHeight - 16;
+        window.scrollTo({ top: Math.max(0, top), behavior });
+      }));
   };
 
   form.querySelectorAll('.error').forEach((error) => {
