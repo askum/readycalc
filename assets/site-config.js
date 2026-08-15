@@ -1,4 +1,4 @@
 globalThis.SITE_CONFIG = Object.freeze({
   baseUrl: 'https://readytools.kr',
-  lastReviewed: '2026-08-06'
+  lastReviewed: '2026-08-15'
 });

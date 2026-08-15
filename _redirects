@@ -19,3 +19,12 @@
 /random-team-generator /calculator/random-team-generator/ 200
 /random-team-generator/ /calculator/random-team-generator/ 200
 /random-team-generator/* /calculator/random-team-generator/:splat 200
+/chicken-calculator /calculator/chicken-calculator/ 200
+/chicken-calculator/ /calculator/chicken-calculator/ 200
+/chicken-calculator/* /calculator/chicken-calculator/:splat 200
+/company-dinner-drink-calculator /calculator/company-dinner-drink-calculator/ 200
+/company-dinner-drink-calculator/ /calculator/company-dinner-drink-calculator/ 200
+/company-dinner-drink-calculator/* /calculator/company-dinner-drink-calculator/:splat 200
+/pizza-calculator /calculator/pizza-calculator/ 200
+/pizza-calculator/ /calculator/pizza-calculator/ 200
+/pizza-calculator/* /calculator/pizza-calculator/:splat 200

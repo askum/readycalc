@@ -12,6 +12,9 @@
 - 이사 박스 수 계산기
 - 여행 경비 분배 계산기
 - 랜덤 팀 배정기
+- 치킨 몇 마리 계산기
+- 회식 술 계산기
+- 피자 몇 판 계산기
 - 사이트 소개
 - 문의하기
 - 개인정보처리방침
@@ -28,7 +31,7 @@
 - `privacy/index.html`: 개인정보처리방침 상세 고지
 - `contact/index.html`: 확정되지 않은 운영자 이메일 제거
 - `travel-expense-splitter/index.html`: 공유 URL 버튼 제거 및 안내 수정
-- `calculator/`: 7개 계산기 페이지를 한 폴더 아래에 모아 관리
+- `calculator/`: 10개 계산기 페이지를 한 폴더 아래에 모아 관리
 - `_redirects`: 계산기 소스 위치를 옮겨도 기존 공개 URL이 유지되도록 Cloudflare Pages 내부 rewrite 적용
 - 메인·소개·약관·면책조항·404 HTML: 공통 설정 로드와 정적 자산 버전 정리
 - `scripts/sync-site-url.mjs`: 기본 URL을 SEO 메타와 검색엔진 파일에 동기화
@@ -36,7 +39,11 @@
 
 ## 새로 생성한 페이지
 
-새로 생성한 공개 페이지는 없습니다. 사이트 소개, 문의하기, 개인정보처리방침, 이용약관, 면책조항 페이지가 이미 존재하여 기존 URL과 디자인을 유지하면서 필요한 내용만 보완했습니다.
+- `calculator/chicken-calculator/index.html`: 인원과 식사 상황에 따른 치킨 주문량 계산
+- `calculator/company-dinner-drink-calculator/index.html`: 회식 주류·생수·무알코올 음료 준비량 계산
+- `calculator/pizza-calculator/index.html`: 인원과 사이드 메뉴에 따른 피자 판 수 계산
+
+세 페이지는 각자 고유한 SEO 메타, WebApplication·BreadcrumbList 구조화 데이터, 800자 이상의 계산 설명, 예시 3개 이상, FAQ 5개 이상과 관련 계산기 링크를 포함합니다.
 
 ## 운영자 정보
 
@@ -44,7 +51,7 @@
 - 문의 이메일: `hnmshop55@gmail.com`
 - 대표 도메인: `https://readytools.kr`
 
-개인정보처리방침의 시행일은 `2026년 8월 6일`, 마지막 수정일은 `2026년 8월 7일`로 표시되어 있습니다. 실제 공개 정책이 변경될 때 날짜도 함께 갱신하세요.
+개인정보처리방침의 시행일은 `2026년 8월 6일`, 마지막 수정일은 `2026년 8월 15일`로 표시되어 있습니다. 실제 공개 정책이 변경될 때 날짜도 함께 갱신하세요.
 
 ## 사이트 기본 URL 관리
 
@@ -63,9 +70,10 @@ node scripts/sync-site-url.mjs
 
 ## 개인정보와 브라우저 저장소
 
-- 계산 입력값은 서버나 localStorage에 저장하지 않습니다.
+- 계산 입력값은 서버나 데이터베이스에 저장하지 않습니다.
 - 모든 계산은 현재 브라우저에서 처리됩니다.
-- localStorage는 밝은 화면·어두운 화면 설정 저장에만 사용합니다.
+- localStorage는 밝은 화면·어두운 화면 설정과 치킨·회식 술·피자 계산기의 입력값 자동 복원에 사용합니다.
+- 새 계산기의 ‘입력 초기화’를 누르면 해당 계산기의 localStorage 입력값도 삭제됩니다.
 - 여행 경비 분배 계산기는 참가자 이름과 결제금액을 URL에 포함하지 않습니다.
 - 현재 별도의 방문자 분석 스크립트와 Google AdSense 코드는 적용되어 있지 않습니다.
 
@@ -137,6 +145,9 @@ calculator/
   moving-box-calculator/index.html
   travel-expense-splitter/index.html
   random-team-generator/index.html
+  chicken-calculator/index.html
+  company-dinner-drink-calculator/index.html
+  pizza-calculator/index.html
 about/ contact/ privacy/ terms/ disclaimer/
 _headers
 _redirects

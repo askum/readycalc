@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>피자 몇 판 계산기 | 인원별 피자 주문량</title>
+  <meta name="description" content="성인과 아이 인원, 남녀 비율, 식사·간식 상황과 사이드 메뉴를 반영해 피자 몇 판을 주문할지 계산하세요.">
+  <link rel="canonical" href="https://readytools.kr/pizza-calculator/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
+  <meta property="og:title" content="피자 몇 판 시킬까? 피자 수량 계산기"><meta property="og:description" content="모임 인원과 식사 상황을 입력하면 필요한 피자 판 수와 조각 수를 알려드려요."><meta property="og:url" content="https://readytools.kr/pizza-calculator/"><meta property="og:image" content="https://readytools.kr/assets/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="생활계산소 - 생활의 애매함을 숫자로 정리해요">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="피자 몇 판 시킬까?"><meta name="twitter:description" content="인원과 사이드 메뉴에 맞는 피자 주문량을 계산하세요."><meta name="twitter:image" content="https://readytools.kr/assets/og.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=20260815-1"><script src="/assets/site-config.js?v=20260815-1"></script><script src="/assets/head.js?v=20260815-1"></script><script src="/assets/site.js?v=20260815-1" defer></script><script src="/assets/calculators.js?v=20260815-1" defer></script>
+  <script type="application/ld+json" data-breadcrumb-schema>{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"피자 몇 판 계산기","url":"https://readytools.kr/pizza-calculator/","description":"성인과 아이 인원, 남녀 비율, 식사 상황과 사이드 메뉴를 반영하는 피자 주문량 계산기","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"JavaScript 사용 가능 브라우저","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"inLanguage":"ko-KR"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산소","item":"https://readytools.kr/"},{"@type":"ListItem","position":2,"name":"전체 계산기","item":"https://readytools.kr/#tools"},{"@type":"ListItem","position":3,"name":"피자 몇 판 계산기","item":"https://readytools.kr/pizza-calculator/"}]}]}</script>
+</head>
+<body><div data-site-header></div><main id="main"><div class="container">
+  <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">피자 몇 판 계산기</li></ol></nav>
+  <section class="hero"><p class="eyebrow">Pizza order planner</p><h1>피자 몇 판 시킬까?</h1><p>성인과 아이 인원, 식사 또는 간식 여부와 사이드 메뉴 양을 반영해 알맞은 피자 주문량을 계산해 보세요.</p></section>
+  <section class="calculator-layout" aria-label="피자 주문량 계산">
+    <form class="panel form-grid" data-calculator="pizza" novalidate>
+      <div class="field-row"><div class="field"><label for="adults">성인 인원</label><input id="adults" name="adults" type="number" inputmode="numeric" min="0" max="100" value="4" aria-describedby="adults-error"><p class="error" id="adults-error"></p></div><div class="field"><label for="children">아이 인원</label><input id="children" name="children" type="number" inputmode="numeric" min="0" max="100" value="0" aria-describedby="children-error"><p class="error" id="children-error"></p></div></div>
+      <div class="field"><label for="gender-ratio">모임의 남녀 비율</label><select id="gender-ratio" name="genderRatio"><option value="0.9">여성 비율이 높은 편</option><option value="1" selected>비슷한 편</option><option value="1.1">남성 비율이 높은 편</option></select><p class="hint">개인의 식사량이 더 중요하며, 비율은 평균 주문량을 조금 조정하는 용도입니다.</p></div>
+      <div class="field"><label for="occasion">피자를 어떻게 먹나요?</label><select id="occasion" name="occasion"><option value="meal" selected>한 끼 식사</option><option value="snack">간식·파티 음식</option></select></div>
+      <div class="field"><label for="side-menu">사이드 메뉴 양</label><select id="side-menu" name="sideMenu"><option value="0.85">많음 — 치킨·파스타 등 충분</option><option value="1" selected>보통 — 간단한 사이드</option><option value="1.1">거의 없음 — 피자가 중심</option></select></div>
+      <p class="hint">입력값은 이 기기의 브라우저에 자동 저장되며 서버로 전송되지 않습니다.</p>
+      <div class="button-row"><button class="button button-primary" type="submit">피자 판 수 계산하기</button><button class="button button-secondary" type="reset">입력 초기화</button></div>
+    </form>
+    <aside class="panel result-panel" aria-live="polite" aria-label="계산 결과"><div class="result-empty" data-result-empty>인원과 상황을 입력하고<br>계산 버튼을 눌러주세요.</div><div class="result-content" data-result-content tabindex="-1" hidden><span class="result-kicker">추천 피자 주문량</span><div class="result-value" data-result-value></div><ul class="result-list" data-result-list></ul><p class="notice" data-result-note></p><div class="button-row"><button class="button button-secondary" type="button" data-copy-result>결과 텍스트 복사</button><button class="button button-secondary" type="button" data-share-result>계산 결과 공유하기</button></div></div></aside>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 계산 결과 아래 반응형 광고 코드 삽입 위치 --><span>광고</span></div>
+
+  <article class="section content-copy">
+    <h2>인원별 피자 주문량 계산 원리</h2>
+    <p>피자 몇 판을 주문할지 정하려면 단순히 사람 수를 한 판당 인원으로 나누는 것보다 조각 수로 계산하는 편이 정확합니다. 이 피자 계산기는 한 판을 보편적인 8조각으로 가정합니다. 한 끼 식사로 피자를 먹을 때는 성인 한 명당 3조각, 아이 한 명당 2조각을 기본으로 잡습니다. 생일 파티나 야식처럼 간식으로 먹을 때는 성인 1.8조각, 아이 1.2조각을 기준으로 낮춥니다. 인원별 조각 수를 모두 더한 뒤 모임의 평균 식사량을 보조하는 남녀 비율 계수와 사이드 메뉴 계수를 적용하고, 부족하지 않도록 필요한 전체 조각 수와 피자 판 수를 각각 올림합니다.</p>
+    <p>남녀 비율은 실제 개인차를 대신할 수 없으므로 결과를 ±10% 안에서만 조정합니다. 운동 후 모임이나 평소 많이 먹는 사람이 많은 경우에는 성별 선택과 관계없이 사이드 메뉴를 ‘거의 없음’으로 고르거나 결과에 한 판을 추가하는 편이 좋습니다. 치킨, 파스타, 샐러드, 감자튀김처럼 함께 배를 채울 메뉴가 충분하면 0.85배를 적용하고, 간단한 피클이나 음료만 있다면 보통을 선택합니다. 피자가 사실상 유일한 메뉴일 때는 1.1배를 적용해 여유분을 확보합니다.</p>
+    <p>브랜드마다 라지, 패밀리, 레귤러의 지름과 조각 수가 다르다는 점도 중요합니다. 같은 8조각이라도 큰 피자의 한 조각과 작은 피자의 한 조각은 포만감이 다릅니다. 계산 결과가 3판이라면 주문하려는 매장의 기본 사이즈와 조각 수를 확인한 뒤, 작은 사이즈만 주문할 경우 한 판을 더하거나 큰 사이즈로 바꾸세요. 여러 판을 주문할 때는 매운맛, 치즈, 고기, 채소 토핑을 섞어 취향을 맞추고 알레르기와 채식 여부도 미리 확인해야 합니다. 결과는 주문 계획을 돕는 일반적인 추정치이며 영양상 권장 섭취량은 아닙니다.</p>
+
+    <h2>피자 주문량 계산 예시</h2>
+    <div class="content-grid three">
+      <section class="info-card"><h3>성인 4명 한 끼 식사</h3><p>성인 4명은 기본 12조각이 필요합니다. 8조각 피자로 나누면 1.5판이므로 올림해 2판, 총 16조각을 주문하면 약 4조각의 여유가 생깁니다.</p></section>
+      <section class="info-card"><h3>성인 6명·아이 3명 파티</h3><p>간식 기준으로 성인 10.8조각과 아이 3.6조각을 합쳐 약 15조각입니다. 보통 사이드라면 피자 2판이 적당합니다.</p></section>
+      <section class="info-card"><h3>성인 8명, 사이드가 많을 때</h3><p>식사 기준 24조각에 사이드 메뉴 계수 0.85를 적용하면 20.4조각입니다. 올림한 21조각을 담으려면 8조각 피자 3판이 필요합니다.</p></section>
+    </div>
+  </article>
+
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 본문 설명 중간 반응형 광고 코드 삽입 위치 --><span>광고</span></div>
+
+  <section class="section faq"><h2>피자 수량 계산기 자주 묻는 질문</h2>
+    <details><summary>피자 한 판은 몇 명이 먹나요?</summary><p>8조각 라지 피자를 식사로 먹는다면 성인 2~3명이 일반적인 범위입니다. 간식이거나 사이드 메뉴가 많으면 3~4명이 나눠 먹을 수도 있습니다.</p></details>
+    <details><summary>피자가 6조각이나 10조각으로 잘려 나오면 어떻게 하나요?</summary><p>계산 결과의 ‘계산상 필요량’ 조각 수를 확인한 뒤 매장의 실제 한 판 조각 수로 나누고 올림하세요. 판 수보다 전체 크기와 중량도 함께 확인하는 것이 좋습니다.</p></details>
+    <details><summary>아이 나이는 어느 정도를 기준으로 하나요?</summary><p>초등학생 정도의 평균 식사량을 기준으로 합니다. 중학생 이상이거나 피자를 좋아하고 잘 먹는 아이는 성인으로 입력하면 부족할 가능성을 줄일 수 있습니다.</p></details>
+    <details><summary>치킨과 피자를 함께 시키면 어떻게 계산하나요?</summary><p>피자 계산기에서는 사이드 메뉴를 ‘많음’으로 선택하고, 치킨 계산기에서는 간식 상황을 선택해 각각 계산하세요. 두 결과가 넉넉하면 한쪽 메뉴를 한 단위 줄일 수 있습니다.</p></details>
+    <details><summary>남은 피자가 걱정되면 한 판 줄여도 되나요?</summary><p>계산 결과의 예상 여유분이 많고 다른 음식이 충분하다면 줄일 수 있습니다. 다만 배달을 추가로 주문하기 어려운 장소라면 계산값을 유지하는 편이 안전합니다.</p></details>
+    <details><summary>입력한 값은 다른 사람에게 공유되나요?</summary><p>입력값은 현재 브라우저의 localStorage에만 자동 저장되고 서버나 공유 URL에 포함되지 않습니다. 공유 버튼은 계산된 결과 텍스트만 전달하며, 초기화하면 저장값도 삭제됩니다.</p></details>
+  </section>
+
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 관련 계산기 위 반응형 광고 코드 삽입 위치 --><span>광고</span></div>
+  <section class="section"><h2>피자 주문과 함께 쓰기 좋은 계산기</h2><div class="tools-grid"><a class="tool-card" href="/chicken-calculator/"><span class="tool-icon" aria-hidden="true">🍗</span><h3>치킨 몇 마리 계산기</h3><p>피자와 함께 주문할 치킨 수량 계산</p></a><a class="tool-card" href="/event-drink-calculator/"><span class="tool-icon" aria-hidden="true">🧊</span><h3>행사 음료·얼음</h3><p>모임 음료와 얼음 준비량 계산</p></a><a class="tool-card" href="/company-dinner-drink-calculator/"><span class="tool-icon" aria-hidden="true">🍻</span><h3>회식 술 계산기</h3><p>소주·맥주·물 수량 계산</p></a></div></section>
+</div></main><div data-site-footer></div></body>
+</html>

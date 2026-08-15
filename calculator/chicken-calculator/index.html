@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>치킨 몇 마리 계산기 | 인원별 치킨 주문량</title>
+  <meta name="description" content="성인과 아이 인원, 남녀 비율, 음주 여부, 식사·간식 상황을 반영해 치킨 몇 마리를 주문할지 계산하세요.">
+  <link rel="canonical" href="https://readytools.kr/chicken-calculator/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
+  <meta property="og:title" content="치킨 몇 마리 시킬까? 치킨 수량 계산기"><meta property="og:description" content="모임 인원과 먹는 상황을 입력하면 필요한 치킨 마릿수와 조각 수를 알려드려요."><meta property="og:url" content="https://readytools.kr/chicken-calculator/"><meta property="og:image" content="https://readytools.kr/assets/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="생활계산소 - 생활의 애매함을 숫자로 정리해요">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="치킨 몇 마리 시킬까?"><meta name="twitter:description" content="인원과 식사 상황에 맞는 치킨 주문량을 계산하세요."><meta name="twitter:image" content="https://readytools.kr/assets/og.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=20260815-1"><script src="/assets/site-config.js?v=20260815-1"></script><script src="/assets/head.js?v=20260815-1"></script><script src="/assets/site.js?v=20260815-1" defer></script><script src="/assets/calculators.js?v=20260815-1" defer></script>
+  <script type="application/ld+json" data-breadcrumb-schema>{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"치킨 몇 마리 계산기","url":"https://readytools.kr/chicken-calculator/","description":"성인과 아이 인원, 남녀 비율, 음주 여부와 식사 상황을 반영하는 치킨 주문량 계산기","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"JavaScript 사용 가능 브라우저","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"inLanguage":"ko-KR"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산소","item":"https://readytools.kr/"},{"@type":"ListItem","position":2,"name":"전체 계산기","item":"https://readytools.kr/#tools"},{"@type":"ListItem","position":3,"name":"치킨 몇 마리 계산기","item":"https://readytools.kr/chicken-calculator/"}]}]}</script>
+</head>
+<body><div data-site-header></div><main id="main"><div class="container">
+  <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">치킨 몇 마리 계산기</li></ol></nav>
+  <section class="hero"><p class="eyebrow">Chicken order planner</p><h1>치킨 몇 마리 시킬까?</h1><p>성인과 아이 수, 모임 분위기를 입력하면 부족하거나 지나치게 남지 않을 치킨 주문량을 빠르게 계산해 드려요.</p></section>
+  <section class="calculator-layout" aria-label="치킨 주문량 계산">
+    <form class="panel form-grid" data-calculator="chicken" novalidate>
+      <div class="field-row"><div class="field"><label for="adults">성인 인원</label><input id="adults" name="adults" type="number" inputmode="numeric" min="0" max="100" value="4" aria-describedby="adults-error"><p class="error" id="adults-error"></p></div><div class="field"><label for="children">아이 인원</label><input id="children" name="children" type="number" inputmode="numeric" min="0" max="100" value="0" aria-describedby="children-error"><p class="error" id="children-error"></p></div></div>
+      <div class="field"><label for="gender-ratio">모임의 남녀 비율</label><select id="gender-ratio" name="genderRatio"><option value="0.9">여성 비율이 높은 편</option><option value="1" selected>비슷한 편</option><option value="1.1">남성 비율이 높은 편</option></select><p class="hint">개인의 식사량이 더 중요하며, 비율은 평균 주문량을 조금 조정하는 용도입니다.</p></div>
+      <div class="field"><label for="alcohol">술을 함께 마시나요?</label><select id="alcohol" name="alcohol"><option value="no" selected>아니요</option><option value="yes">네, 술안주로도 먹어요</option></select></div>
+      <div class="field"><label for="occasion">치킨을 어떻게 먹나요?</label><select id="occasion" name="occasion"><option value="meal" selected>식사 대용</option><option value="snack">간식·야식</option></select></div>
+      <p class="hint">입력값은 이 기기의 브라우저에 자동 저장되며 서버로 전송되지 않습니다.</p>
+      <div class="button-row"><button class="button button-primary" type="submit">치킨 수량 계산하기</button><button class="button button-secondary" type="reset">입력 초기화</button></div>
+    </form>
+    <aside class="panel result-panel" aria-live="polite" aria-label="계산 결과"><div class="result-empty" data-result-empty>인원과 상황을 입력하고<br>계산 버튼을 눌러주세요.</div><div class="result-content" data-result-content tabindex="-1" hidden><span class="result-kicker">추천 치킨 주문량</span><div class="result-value" data-result-value></div><ul class="result-list" data-result-list></ul><p class="notice" data-result-note></p><div class="button-row"><button class="button button-secondary" type="button" data-copy-result>결과 텍스트 복사</button><button class="button button-secondary" type="button" data-share-result>계산 결과 공유하기</button></div></div></aside>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 계산 결과 아래 반응형 광고 코드 삽입 위치 --><span>광고</span></div>
+
+  <article class="section content-copy">
+    <h2>인원별 치킨 주문량은 어떻게 계산하나요?</h2>
+    <p>“치킨 몇 마리 시킬까?”는 배달 주문 직전에 자주 생기는 고민입니다. 한 마리의 크기와 조각 수는 브랜드마다 다르지만, 이 계산기는 일반적인 치킨 한 마리를 약 10조각으로 보고 성인과 아이가 먹는 평균 몫을 먼저 환산합니다. 치킨이 식사 대용이면 성인 한 명당 0.5마리, 아이 한 명당 0.28마리를 기본값으로 사용합니다. 밥을 먹은 뒤의 간식이나 야식이라면 성인은 0.32마리, 아이는 0.18마리로 낮춰 계산합니다. 이렇게 구한 양에 모임의 평균적인 식사량 차이를 완만하게 반영하는 남녀 비율 계수와 술안주 여부를 곱한 다음, 실제 주문 가능한 온전한 마릿수로 올림합니다.</p>
+    <p>남녀 비율 항목은 특정 성별의 식사량을 단정하려는 기준이 아닙니다. 여러 사람이 모였을 때 나타날 수 있는 평균 차이를 ±10% 범위에서만 보조적으로 반영하며, 평소 많이 먹는 사람이 있다면 성별보다 그 사람의 실제 식사량을 우선해서 판단해야 합니다. 술을 함께 마시는 경우에는 식사 시간이 길어지고 안주로 치킨을 더 집어 먹는 상황을 고려해 10%를 더합니다. 떡볶이, 피자, 족발처럼 다른 메인 메뉴가 충분하다면 결과보다 한 마리를 줄여도 되고, 치킨만으로 저녁을 해결하거나 운동 뒤 모임이라면 한 마리를 추가하는 편이 안전합니다.</p>
+    <p>계산 결과에는 주문할 치킨 마릿수뿐 아니라 약 10조각 기준 전체 조각 수, 1인당 예상 조각 수, 추천 맛 종류가 함께 표시됩니다. 여러 마리를 주문할 때는 후라이드와 양념처럼 맛을 나누면 취향 차이를 줄일 수 있습니다. 다만 순살과 뼈 치킨은 실제 중량과 포만감이 다르고, 대형 닭이나 작은 닭을 사용하는 매장도 있으므로 최종 주문 전에는 메뉴 설명의 중량과 조각 수를 확인하세요. 이 계산값은 편리한 주문 계획을 위한 일반적인 추정치이며 영양 또는 건강상의 권장 섭취량이 아닙니다.</p>
+
+    <h2>치킨 주문량 계산 예시</h2>
+    <div class="content-grid three">
+      <section class="info-card"><h3>성인 4명 저녁 식사</h3><p>성인 4명이 다른 메인 메뉴 없이 저녁으로 먹는다면 4 × 0.5 = 2마리입니다. 보통 비율이고 술을 마시지 않는 경우 치킨 2마리, 약 20조각을 준비합니다.</p></section>
+      <section class="info-card"><h3>성인 6명 술자리</h3><p>성인 6명이 치킨을 식사 겸 술안주로 먹으면 기본 3마리에 음주 계수 1.1을 적용해 3.3마리가 됩니다. 주문 단위로 올림해 4마리를 제안합니다.</p></section>
+      <section class="info-card"><h3>성인 3명·아이 4명 간식</h3><p>간식 기준으로 성인 몫 0.96마리와 아이 몫 0.72마리를 합치면 1.68마리입니다. 다른 간식이 많지 않다면 올림하여 2마리를 준비합니다.</p></section>
+    </div>
+  </article>
+
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 본문 설명 중간 반응형 광고 코드 삽입 위치 --><span>광고</span></div>
+
+  <section class="section faq"><h2>치킨 수량 계산기 자주 묻는 질문</h2>
+    <details><summary>치킨 한 마리는 몇 명이 먹나요?</summary><p>식사 대용이라면 평균적으로 성인 2명 정도를 한 마리 기준으로 봅니다. 사이드 메뉴와 개인 식사량에 따라 성인 1~3명까지 차이가 날 수 있습니다.</p></details>
+    <details><summary>순살 치킨도 같은 마릿수로 계산해도 되나요?</summary><p>대략적인 주문에는 사용할 수 있지만 순살 메뉴는 매장별 중량 차이가 큽니다. 한 팩의 중량이 작다면 계산 결과보다 넉넉하게 주문하세요.</p></details>
+    <details><summary>아이 나이는 몇 살을 기준으로 하나요?</summary><p>초등학생 정도의 평균 식사량을 가정합니다. 중학생 이상이거나 평소 식사량이 많은 아이는 성인 인원으로 입력하는 것이 현실적입니다.</p></details>
+    <details><summary>피자나 떡볶이도 함께 주문하면 어떻게 하나요?</summary><p>다른 메인 메뉴가 충분하면 먼저 계산한 뒤 한 마리 정도 줄이는 방법이 좋습니다. 인원이 적다면 결과를 그대로 두고 남은 치킨을 보관하는 편이 안전합니다.</p></details>
+    <details><summary>계산 결과가 2.1마리인데 왜 3마리인가요?</summary><p>치킨은 보통 한 마리 단위로 주문하므로 부족하지 않도록 올림합니다. 반 마리 메뉴가 있거나 사이드가 많다면 2마리로 조정할 수 있습니다.</p></details>
+    <details><summary>입력한 인원 정보는 어디에 저장되나요?</summary><p>입력값은 자동 복원을 위해 현재 기기의 localStorage에만 저장됩니다. 서버나 데이터베이스로 전송되지 않으며 ‘입력 초기화’를 누르면 해당 계산기의 저장값이 삭제됩니다.</p></details>
+  </section>
+
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 관련 계산기 위 반응형 광고 코드 삽입 위치 --><span>광고</span></div>
+  <section class="section"><h2>치킨 주문과 함께 쓰기 좋은 계산기</h2><div class="tools-grid"><a class="tool-card" href="/company-dinner-drink-calculator/"><span class="tool-icon" aria-hidden="true">🍻</span><h3>회식 술 계산기</h3><p>참석자에 맞는 술과 물 준비량 계산</p></a><a class="tool-card" href="/pizza-calculator/"><span class="tool-icon" aria-hidden="true">🍕</span><h3>피자 몇 판 계산기</h3><p>치킨과 함께 주문할 피자 수량 계산</p></a><a class="tool-card" href="/event-drink-calculator/"><span class="tool-icon" aria-hidden="true">🧊</span><h3>행사 음료·얼음</h3><p>음료와 얼음 준비량까지 확인</p></a></div></section>
+</div></main><div data-site-footer></div></body>
+</html>

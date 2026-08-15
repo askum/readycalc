@@ -10,9 +10,15 @@ const baseUrl = baseMatch[1].replace(/\/$/, '');
 const routes = [
   '', 'meat-calculator', 'fuel-cost-calculator', 'camping-food-calculator',
   'event-drink-calculator', 'moving-box-calculator', 'travel-expense-splitter',
-  'random-team-generator', 'about', 'contact', 'privacy', 'terms', 'disclaimer'
+  'random-team-generator', 'chicken-calculator', 'company-dinner-drink-calculator',
+  'pizza-calculator', 'about', 'contact', 'privacy', 'terms', 'disclaimer'
 ];
-const calculatorRoutes = new Set(routes.slice(1, 8));
+const calculatorRoutes = new Set([
+  'meat-calculator', 'fuel-cost-calculator', 'camping-food-calculator',
+  'event-drink-calculator', 'moving-box-calculator', 'travel-expense-splitter',
+  'random-team-generator', 'chicken-calculator', 'company-dinner-drink-calculator',
+  'pizza-calculator'
+]);
 
 for (const route of routes) {
   const file = calculatorRoutes.has(route)
@@ -23,13 +29,24 @@ for (const route of routes) {
   html = html
     .replace(/(<link rel="canonical" href=")[^"]+("\s*>)/, `$1${pageUrl}$2`)
     .replace(/(<meta property="og:url" content=")[^"]+("\s*>)/, `$1${pageUrl}$2`)
-    .replace(/(<meta property="og:image" content=")[^"]+("\s*>)/, `$1${baseUrl}/assets/og.png$2`);
+    .replace(/(<meta property="og:image" content=")[^"]+("\s*>)/, `$1${baseUrl}/assets/og.png$2`)
+    .replace(/(<meta name="twitter:image" content=")[^"]+("\s*>)/, `$1${baseUrl}/assets/og.png$2`);
 
-  html = html.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, (block, jsonText) => {
+  html = html.replace(/<script type="application\/ld\+json"([^>]*)>([\s\S]*?)<\/script>/g, (block, attributes, jsonText) => {
     try {
       const data = JSON.parse(jsonText);
-      if (data['@type'] === 'WebSite' || data['@type'] === 'WebApplication') data.url = pageUrl;
-      return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+      const updateUrls = (node) => {
+        if (!node || typeof node !== 'object') return;
+        if (node['@type'] === 'WebSite' || node['@type'] === 'WebApplication') node.url = pageUrl;
+        Object.entries(node).forEach(([key, entry]) => {
+          if ((key === 'url' || key === 'item') && typeof entry === 'string' && /^https?:\/\//.test(entry)) {
+            const parsed = new URL(entry);
+            node[key] = `${baseUrl}${parsed.pathname}${parsed.hash}`;
+          } else if (typeof entry === 'object') updateUrls(entry);
+        });
+      };
+      updateUrls(data);
+      return `<script type="application/ld+json"${attributes}>${JSON.stringify(data)}</script>`;
     } catch {
       return block;
     }

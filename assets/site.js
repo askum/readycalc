@@ -26,7 +26,7 @@
   }
 
   const breadcrumb = document.querySelector('.breadcrumb ol');
-  if (breadcrumb) {
+  if (breadcrumb && !document.querySelector('[data-breadcrumb-schema]')) {
     const items = [...breadcrumb.querySelectorAll('li')].map((item, index) => {
       const link = item.querySelector('a');
       const rawPath = link?.getAttribute('href') || location.pathname;
