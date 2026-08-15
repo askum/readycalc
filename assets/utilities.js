@@ -24,6 +24,14 @@
   let shareResult = true;
   let lastQrSvg = '';
 
+  const scrollToResultOnMobile = () => {
+    if (!window.matchMedia('(max-width: 899px)').matches) return;
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    requestAnimationFrame(() => {
+      resultContent.closest('.result-panel')?.scrollIntoView({ behavior, block: 'start' });
+    });
+  };
+
   const escapeHtml = (text) => String(text).replace(/[&<>"']/g, (char) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   })[char]);
@@ -750,7 +758,9 @@
     clearErrors();
     saveSettings();
     calculators[type]?.();
-    form.querySelector('[aria-invalid="true"]')?.focus();
+    const invalidInput = form.querySelector('[aria-invalid="true"]');
+    if (invalidInput) invalidInput.focus();
+    else if (!resultContent.hidden) scrollToResultOnMobile();
   });
   form.addEventListener('change', saveSettings);
   form.addEventListener('reset', () => {

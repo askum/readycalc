@@ -112,7 +112,7 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--
 :root[data-theme="dark"] .button-primary { color: #0b2019; }
 .button-primary:hover { background: var(--primary-dark); }
 .button-secondary { border-color: var(--line); background: var(--surface); color: var(--text); }
-.result-panel { position: sticky; top: 88px; min-height: 220px; overflow: hidden; }
+.result-panel { position: sticky; top: 88px; min-height: 220px; overflow: hidden; scroll-margin-top: 84px; }
 .result-empty { display: grid; min-height: 176px; place-items: center; color: var(--muted); text-align: center; }
 .result-content[hidden], .toast[hidden] { display: none; }
 .result-kicker { color: var(--muted); font-size: .84rem; font-weight: 800; }
