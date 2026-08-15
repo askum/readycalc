@@ -17,7 +17,7 @@
     unit: ['category', 'fromUnit', 'toUnit'],
     date: ['mode', 'includeEnd', 'direction', 'offsetUnit'],
     qr: ['contentType', 'qrSize'],
-    password: ['length', 'lowercase', 'uppercase', 'numbers', 'symbols', 'excludeAmbiguous'],
+    password: ['passwordLength', 'lowercase', 'uppercase', 'numbers', 'symbols', 'excludeAmbiguous'],
     text: ['operation']
   };
   let resultText = '';
@@ -634,8 +634,8 @@
   };
 
   const calculatePassword = () => {
-    const length = Number(form.elements.length.value);
-    if (!Number.isInteger(length) || length < 8 || length > 128) return invalidate('length', '8~128 사이의 정수를 입력해 주세요.');
+    const length = Number(form.elements.passwordLength.value);
+    if (!Number.isInteger(length) || length < 8 || length > 128) return invalidate('passwordLength', '8~128 사이의 정수를 입력해 주세요.');
     const ambiguous = /[Il1O0o|]/g;
     const sets = [];
     if (form.elements.lowercase.checked) sets.push('abcdefghijklmnopqrstuvwxyz');
@@ -644,7 +644,7 @@
     if (form.elements.symbols.checked) sets.push('!@#$%^&*()-_=+[]{};:,.?');
     if (!sets.length) return invalidate('lowercase', '문자 종류를 하나 이상 선택해 주세요.');
     const filteredSets = sets.map((set) => form.elements.excludeAmbiguous.checked ? set.replace(ambiguous, '') : set);
-    if (length < filteredSets.length) return invalidate('length', '선택한 문자 종류 수보다 긴 길이를 입력해 주세요.');
+    if (length < filteredSets.length) return invalidate('passwordLength', '선택한 문자 종류 수보다 긴 길이를 입력해 주세요.');
     const pool = filteredSets.join('');
     const characters = filteredSets.map((set) => set[secureRandomIndex(set.length)]);
     while (characters.length < length) characters.push(pool[secureRandomIndex(pool.length)]);
