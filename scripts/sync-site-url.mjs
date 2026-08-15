@@ -11,13 +11,17 @@ const routes = [
   '', 'meat-calculator', 'fuel-cost-calculator', 'camping-food-calculator',
   'event-drink-calculator', 'moving-box-calculator', 'travel-expense-splitter',
   'random-team-generator', 'chicken-calculator', 'company-dinner-drink-calculator',
-  'pizza-calculator', 'about', 'contact', 'privacy', 'terms', 'disclaimer'
+  'pizza-calculator', 'travel-packing-checklist', 'currency-exchange-calculator',
+  'travel-itinerary-generator', 'travel-budget-calculator',
+  'international-travel-cost-calculator', 'about', 'contact', 'privacy', 'terms', 'disclaimer'
 ];
 const calculatorRoutes = new Set([
   'meat-calculator', 'fuel-cost-calculator', 'camping-food-calculator',
   'event-drink-calculator', 'moving-box-calculator', 'travel-expense-splitter',
   'random-team-generator', 'chicken-calculator', 'company-dinner-drink-calculator',
-  'pizza-calculator'
+  'pizza-calculator', 'travel-packing-checklist', 'currency-exchange-calculator',
+  'travel-itinerary-generator', 'travel-budget-calculator',
+  'international-travel-cost-calculator'
 ]);
 
 for (const route of routes) {

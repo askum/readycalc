@@ -11,7 +11,10 @@
   const resultNote = document.querySelector('[data-result-note]');
   const resultCopy = document.querySelector('[data-copy-result]');
   const shareButton = document.querySelector('[data-share-result]');
-  const persistentTypes = new Set(['chicken', 'company-drinks', 'pizza']);
+  const persistentTypes = new Set([
+    'chicken', 'company-drinks', 'pizza', 'packing-list', 'currency-exchange',
+    'travel-itinerary', 'travel-budget', 'international-cost'
+  ]);
   const storageKey = `living-calc-inputs:${type}`;
   let shareText = '';
 
@@ -61,6 +64,16 @@
     } else {
       history.replaceState(null, '', location.pathname);
     }
+    resultContent.focus({ preventScroll: true });
+  };
+  const showCustom = (headline, html, note, customShareText) => {
+    resultValue.textContent = headline;
+    resultList.innerHTML = `<li class="result-custom">${html}</li>`;
+    resultNote.textContent = note;
+    resultEmpty.hidden = true;
+    resultContent.hidden = false;
+    shareText = customShareText;
+    history.replaceState(null, '', location.pathname);
     resultContent.focus({ preventScroll: true });
   };
 
@@ -151,6 +164,92 @@
       const leftover = pizzas * 8 - slices;
       const varieties = Math.min(pizzas, pizzas >= 4 ? 3 : pizzas >= 2 ? 2 : 1);
       show(`${pizzas}판`, [['8조각 피자 기준', `${pizzas * 8}조각`], ['계산상 필요량', `${slices}조각`], ['예상 여유분', `${leftover}조각`], ['추천 맛 구성', `${varieties}종류`]], '브랜드와 피자 크기에 따라 한 판의 지름과 조각 크기가 다릅니다. 주문 전 해당 매장의 조각 수와 사이드 메뉴 양을 확인하세요.', { updateUrl: false });
+    },
+    'packing-list'() {
+      if (!range('days', 1, 60)) return;
+      const days = num('days'); const overseas = value('destination') === 'overseas';
+      const season = value('season'); const purpose = value('purpose'); const laundry = value('laundry') === 'yes';
+      const tops = laundry ? Math.min(days, 4) : days;
+      const bottoms = Math.max(1, Math.ceil(days / (laundry ? 3 : 2)));
+      const underwear = laundry ? Math.min(days + 1, 5) : days + 1;
+      const categories = [
+        ['필수 서류·결제', [overseas ? '여권과 여권 사본' : '신분증', '교통·숙소 예약 확인서', '지갑과 결제 카드', overseas ? '여행자보험 증서' : '비상 연락처']],
+        ['의류', [`상의 ${tops}벌`, `하의 ${bottoms}벌`, `속옷 ${underwear}벌`, `양말 ${underwear}켤레`, '잠옷 1벌', season === 'winter' ? '두꺼운 외투·장갑·목도리' : season === 'summer' ? '얇은 겉옷·모자' : '간절기 겉옷 1벌']],
+        ['전자기기', ['휴대전화와 충전기', '보조배터리', overseas ? '여행용 멀티 어댑터' : '충전 케이블', '이어폰']],
+        ['세면·건강', ['칫솔·치약', '기초 화장품과 자외선 차단제', '개인 복용약', '휴지·물티슈', '작은 구급용품']],
+        ['여행 상황별', purpose === 'beach' ? ['수영복', '방수 가방', '슬리퍼', '비치타월'] : purpose === 'business' ? ['업무용 노트북', '명함·업무 서류', '정장 또는 단정한 옷', '구두'] : purpose === 'outdoor' ? ['편한 운동화', '우비', '물병', '휴대용 랜턴'] : ['편한 신발', '접이식 가방', '우산', '간단한 간식']]
+      ];
+      if (overseas) categories.push(['해외여행 추가', ['현지 통화 또는 해외 결제 카드', 'eSIM·유심 준비', '항공편 온라인 체크인', '대사관·영사관 연락처']]);
+      const checkedKey = 'living-calc-checklist:packing-list';
+      let checked = new Set();
+      try { checked = new Set(JSON.parse(localStorage.getItem(checkedKey) || '[]')); } catch (_) {}
+      const allItems = categories.flatMap(([, items]) => items);
+      const html = `<div class="checklist-groups">${categories.map(([category, items]) => `<section class="checklist-group"><h3>${escapeHtml(category)}</h3>${items.map((item) => `<label class="checklist-item"><input type="checkbox" data-check-item="${escapeHtml(item)}"${checked.has(item) ? ' checked' : ''}><span>${escapeHtml(item)}</span></label>`).join('')}</section>`).join('')}</div>`;
+      const packingLines = categories.flatMap(([category, items]) => ['', `[${category}]`, ...items.map((item) => `□ ${item}`)]);
+      const packingShare = ['[생활계산소] 여행 짐 체크리스트', `${days}일 · ${overseas ? '해외여행' : '국내여행'}`, ...packingLines].join('\n');
+      showCustom(`${allItems.length}개 준비`, html, '체크 상태는 현재 브라우저에만 저장됩니다. 항공기 반입 금지 물품과 수하물 규정은 이용 항공사에서 별도로 확인하세요.', packingShare);
+      const updateProgress = () => {
+        const boxes = [...resultList.querySelectorAll('[data-check-item]')];
+        const completed = boxes.filter((box) => box.checked);
+        resultValue.textContent = `${completed.length}/${boxes.length}개 완료`;
+        try { localStorage.setItem(checkedKey, JSON.stringify(completed.map((box) => box.dataset.checkItem))); } catch (_) {}
+      };
+      resultList.querySelectorAll('[data-check-item]').forEach((box) => box.addEventListener('change', updateProgress));
+      updateProgress();
+    },
+    'currency-exchange'() {
+      if (![range('krw', 1, 1000000000), range('rate', .0001, 10000000), range('unit', 1, 1000), range('spread', 0, 20), range('discount', 0, 100), range('fixedFee', 0, 1000000)].every(Boolean)) return;
+      if (num('fixedFee') >= num('krw')) return invalidate('fixedFee', '고정 수수료는 환전할 원화보다 작아야 합니다.');
+      const code = value('currency'); const unit = num('unit');
+      const available = num('krw') - num('fixedFee');
+      const spreadRate = num('spread') / 100 * (1 - num('discount') / 100);
+      const appliedRate = num('rate') * (1 + spreadRate);
+      const foreign = available / appliedRate * unit;
+      const noFeeForeign = num('krw') / num('rate') * unit;
+      show(`${foreign.toLocaleString('ko-KR', { maximumFractionDigits: 2 })} ${code}`, [[`적용 환율 (${unit} ${code})`, `${appliedRate.toLocaleString('ko-KR', { maximumFractionDigits: 4 })}원`], ['수수료 전 예상', `${noFeeForeign.toLocaleString('ko-KR', { maximumFractionDigits: 2 })} ${code}`], ['환율 스프레드 반영', `${(spreadRate * 100).toFixed(3)}%`], ['고정 수수료', won(num('fixedFee'))]], '실제 수령액은 금융기관의 현찰 매매율, 권종, 최소 수수료와 반올림 방식에 따라 달라질 수 있습니다.', { updateUrl: false });
+    },
+    'travel-itinerary'() {
+      const destination = value('destination');
+      if (destination.length < 2 || destination.length > 40) return invalidate('destination', '여행지는 2~40자로 입력해 주세요.');
+      if (!range('days', 1, 14)) return;
+      const days = num('days'); const pace = value('pace'); const theme = value('theme'); const companion = value('companion');
+      const themeLabels = { mixed: '대표 명소와 현지 분위기', food: '시장·카페·지역 음식', culture: '박물관·역사·문화 공간', nature: '공원·전망·자연 명소' };
+      const morningByPace = { relaxed: '느긋한 아침 식사 후 가까운 핵심 장소 1곳', balanced: '아침 식사 후 대표 명소 1곳 집중 관람', full: '이른 출발 후 대표 명소 2곳 연속 방문' };
+      const afternoonByTheme = { mixed: '현지 동네 산책과 관심 장소 선택 방문', food: '현지 시장 또는 음식 거리 탐방', culture: '전시·역사 공간과 주변 거리 탐방', nature: '공원·해안·전망 구간을 여유 있게 걷기' };
+      const companionNote = { solo: '혼자 쉬기 좋은 카페 또는 자유시간', couple: '사진과 대화를 위한 여유 시간', family: '이동 부담이 적은 휴식 시간', friends: '함께 고를 수 있는 자유 활동' };
+      const blocks = Array.from({ length: days }, (_, index) => {
+        const day = index + 1;
+        const first = day === 1; const last = day === days;
+        return { day, morning: first ? `${destination} 도착·숙소 이동·짐 정리` : morningByPace[pace], afternoon: last ? '남은 쇼핑과 체크아웃·출발 준비' : afternoonByTheme[theme], evening: last ? '귀가 이동과 여행 기록 정리' : `${themeLabels[theme]} 중심 저녁 일정 · ${companionNote[companion]}` };
+      });
+      const html = `<div class="itinerary-list">${blocks.map((block) => `<section class="itinerary-day"><h3>${block.day}일차</h3><dl><div><dt>오전</dt><dd>${escapeHtml(block.morning)}</dd></div><div><dt>오후</dt><dd>${escapeHtml(block.afternoon)}</dd></div><div><dt>저녁</dt><dd>${escapeHtml(block.evening)}</dd></div></dl></section>`).join('')}</div>`;
+      const itineraryShare = [`[생활계산소] ${destination} ${days}일 여행 일정`, ...blocks.flatMap((block) => ['', `[${block.day}일차]`, `오전: ${block.morning}`, `오후: ${block.afternoon}`, `저녁: ${block.evening}`]), '', '장소의 영업시간과 휴무일, 이동시간은 직접 확인하세요.'].join('\n');
+      showCustom(`${destination} ${days}일 일정`, html, '외부 장소 API를 사용하지 않는 기본 일정 뼈대입니다. 실제 명소의 영업시간·예약·이동시간을 확인해 구체적인 장소를 채워 넣으세요.', itineraryShare);
+    },
+    'travel-budget'() {
+      if (![range('people', 1, 100), range('days', 1, 365), range('nights', 0, 364), range('transport', 0, 100000000), range('lodging', 0, 100000000), range('food', 0, 10000000), range('activities', 0, 10000000), range('other', 0, 1000000000), range('reserve', 0, 100)].every(Boolean)) return;
+      if (num('nights') > num('days')) return invalidate('nights', '숙박일은 여행 일수보다 많을 수 없습니다.');
+      const people = num('people'); const days = num('days');
+      const transport = num('transport') * people;
+      const lodging = num('lodging') * num('nights');
+      const food = num('food') * people * days;
+      const activities = num('activities') * people * days;
+      const base = transport + lodging + food + activities + num('other');
+      const reserve = base * num('reserve') / 100; const total = base + reserve;
+      show(won(total), [['교통비 합계', won(transport)], ['숙박비 합계', won(lodging)], ['식비·활동비', won(food + activities)], ['예비비', won(reserve)], ['1인당 예산', won(total / people)], ['하루 평균', won(total / days)]], '실제 가격 변동과 현장 추가 비용을 고려해 계산 결과와 별도로 비상 결제 수단을 준비하세요.', { updateUrl: false });
+    },
+    'international-cost'() {
+      if (![range('people', 1, 100), range('days', 1, 365), range('nights', 0, 364), range('flight', 0, 100000000), range('lodgingLocal', 0, 100000000), range('dailyLocal', 0, 10000000), range('exchangeRate', .0001, 10000000), range('quoteUnit', 1, 1000), range('cardRatio', 0, 100), range('cardFee', 0, 10), range('insurance', 0, 10000000), range('connectivity', 0, 10000000)].every(Boolean)) return;
+      if (num('nights') > num('days')) return invalidate('nights', '숙박일은 여행 일수보다 많을 수 없습니다.');
+      const people = num('people'); const days = num('days');
+      const local = num('lodgingLocal') * num('nights') + num('dailyLocal') * people * days;
+      const localKrw = local / num('quoteUnit') * num('exchangeRate');
+      const cardLocal = local * num('cardRatio') / 100;
+      const cardFeeKrw = cardLocal / num('quoteUnit') * num('exchangeRate') * num('cardFee') / 100;
+      const flights = num('flight') * people;
+      const fixed = (num('insurance') + num('connectivity')) * people;
+      const total = flights + localKrw + cardFeeKrw + fixed;
+      show(won(total), [['항공권 합계', won(flights)], ['현지 지출 원화 환산', won(localKrw)], ['예상 해외결제 수수료', won(cardFeeKrw)], ['보험·통신', won(fixed)], ['1인당 총경비', won(total / people)], ['현지통화 필요액', local.toLocaleString('ko-KR', { maximumFractionDigits: 2 })]], '환율은 직접 입력한 값으로 고정 계산됩니다. 카드사 환율 적용일과 해외서비스 수수료, 현금 인출 수수료에 따라 실제 청구액이 달라집니다.', { updateUrl: false });
     },
     boxes() {
       if (![range('people', 1, 20), range('rooms', 1, 20), range('years', 0, 50)].every(Boolean)) return;
@@ -255,6 +354,9 @@
   form.addEventListener('reset', () => {
     if (persistentTypes.has(type)) {
       try { localStorage.removeItem(storageKey); } catch (_) {}
+      if (type === 'packing-list') {
+        try { localStorage.removeItem('living-calc-checklist:packing-list'); } catch (_) {}
+      }
     }
     setTimeout(() => { clearErrors(); resultEmpty.hidden = false; resultContent.hidden = true; history.replaceState(null, '', location.pathname); }, 0);
   });

@@ -113,6 +113,17 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--
 .result-list li { display: flex; min-width: 0; justify-content: space-between; gap: 12px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
 .result-list span, .result-list strong { min-width: 0; overflow-wrap: anywhere; }
 .result-list strong { text-align: right; }
+.result-list .result-custom { display: block; padding: 0; border: 0; }
+.checklist-groups, .itinerary-list { display: grid; gap: 14px; }
+.checklist-group, .itinerary-day { padding: 15px; border-radius: 14px; background: var(--surface-2); }
+.checklist-group h3, .itinerary-day h3 { margin-bottom: 10px; color: var(--primary-dark); }
+.checklist-item { display: flex; min-height: 44px; align-items: center; gap: 10px; padding: 7px 0; cursor: pointer; font-weight: 700; }
+.checklist-item input { flex: 0 0 auto; width: 22px; min-height: 22px; margin: 0; accent-color: var(--primary); }
+.checklist-item input:checked + span { color: var(--muted); text-decoration: line-through; }
+.itinerary-day dl { display: grid; gap: 9px; margin: 0; }
+.itinerary-day dl div { display: grid; gap: 3px; }
+.itinerary-day dt { font-weight: 900; }
+.itinerary-day dd { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
 .calculator-guide { display: grid; gap: 8px; margin: 4px 0 20px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface-2); }
 .calculator-guide p { margin: 0; color: var(--muted); font-size: .86rem; }
 .calculator-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
