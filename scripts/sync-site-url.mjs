@@ -12,7 +12,7 @@ const routes = [
   'event-drink-calculator', 'moving-box-calculator', 'travel-expense-splitter',
   'random-team-generator', 'chicken-calculator', 'company-dinner-drink-calculator',
   'pizza-calculator', 'travel-packing-checklist', 'currency-exchange-calculator',
-  'travel-itinerary-generator', 'travel-budget-calculator',
+  'travel-budget-calculator',
   'international-travel-cost-calculator', 'about', 'contact', 'privacy', 'terms', 'disclaimer'
 ];
 const calculatorRoutes = new Set([
@@ -20,7 +20,7 @@ const calculatorRoutes = new Set([
   'event-drink-calculator', 'moving-box-calculator', 'travel-expense-splitter',
   'random-team-generator', 'chicken-calculator', 'company-dinner-drink-calculator',
   'pizza-calculator', 'travel-packing-checklist', 'currency-exchange-calculator',
-  'travel-itinerary-generator', 'travel-budget-calculator',
+  'travel-budget-calculator',
   'international-travel-cost-calculator'
 ]);
 

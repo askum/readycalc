@@ -34,9 +34,6 @@
 /currency-exchange-calculator /calculator/currency-exchange-calculator/ 200
 /currency-exchange-calculator/ /calculator/currency-exchange-calculator/ 200
 /currency-exchange-calculator/* /calculator/currency-exchange-calculator/:splat 200
-/travel-itinerary-generator /calculator/travel-itinerary-generator/ 200
-/travel-itinerary-generator/ /calculator/travel-itinerary-generator/ 200
-/travel-itinerary-generator/* /calculator/travel-itinerary-generator/:splat 200
 /travel-budget-calculator /calculator/travel-budget-calculator/ 200
 /travel-budget-calculator/ /calculator/travel-budget-calculator/ 200
 /travel-budget-calculator/* /calculator/travel-budget-calculator/:splat 200

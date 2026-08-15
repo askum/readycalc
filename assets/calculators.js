@@ -13,7 +13,7 @@
   const shareButton = document.querySelector('[data-share-result]');
   const persistentTypes = new Set([
     'chicken', 'company-drinks', 'pizza', 'packing-list', 'currency-exchange',
-    'travel-itinerary', 'travel-budget', 'international-cost'
+    'travel-budget', 'international-cost'
   ]);
   const storageKey = `living-calc-inputs:${type}`;
   let shareText = '';
@@ -207,24 +207,6 @@
       const foreign = available / appliedRate * unit;
       const noFeeForeign = num('krw') / num('rate') * unit;
       show(`${foreign.toLocaleString('ko-KR', { maximumFractionDigits: 2 })} ${code}`, [[`적용 환율 (${unit} ${code})`, `${appliedRate.toLocaleString('ko-KR', { maximumFractionDigits: 4 })}원`], ['수수료 전 예상', `${noFeeForeign.toLocaleString('ko-KR', { maximumFractionDigits: 2 })} ${code}`], ['환율 스프레드 반영', `${(spreadRate * 100).toFixed(3)}%`], ['고정 수수료', won(num('fixedFee'))]], '실제 수령액은 금융기관의 현찰 매매율, 권종, 최소 수수료와 반올림 방식에 따라 달라질 수 있습니다.', { updateUrl: false });
-    },
-    'travel-itinerary'() {
-      const destination = value('destination');
-      if (destination.length < 2 || destination.length > 40) return invalidate('destination', '여행지는 2~40자로 입력해 주세요.');
-      if (!range('days', 1, 14)) return;
-      const days = num('days'); const pace = value('pace'); const theme = value('theme'); const companion = value('companion');
-      const themeLabels = { mixed: '대표 명소와 현지 분위기', food: '시장·카페·지역 음식', culture: '박물관·역사·문화 공간', nature: '공원·전망·자연 명소' };
-      const morningByPace = { relaxed: '느긋한 아침 식사 후 가까운 핵심 장소 1곳', balanced: '아침 식사 후 대표 명소 1곳 집중 관람', full: '이른 출발 후 대표 명소 2곳 연속 방문' };
-      const afternoonByTheme = { mixed: '현지 동네 산책과 관심 장소 선택 방문', food: '현지 시장 또는 음식 거리 탐방', culture: '전시·역사 공간과 주변 거리 탐방', nature: '공원·해안·전망 구간을 여유 있게 걷기' };
-      const companionNote = { solo: '혼자 쉬기 좋은 카페 또는 자유시간', couple: '사진과 대화를 위한 여유 시간', family: '이동 부담이 적은 휴식 시간', friends: '함께 고를 수 있는 자유 활동' };
-      const blocks = Array.from({ length: days }, (_, index) => {
-        const day = index + 1;
-        const first = day === 1; const last = day === days;
-        return { day, morning: first ? `${destination} 도착·숙소 이동·짐 정리` : morningByPace[pace], afternoon: last ? '남은 쇼핑과 체크아웃·출발 준비' : afternoonByTheme[theme], evening: last ? '귀가 이동과 여행 기록 정리' : `${themeLabels[theme]} 중심 저녁 일정 · ${companionNote[companion]}` };
-      });
-      const html = `<div class="itinerary-list">${blocks.map((block) => `<section class="itinerary-day"><h3>${block.day}일차</h3><dl><div><dt>오전</dt><dd>${escapeHtml(block.morning)}</dd></div><div><dt>오후</dt><dd>${escapeHtml(block.afternoon)}</dd></div><div><dt>저녁</dt><dd>${escapeHtml(block.evening)}</dd></div></dl></section>`).join('')}</div>`;
-      const itineraryShare = [`[생활계산소] ${destination} ${days}일 여행 일정`, ...blocks.flatMap((block) => ['', `[${block.day}일차]`, `오전: ${block.morning}`, `오후: ${block.afternoon}`, `저녁: ${block.evening}`]), '', '장소의 영업시간과 휴무일, 이동시간은 직접 확인하세요.'].join('\n');
-      showCustom(`${destination} ${days}일 일정`, html, '외부 장소 API를 사용하지 않는 기본 일정 뼈대입니다. 실제 명소의 영업시간·예약·이동시간을 확인해 구체적인 장소를 채워 넣으세요.', itineraryShare);
     },
     'travel-budget'() {
       if (![range('people', 1, 100), range('days', 1, 365), range('nights', 0, 364), range('transport', 0, 100000000), range('lodging', 0, 100000000), range('food', 0, 10000000), range('activities', 0, 10000000), range('other', 0, 1000000000), range('reserve', 0, 100)].every(Boolean)) return;

@@ -17,7 +17,6 @@
 - 피자 몇 판 계산기
 - 여행 짐 체크리스트
 - 환전 계산기
-- 여행 일정 생성기
 - 여행 예산 계산기
 - 해외여행 경비 계산기
 - 사이트 소개
@@ -36,7 +35,7 @@
 - `privacy/index.html`: 개인정보처리방침 상세 고지
 - `contact/index.html`: 확정되지 않은 운영자 이메일 제거
 - `travel-expense-splitter/index.html`: 공유 URL 버튼 제거 및 안내 수정
-- `calculator/`: 15개 계산기 페이지를 한 폴더 아래에 모아 관리
+- `calculator/`: 14개 계산기 페이지를 한 폴더 아래에 모아 관리
 - `_redirects`: 계산기 소스 위치를 옮겨도 기존 공개 URL이 유지되도록 Cloudflare Pages 내부 rewrite 적용
 - 메인·소개·약관·면책조항·404 HTML: 공통 설정 로드와 정적 자산 버전 정리
 - `scripts/sync-site-url.mjs`: 기본 URL을 SEO 메타와 검색엔진 파일에 동기화
@@ -49,11 +48,10 @@
 - `calculator/pizza-calculator/index.html`: 인원과 사이드 메뉴에 따른 피자 판 수 계산
 - `calculator/travel-packing-checklist/index.html`: 여행 조건별 준비물과 체크 진행률
 - `calculator/currency-exchange-calculator/index.html`: 환율 스프레드·우대율·수수료 반영
-- `calculator/travel-itinerary-generator/index.html`: 여행 성향 기반 날짜별 일정 생성
 - `calculator/travel-budget-calculator/index.html`: 총예산·1인당 비용 계산
 - `calculator/international-travel-cost-calculator/index.html`: 환율·해외 카드 수수료 포함 경비 계산
 
-세 페이지는 각자 고유한 SEO 메타, WebApplication·BreadcrumbList 구조화 데이터, 800자 이상의 계산 설명, 예시 3개 이상, FAQ 5개 이상과 관련 계산기 링크를 포함합니다.
+위 신규 페이지는 각자 고유한 SEO 메타, WebApplication·BreadcrumbList 구조화 데이터, 800자 이상의 계산 설명, 예시 3개 이상, FAQ 5개 이상과 관련 계산기 링크를 포함합니다.
 
 ## 운영자 정보
 
@@ -82,7 +80,7 @@ node scripts/sync-site-url.mjs
 
 - 계산 입력값은 서버나 데이터베이스에 저장하지 않습니다.
 - 모든 계산은 현재 브라우저에서 처리됩니다.
-- localStorage는 화면 설정과 치킨·회식 술·피자 및 신규 여행 도구의 입력값·체크 상태 자동 복원에 사용합니다.
+- localStorage는 화면 설정과 치킨·회식 술·피자 및 여행 짐·환전·여행 예산·해외여행 경비 도구의 입력값·체크 상태 자동 복원에 사용합니다.
 - 새 계산기의 ‘입력 초기화’를 누르면 해당 계산기의 localStorage 입력값도 삭제됩니다.
 - 여행 경비 분배 계산기는 참가자 이름과 결제금액을 URL에 포함하지 않습니다.
 - 현재 별도의 방문자 분석 스크립트와 Google AdSense 코드는 적용되어 있지 않습니다.
@@ -160,7 +158,6 @@ calculator/
   pizza-calculator/index.html
   travel-packing-checklist/index.html
   currency-exchange-calculator/index.html
-  travel-itinerary-generator/index.html
   travel-budget-calculator/index.html
   international-travel-cost-calculator/index.html
 about/ contact/ privacy/ terms/ disclaimer/
