@@ -19,6 +19,11 @@
 - 환전 계산기
 - 여행 예산 계산기
 - 해외여행 경비 계산기
+- 단위 변환기
+- 날짜 계산기
+- QR 코드 생성기
+- 비밀번호 생성기
+- 텍스트 도구
 - 사이트 소개
 - 문의하기
 - 개인정보처리방침
@@ -30,12 +35,14 @@
 - `assets/site-config.js`: 사이트 기본 URL과 공통 검토일 설정
 - `assets/site.js`: 공통 푸터, 계산기 안내, BreadcrumbList 구조화 데이터
 - `assets/calculators.js`: 빈 값 검증, 오류 안내, 여행 경비 결과 복사 및 URL 개인정보 보호
+- `assets/utilities.js`: 단위·날짜·QR·비밀번호·텍스트 도구의 로컬 처리, 검증, 복사와 공유
 - `assets/styles.css`: 모바일 터치 영역, 긴 결과, 카드·표·버튼 반응형 처리
+- `assets/favicon.svg`, `assets/head.js`: 공통 파비콘과 브라우저 테마 색상 적용
 - `_headers`: 파일명 고정 CSS·JavaScript가 이전 버전으로 남지 않도록 재검증 캐시 정책 적용
 - `privacy/index.html`: 개인정보처리방침 상세 고지
 - `contact/index.html`: 확정되지 않은 운영자 이메일 제거
 - `travel-expense-splitter/index.html`: 공유 URL 버튼 제거 및 안내 수정
-- `calculator/`: 14개 계산기 페이지를 한 폴더 아래에 모아 관리
+- `calculator/`: 19개 계산기·도구 페이지를 한 폴더 아래에 모아 관리
 - `_redirects`: 계산기 소스 위치를 옮겨도 기존 공개 URL이 유지되도록 Cloudflare Pages 내부 rewrite 적용
 - 메인·소개·약관·면책조항·404 HTML: 공통 설정 로드와 정적 자산 버전 정리
 - `scripts/sync-site-url.mjs`: 기본 URL을 SEO 메타와 검색엔진 파일에 동기화
@@ -50,6 +57,11 @@
 - `calculator/currency-exchange-calculator/index.html`: 환율 스프레드·우대율·수수료 반영
 - `calculator/travel-budget-calculator/index.html`: 총예산·1인당 비용 계산
 - `calculator/international-travel-cost-calculator/index.html`: 환율·해외 카드 수수료 포함 경비 계산
+- `calculator/unit-converter/index.html`: 길이·무게·넓이·온도 등 생활 단위 변환
+- `calculator/date-calculator/index.html`: 날짜 차이와 날짜 더하기·빼기
+- `calculator/qr-code-generator/index.html`: 외부 API 없는 QR SVG 생성
+- `calculator/password-generator/index.html`: Web Crypto 기반 무작위 비밀번호 생성
+- `calculator/text-tools/index.html`: 글자 수 분석과 공백·줄 정리
 
 위 신규 페이지는 각자 고유한 SEO 메타, WebApplication·BreadcrumbList 구조화 데이터, 800자 이상의 계산 설명, 예시 3개 이상, FAQ 5개 이상과 관련 계산기 링크를 포함합니다.
 
@@ -81,6 +93,7 @@ node scripts/sync-site-url.mjs
 - 계산 입력값은 서버나 데이터베이스에 저장하지 않습니다.
 - 모든 계산은 현재 브라우저에서 처리됩니다.
 - localStorage는 화면 설정과 치킨·회식 술·피자 및 여행 짐·환전·여행 예산·해외여행 경비 도구의 입력값·체크 상태 자동 복원에 사용합니다.
+- 새 유틸리티는 선택 단위와 작업 방식 같은 설정만 저장하며 변환 숫자, 날짜, QR 내용, 비밀번호와 원본 텍스트는 저장하지 않습니다.
 - 새 계산기의 ‘입력 초기화’를 누르면 해당 계산기의 localStorage 입력값도 삭제됩니다.
 - 여행 경비 분배 계산기는 참가자 이름과 결제금액을 URL에 포함하지 않습니다.
 - 현재 별도의 방문자 분석 스크립트와 Google AdSense 코드는 적용되어 있지 않습니다.
@@ -106,6 +119,7 @@ npx wrangler pages dev . --port 8787
 ```bash
 node --check assets/site.js
 node --check assets/calculators.js
+node --check assets/utilities.js
 node --check assets/site-config.js
 node --check scripts/sync-site-url.mjs
 node scripts/sync-site-url.mjs
@@ -139,6 +153,8 @@ npx wrangler pages deploy . --project-name readycalc
 ```text
 assets/
   calculators.js     계산, 검증, 결과 복사 로직
+  utilities.js       단위·날짜·QR·비밀번호·텍스트 도구 로직
+  favicon.svg        공통 파비콘
   head.js            광고 등 공통 head 코드 진입점
   site-config.js     기본 URL과 공통 검토일
   site.js            공통 메뉴, 푸터, 접근성, 구조화 데이터
@@ -160,6 +176,11 @@ calculator/
   currency-exchange-calculator/index.html
   travel-budget-calculator/index.html
   international-travel-cost-calculator/index.html
+  unit-converter/index.html
+  date-calculator/index.html
+  qr-code-generator/index.html
+  password-generator/index.html
+  text-tools/index.html
 about/ contact/ privacy/ terms/ disclaimer/
 _headers
 _redirects

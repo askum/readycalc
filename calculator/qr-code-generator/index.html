@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>QR 코드 생성기 | URL·텍스트 QR 만들기</title>
+  <meta name="description" content="URL, 텍스트, 이메일과 전화번호를 서버 전송 없이 QR 코드로 만드세요. 브라우저에서 즉시 생성하고 SVG 파일로 저장할 수 있습니다.">
+  <link rel="canonical" href="https://readytools.kr/qr-code-generator/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
+  <meta property="og:title" content="QR 코드 생성기 | 생활계산소"><meta property="og:description" content="주소와 텍스트를 외부 API 없이 QR 코드로 만들어 SVG로 저장하세요."><meta property="og:url" content="https://readytools.kr/qr-code-generator/"><meta property="og:image" content="https://readytools.kr/assets/og.png"><meta property="og:image:alt" content="생활계산소 QR 코드 생성기">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="QR 코드 생성기 | 생활계산소"><meta name="twitter:description" content="URL·텍스트·이메일·전화번호 QR을 브라우저에서 생성하세요."><meta name="twitter:image" content="https://readytools.kr/assets/og.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=20260815-3"><script src="/assets/site-config.js?v=20260815-3"></script><script src="/assets/head.js?v=20260815-3"></script><script src="/assets/site.js?v=20260815-3" defer></script><script src="/assets/utilities.js?v=20260815-3" defer></script>
+  <script type="application/ld+json" data-breadcrumb-schema>{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"QR 코드 생성기","url":"https://readytools.kr/qr-code-generator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"JavaScript 및 SVG 사용 가능 브라우저","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"inLanguage":"ko-KR","description":"URL, 텍스트, 이메일과 전화번호를 브라우저에서 QR 코드로 만드는 무료 도구"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산소","item":"https://readytools.kr/"},{"@type":"ListItem","position":2,"name":"전체 계산기","item":"https://readytools.kr/#tools"},{"@type":"ListItem","position":3,"name":"QR 코드 생성기","item":"https://readytools.kr/qr-code-generator/"}]}]}</script>
+</head>
+<body><div data-site-header></div>
+<main id="main"><div class="container">
+  <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">QR 코드 생성기</li></ol></nav>
+  <section class="hero"><p class="eyebrow">Scan and go</p><h1>QR 코드 생성기</h1><p>주소나 텍스트를 입력하면 서버 전송 없이 현재 브라우저에서 QR 코드를 만듭니다.</p></section>
+  <section class="calculator-layout" aria-label="QR 코드 생성">
+    <form class="panel form-grid" data-utility="qr" novalidate>
+      <div class="field"><label for="content-type">내용 종류</label><select id="content-type" name="contentType"><option value="url">웹사이트 주소</option><option value="text">일반 텍스트</option><option value="email">이메일 주소</option><option value="phone">전화번호</option></select></div>
+      <div class="field"><label for="qr-content">QR에 넣을 내용</label><textarea id="qr-content" name="qrContent" maxlength="1000" placeholder="https://readytools.kr" autocomplete="off" spellcheck="false" aria-describedby="qr-content-hint qr-content-error">https://readytools.kr</textarea><p class="hint" id="qr-content-hint">긴 내용일수록 QR 모듈이 촘촘해져 작은 인쇄물에서 인식하기 어려울 수 있습니다.</p><p class="error" id="qr-content-error"></p></div>
+      <div class="field"><label for="qr-size">저장 크기</label><select id="qr-size" name="qrSize"><option value="256">256×256</option><option value="384" selected>384×384</option><option value="512">512×512</option></select></div>
+      <div class="button-row"><button class="button button-primary" type="submit">QR 코드 만들기</button><button class="button button-secondary" type="reset">입력 초기화</button></div>
+    </form>
+    <aside class="panel result-panel" aria-live="polite" aria-label="QR 코드 생성 결과"><div class="result-empty" data-result-empty>내용을 입력하고<br>QR 코드 만들기를 눌러주세요.</div><div class="result-content" data-result-content tabindex="-1" hidden><span class="result-kicker">생성 결과</span><div class="result-value" data-result-value></div><ul class="result-list" data-result-list></ul><p class="notice" data-result-note></p><div class="button-row"><button class="button button-secondary" type="button" data-copy-result>내용 복사</button><button class="button button-secondary" type="button" data-download-qr>SVG 다운로드</button><button class="button button-secondary" type="button" data-share-result>QR 내용 공유</button></div></div></aside>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 결과 아래 --><span>광고</span></div>
+  <article class="section content-copy">
+    <h2>QR 코드는 어떻게 만들어지나요?</h2>
+    <p>QR 코드는 입력한 문자와 주소를 흑백 격자에 기록하는 2차원 코드입니다. 이 생성기는 텍스트를 UTF-8 바이트로 바꾼 뒤 QR Code Model 2의 바이트 모드로 배치합니다. 데이터 길이에 맞는 버전을 선택하고, 읽는 기기가 일부 모듈을 놓쳐도 내용을 복구할 수 있도록 Reed-Solomon 오류 정정 코드를 계산합니다. 세 모서리의 큰 위치 찾기 패턴, 작은 정렬 패턴, 타이밍 패턴과 형식 정보를 배치한 다음 남은 칸에 데이터 비트를 지그재그로 넣습니다.</p>
+    <p>같은 내용이라도 적용하는 마스크 패턴에 따라 검은 칸이 뭉치거나 긴 줄이 생길 수 있습니다. 생성 과정에서는 표준의 8가지 마스크 후보를 모두 적용하고 연속된 색, 2×2 블록, 위치 찾기 패턴과 비슷한 모양, 전체 흑백 비율을 평가해 읽기 쉬운 후보를 선택합니다. 결과 주변에는 네 모듈 너비의 흰색 여백을 포함합니다. 이 여백을 잘라내거나 배경 무늬 위에 붙이면 카메라가 QR의 경계를 찾기 어려워질 수 있습니다.</p>
+    <p>웹사이트 주소를 선택하면 http 또는 https 주소인지 확인하고, 이메일은 mailto:, 전화번호는 tel: 형식으로 만들어 휴대전화에서 관련 앱을 열기 쉽게 합니다. 일반 텍스트는 입력한 내용을 그대로 담습니다. 외부 QR 생성 API와 외부 JavaScript 라이브러리를 사용하지 않으므로 입력 내용은 서버에 전송되지 않으며 localStorage에도 저장하지 않습니다. 종류와 다운로드 크기 선택만 현재 브라우저의 사용자 설정으로 기억합니다.</p>
+    <p>QR 코드는 정보를 숨기거나 암호화하는 기술이 아닙니다. 카메라로 읽을 수 있는 사람은 누구나 안의 주소와 텍스트를 확인할 수 있으므로 비밀번호, 주민등록번호, 계좌 인증정보 같은 민감한 내용을 넣지 마세요. 다운로드한 SVG는 크기를 확대해도 선명하지만 문서 프로그램에서 임의로 색을 바꾸거나 가로세로 비율을 찌그러뜨리면 인식률이 떨어질 수 있습니다. 실제 배포 전에는 인쇄물과 화면 모두에서 서로 다른 휴대전화 카메라로 시험하는 것이 안전합니다.</p>
+    <h2>QR 코드 생성 예시</h2>
+    <div class="content-grid three">
+      <section class="info-card"><h3>행사 안내 주소</h3><p>신청 페이지의 https 주소를 넣어 포스터에 붙이면 방문자가 긴 주소를 직접 입력하지 않고 이동할 수 있습니다.</p></section>
+      <section class="info-card"><h3>와이파이 대신 안내문</h3><p>일반 텍스트로 장소 이용 안내나 짧은 메시지를 넣을 수 있습니다. 민감한 비밀번호는 공개 QR에 넣지 않는 편이 안전합니다.</p></section>
+      <section class="info-card"><h3>문의 이메일</h3><p>이메일 종류를 선택하고 주소를 입력하면 스캔 시 메일 앱이 열릴 수 있는 mailto 형식의 QR이 만들어집니다.</p></section>
+    </div>
+  </article>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 설명 중간 --><span>광고</span></div>
+  <section class="section faq"><h2>QR 코드 생성기 FAQ</h2>
+    <details><summary>입력한 주소와 텍스트가 서버로 전송되나요?</summary><p>아닙니다. 인코딩과 SVG 생성은 모두 현재 브라우저에서 실행되며 입력 내용은 저장하지 않습니다.</p></details>
+    <details><summary>QR 코드가 카메라에서 인식되지 않으면 어떻게 하나요?</summary><p>내용을 줄이고 흰색 여백을 유지한 뒤 더 크게 표시하거나 인쇄하세요. 다른 카메라에서도 반드시 시험해 보세요.</p></details>
+    <details><summary>생성한 SVG를 상업적으로 사용해도 되나요?</summary><p>QR에 넣는 콘텐츠와 연결 페이지의 권리는 사용자가 확인해야 합니다. 로고를 겹치거나 형태를 변형하면 인식률이 낮아질 수 있습니다.</p></details>
+    <details><summary>QR 코드 안의 내용은 안전하게 암호화되나요?</summary><p>아닙니다. QR은 내용을 기계가 읽기 쉽게 표현할 뿐이므로 누구나 스캔해 확인할 수 있습니다.</p></details>
+    <details><summary>한글도 넣을 수 있나요?</summary><p>UTF-8 바이트 모드를 사용하므로 한글을 지원합니다. 한글은 영문보다 바이트 수가 커서 같은 글자 수라도 QR이 더 촘촘해질 수 있습니다.</p></details>
+    <details><summary>왜 입력 가능한 길이에 제한이 있나요?</summary><p>모바일에서 안정적으로 읽을 수 있는 크기와 구현 범위를 고려해 버전 10, UTF-8 약 213바이트까지 지원합니다.</p></details>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 관련 도구 위 --><span>광고</span></div>
+  <section class="section"><h2>함께 쓰기 좋은 도구</h2><div class="tools-grid">
+    <a class="tool-card" href="/password-generator/"><span class="tool-icon" aria-hidden="true">🔐</span><h3>비밀번호 생성기</h3><p>안전한 무작위 비밀번호 만들기</p></a>
+    <a class="tool-card" href="/text-tools/"><span class="tool-icon" aria-hidden="true">📝</span><h3>텍스트 도구</h3><p>글자 수와 줄 정리</p></a>
+    <a class="tool-card" href="/random-team-generator/"><span class="tool-icon" aria-hidden="true">🎲</span><h3>랜덤 팀 배정</h3><p>이름을 무작위 팀으로 배정</p></a>
+  </div></section>
+</div></main><div data-site-footer></div></body></html>

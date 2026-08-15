@@ -4,3 +4,15 @@
  * 예: const s = document.createElement('script'); s.async = true; ...
  * 계산기 기능은 외부 스크립트나 API에 의존하지 않습니다.
  */
+(() => {
+  const icon = document.createElement('link');
+  icon.rel = 'icon';
+  icon.type = 'image/svg+xml';
+  icon.href = '/assets/favicon.svg';
+  document.head.append(icon);
+
+  const color = document.createElement('meta');
+  color.name = 'theme-color';
+  color.content = '#087f5b';
+  document.head.append(color);
+})();

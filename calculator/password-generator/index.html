@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>비밀번호 생성기 | 안전한 랜덤 비밀번호 만들기</title>
+  <meta name="description" content="대문자, 소문자, 숫자와 특수문자를 조합한 강력한 무작위 비밀번호를 브라우저에서 생성하세요. 생성 결과는 저장하거나 전송하지 않습니다.">
+  <link rel="canonical" href="https://readytools.kr/password-generator/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
+  <meta property="og:title" content="비밀번호 생성기 | 생활계산소"><meta property="og:description" content="암호학적으로 안전한 브라우저 난수로 강력한 비밀번호를 만드세요."><meta property="og:url" content="https://readytools.kr/password-generator/"><meta property="og:image" content="https://readytools.kr/assets/og.png"><meta property="og:image:alt" content="생활계산소 비밀번호 생성기">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="비밀번호 생성기 | 생활계산소"><meta name="twitter:description" content="저장과 서버 전송 없이 랜덤 비밀번호를 생성하세요."><meta name="twitter:image" content="https://readytools.kr/assets/og.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=20260815-3"><script src="/assets/site-config.js?v=20260815-3"></script><script src="/assets/head.js?v=20260815-3"></script><script src="/assets/site.js?v=20260815-3" defer></script><script src="/assets/utilities.js?v=20260815-3" defer></script>
+  <script type="application/ld+json" data-breadcrumb-schema>{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"비밀번호 생성기","url":"https://readytools.kr/password-generator/","applicationCategory":"SecurityApplication","operatingSystem":"Any","browserRequirements":"Web Crypto API 및 JavaScript 사용 가능 브라우저","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"inLanguage":"ko-KR","description":"Web Crypto 난수로 안전한 무작위 비밀번호를 생성하는 무료 웹 도구"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산소","item":"https://readytools.kr/"},{"@type":"ListItem","position":2,"name":"전체 계산기","item":"https://readytools.kr/#tools"},{"@type":"ListItem","position":3,"name":"비밀번호 생성기","item":"https://readytools.kr/password-generator/"}]}]}</script>
+</head>
+<body><div data-site-header></div>
+<main id="main"><div class="container">
+  <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">비밀번호 생성기</li></ol></nav>
+  <section class="hero"><p class="eyebrow">Strong by default</p><h1>비밀번호 생성기</h1><p>브라우저의 암호학적 난수로 예측하기 어려운 비밀번호를 만들고 바로 복사하세요.</p></section>
+  <section class="calculator-layout" aria-label="비밀번호 생성">
+    <form class="panel form-grid" data-utility="password" novalidate>
+      <div class="field"><label for="password-length">비밀번호 길이</label><input id="password-length" name="length" type="number" inputmode="numeric" min="8" max="128" step="1" value="20" aria-describedby="password-length-hint password-length-error"><p class="hint" id="password-length-hint">일반 계정에는 16자 이상을 권장합니다.</p><p class="error" id="password-length-error"></p></div>
+      <fieldset class="date-panel"><legend>포함할 문자 종류</legend><div class="check-grid">
+        <label class="check-field" for="lowercase"><input id="lowercase" name="lowercase" type="checkbox" checked aria-describedby="lowercase-error"><span>영문 소문자</span></label>
+        <label class="check-field" for="uppercase"><input id="uppercase" name="uppercase" type="checkbox" checked><span>영문 대문자</span></label>
+        <label class="check-field" for="numbers"><input id="numbers" name="numbers" type="checkbox" checked><span>숫자</span></label>
+        <label class="check-field" for="symbols"><input id="symbols" name="symbols" type="checkbox" checked><span>특수문자</span></label>
+      </div><p class="error" id="lowercase-error"></p></fieldset>
+      <label class="check-field" for="exclude-ambiguous"><input id="exclude-ambiguous" name="excludeAmbiguous" type="checkbox" checked><span>헷갈리는 문자 I, l, 1, O, 0, o, | 제외</span></label>
+      <div class="button-row"><button class="button button-primary" type="submit">비밀번호 생성하기</button><button class="button button-secondary" type="reset">설정 초기화</button></div>
+    </form>
+    <aside class="panel result-panel" aria-live="polite" aria-label="비밀번호 생성 결과"><div class="result-empty" data-result-empty>길이와 문자 종류를 선택하고<br>생성하기를 눌러주세요.</div><div class="result-content" data-result-content tabindex="-1" hidden><span class="result-kicker">생성 결과</span><div class="result-value" data-result-value></div><ul class="result-list" data-result-list></ul><p class="notice" data-result-note></p><div class="button-row"><button class="button button-primary" type="button" data-copy-result>비밀번호 복사</button><button class="button button-secondary" type="button" data-share-result>도구 주소 공유</button></div></div></aside>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 결과 아래 --><span>광고</span></div>
+  <article class="section content-copy">
+    <h2>안전한 랜덤 비밀번호를 만드는 원리</h2>
+    <p>비밀번호의 안전성은 길이, 사용할 수 있는 문자 수, 그리고 선택 과정의 예측 가능성에 크게 좌우됩니다. 이 도구는 사람이 떠올리기 쉬운 단어나 생일 조합 대신 브라우저의 Web Crypto 기능이 제공하는 암호학적으로 강한 난수를 사용합니다. 선택한 소문자, 대문자, 숫자, 특수문자 집합에서 각 위치의 문자를 독립적으로 고르며, 선택한 문자 종류가 결과에 최소 한 번씩 포함되도록 먼저 한 글자씩 뽑은 다음 전체 순서를 다시 안전하게 섞습니다.</p>
+    <p>난수 바이트를 문자 집합의 길이로 단순히 나머지 계산하면 특정 문자가 조금 더 자주 선택되는 모듈로 편향이 생길 수 있습니다. 생성기는 256을 문자 집합 크기로 나눈 유효 범위 밖의 난수는 버리고 다시 뽑는 거부 샘플링을 사용해 각 문자가 가능한 한 균등하게 선택되도록 합니다. 예상 엔트로피는 비밀번호 길이와 문자 풀의 크기를 이용한 이론값으로 표시하며, 실제 계정 보안은 사이트의 저장 방식, 로그인 시도 제한과 다중 인증 사용 여부에도 영향을 받습니다.</p>
+    <p>‘헷갈리는 문자 제외’를 선택하면 I와 소문자 l, 숫자 1, 대문자 O와 숫자 0처럼 화면이나 종이에서 구분하기 어려운 문자를 제거합니다. 직접 타이핑해야 하는 공유기나 장비 비밀번호에 유용하지만 문자 풀이 조금 줄어들므로 충분한 길이를 유지하는 것이 좋습니다. 일부 웹사이트는 허용하는 특수문자가 제한되어 있으므로 가입 화면의 규칙을 확인하고 필요한 문자 종류만 선택하세요. 사이트가 허용한다면 짧고 복잡한 암호보다 길고 무작위인 암호가 일반적으로 추측하기 어렵습니다.</p>
+    <p>생성된 비밀번호는 서버로 전송하지 않고 localStorage에도 저장하지 않습니다. 복사 버튼을 누르면 시스템 클립보드에 들어가므로 공유 기기에서는 붙여넣은 뒤 클립보드 기록과 화면을 정리하세요. 도구의 공유 버튼은 비밀번호 자체가 아니라 이 페이지 주소만 전달합니다. 같은 비밀번호를 여러 서비스에서 재사용하지 말고 계정마다 새로 생성해 신뢰할 수 있는 비밀번호 관리자에 저장하며, 중요한 계정에는 다중 인증을 함께 설정하는 것이 좋습니다.</p>
+    <h2>비밀번호 생성 예시</h2>
+    <div class="content-grid three">
+      <section class="info-card"><h3>일반 웹 계정</h3><p>20자에 소문자·대문자·숫자·특수문자를 모두 사용하면 긴 무작위 비밀번호를 만들 수 있습니다.</p></section>
+      <section class="info-card"><h3>직접 입력하는 공유기</h3><p>헷갈리는 문자를 제외하고 24자 이상으로 생성하면 화면을 보며 입력할 때 실수를 줄일 수 있습니다.</p></section>
+      <section class="info-card"><h3>특수문자 제한 서비스</h3><p>사이트가 특수문자를 받지 않으면 해당 선택을 끄고 길이를 더 늘려 문자 풀 감소를 보완할 수 있습니다.</p></section>
+    </div>
+  </article>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 설명 중간 --><span>광고</span></div>
+  <section class="section faq"><h2>비밀번호 생성기 FAQ</h2>
+    <details><summary>생성된 비밀번호가 서버에 저장되나요?</summary><p>아닙니다. 생성과 표시가 현재 브라우저에서만 이루어지며 결과는 서버나 localStorage에 저장하지 않습니다.</p></details>
+    <details><summary>Math.random()을 사용하나요?</summary><p>아닙니다. 보안 목적에 적합한 브라우저의 crypto.getRandomValues()를 사용합니다.</p></details>
+    <details><summary>몇 글자로 만드는 것이 좋나요?</summary><p>서비스가 허용한다면 일반 계정은 16자 이상을 권장하며 중요한 계정은 더 길게 만들고 다중 인증을 함께 사용하세요.</p></details>
+    <details><summary>강도 표시만 믿어도 되나요?</summary><p>표시는 문자 풀과 길이로 계산한 이론적 참고치입니다. 서비스의 보안과 비밀번호 재사용 여부도 매우 중요합니다.</p></details>
+    <details><summary>비밀번호 공유 버튼은 왜 없나요?</summary><p>실수로 비밀번호를 외부 앱에 전달하지 않도록 공유 버튼은 도구 주소만 공유하고 비밀번호는 복사만 지원합니다.</p></details>
+    <details><summary>비밀번호를 잊으면 복구할 수 있나요?</summary><p>사이트에서는 생성 결과를 보관하지 않으므로 복구할 수 없습니다. 생성 직후 안전한 비밀번호 관리자에 저장하세요.</p></details>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 관련 도구 위 --><span>광고</span></div>
+  <section class="section"><h2>함께 쓰기 좋은 도구</h2><div class="tools-grid">
+    <a class="tool-card" href="/qr-code-generator/"><span class="tool-icon" aria-hidden="true">▦</span><h3>QR 코드 생성기</h3><p>주소와 텍스트 QR 만들기</p></a>
+    <a class="tool-card" href="/text-tools/"><span class="tool-icon" aria-hidden="true">📝</span><h3>텍스트 도구</h3><p>글자 수와 줄 정리</p></a>
+    <a class="tool-card" href="/random-team-generator/"><span class="tool-icon" aria-hidden="true">🎲</span><h3>랜덤 팀 배정</h3><p>브라우저에서 무작위 배정</p></a>
+  </div></section>
+</div></main><div data-site-footer></div></body></html>

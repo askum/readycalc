@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>단위 변환기 | 길이·무게·평수·온도 변환</title>
+  <meta name="description" content="길이, 무게, 넓이, 부피, 온도, 속도와 데이터 용량을 한국에서 자주 쓰는 단위로 빠르게 변환하세요. 평·근·인치·파운드도 지원합니다.">
+  <link rel="canonical" href="https://readytools.kr/unit-converter/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
+  <meta property="og:title" content="단위 변환기 | 생활계산소"><meta property="og:description" content="길이·무게·평수·온도 등 생활 속 단위를 브라우저에서 바로 변환하세요."><meta property="og:url" content="https://readytools.kr/unit-converter/"><meta property="og:image" content="https://readytools.kr/assets/og.png"><meta property="og:image:alt" content="생활계산소 단위 변환기">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="단위 변환기 | 생활계산소"><meta name="twitter:description" content="평, 근, 인치, 파운드까지 간단하게 변환하세요."><meta name="twitter:image" content="https://readytools.kr/assets/og.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=20260815-3"><script src="/assets/site-config.js?v=20260815-3"></script><script src="/assets/head.js?v=20260815-3"></script><script src="/assets/site.js?v=20260815-3" defer></script><script src="/assets/utilities.js?v=20260815-3" defer></script>
+  <script type="application/ld+json" data-breadcrumb-schema>{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"단위 변환기","url":"https://readytools.kr/unit-converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"JavaScript 사용 가능 브라우저","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"inLanguage":"ko-KR","description":"길이, 무게, 넓이, 부피, 온도, 속도와 데이터 용량을 변환하는 무료 웹 도구"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산소","item":"https://readytools.kr/"},{"@type":"ListItem","position":2,"name":"전체 계산기","item":"https://readytools.kr/#tools"},{"@type":"ListItem","position":3,"name":"단위 변환기","item":"https://readytools.kr/unit-converter/"}]}]}</script>
+</head>
+<body><div data-site-header></div>
+<main id="main"><div class="container">
+  <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">단위 변환기</li></ol></nav>
+  <section class="hero"><p class="eyebrow">Convert with confidence</p><h1>단위 변환기</h1><p>길이, 무게, 평수, 부피, 온도, 속도와 데이터 용량을 익숙한 단위로 바꿔 보세요.</p></section>
+  <section class="calculator-layout" aria-label="단위 변환">
+    <form class="panel form-grid" data-utility="unit" novalidate>
+      <div class="field"><label for="category">변환 종류</label><select id="category" name="category"><option value="length">길이</option><option value="weight">무게</option><option value="area">넓이·평수</option><option value="volume">부피</option><option value="temperature">온도</option><option value="speed">속도</option><option value="data">데이터 용량</option></select></div>
+      <div class="field"><label for="amount">변환할 값</label><input id="amount" name="amount" type="number" inputmode="decimal" step="any" value="1" aria-describedby="amount-error"><p class="error" id="amount-error"></p></div>
+      <div class="field-action">
+        <div class="field"><label for="from-unit">현재 단위</label><select id="from-unit" name="fromUnit"></select></div>
+        <button class="icon-button" type="button" data-swap-units aria-label="두 단위 맞바꾸기">⇄</button>
+        <div class="field"><label for="to-unit">변환 단위</label><select id="to-unit" name="toUnit"></select></div>
+      </div>
+      <div class="button-row"><button class="button button-primary" type="submit">단위 변환하기</button><button class="button button-secondary" type="reset">입력 초기화</button></div>
+    </form>
+    <aside class="panel result-panel" aria-live="polite" aria-label="단위 변환 결과">
+      <div class="result-empty" data-result-empty>값과 단위를 선택하고<br>변환하기를 눌러주세요.</div>
+      <div class="result-content" data-result-content tabindex="-1" hidden><span class="result-kicker">변환 결과</span><div class="result-value" data-result-value></div><ul class="result-list" data-result-list></ul><p class="notice" data-result-note></p><div class="button-row"><button class="button button-secondary" type="button" data-copy-result>결과 복사</button><button class="button button-secondary" type="button" data-share-result>결과 공유</button></div></div>
+    </aside>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 결과 아래 --><span>광고</span></div>
+  <article class="section content-copy">
+    <h2>단위 변환은 어떤 원리로 계산하나요?</h2>
+    <p>단위 변환기는 서로 다른 표현을 하나의 기준 단위로 먼저 바꾼 다음 원하는 단위의 비율로 다시 나누는 방식으로 계산합니다. 예를 들어 길이는 미터, 무게는 킬로그램, 넓이는 제곱미터, 부피는 리터를 내부 기준으로 사용합니다. 1킬로미터는 1,000미터이므로 3.5킬로미터를 미터로 바꾸면 3.5에 1,000을 곱해 3,500미터가 됩니다. 반대로 3,500미터를 킬로미터로 바꾸면 1,000으로 나눕니다. 한국 생활에서 자주 쓰는 1평은 약 3.305785제곱미터, 고기 무게의 1근은 600그램 기준으로 반영했습니다.</p>
+    <p>온도는 단순한 배율만으로 바꿀 수 없기 때문에 별도 공식을 사용합니다. 섭씨를 화씨로 바꿀 때는 섭씨 값에 9/5를 곱하고 32를 더하며, 화씨를 섭씨로 바꿀 때는 먼저 32를 뺀 뒤 5/9를 곱합니다. 켈빈은 섭씨에 273.15를 더한 값입니다. 물리적으로 가능한 최저 온도인 0켈빈보다 낮은 입력은 오류로 안내합니다. 속도는 초당 미터를, 데이터 용량은 바이트를 기준으로 환산합니다. 데이터 단위에서는 1KB를 1,000바이트로 보는 십진 단위와 1KiB를 1,024바이트로 보는 이진 단위를 구분했습니다.</p>
+    <p>변환 결과는 읽기 어려운 긴 소수를 피하기 위해 최대 유효 숫자 12자리 안에서 반올림해 표시합니다. 따라서 측량, 실험, 의약품 조제처럼 매우 높은 정밀도가 필요한 업무에서는 원자료의 허용 오차와 공식 기준을 별도로 확인해야 합니다. 컵과 큰술, 작은술은 각각 240mL, 15mL, 5mL의 일반적인 계량 기준이며 실제 식기 크기와는 다를 수 있습니다. 미국 갤런을 사용하므로 영국식 갤런과 혼동하지 않도록 주의하세요.</p>
+    <p>선택한 변환 종류와 단위 조합은 현재 브라우저 설정으로만 기억하고, 입력한 숫자나 결과는 저장하지 않습니다. 모든 계산은 페이지를 연 기기 안에서 실행되며 외부 환율이나 측정 API를 호출하지 않습니다. 결과 복사와 공유 기능을 이용하면 단위 이름이 포함된 문장으로 전달할 수 있어 숫자만 보냈을 때 생기는 오해를 줄일 수 있습니다.</p>
+    <h2>단위 변환 예시</h2>
+    <div class="content-grid three">
+      <section class="info-card"><h3>아파트 25평</h3><p>25평에 3.305785를 곱하면 약 82.64㎡입니다. 공급면적과 전용면적은 서로 다른 개념이므로 매물 정보에서 구분해야 합니다.</p></section>
+      <section class="info-card"><h3>고기 3근</h3><p>1근을 600g으로 계산하면 3근은 1,800g, 즉 1.8kg입니다. 품목이나 지역에 따라 관행이 다를 수 있습니다.</p></section>
+      <section class="info-card"><h3>화씨 77도</h3><p>(77-32)×5/9 공식을 적용하면 섭씨 25도입니다. 해외 날씨 안내를 국내 온도 감각으로 바꿀 때 유용합니다.</p></section>
+    </div>
+  </article>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 설명 중간 --><span>광고</span></div>
+  <section class="section faq"><h2>단위 변환기 FAQ</h2>
+    <details><summary>1평은 정확히 몇 제곱미터인가요?</summary><p>계산기에서는 일반적으로 사용하는 1평 = 약 3.305785㎡ 기준을 적용합니다.</p></details>
+    <details><summary>근은 모든 물건에서 600g인가요?</summary><p>국내에서 고기 무게를 말할 때 흔히 600g을 사용하지만 품목과 지역 관행이 다를 수 있으므로 거래 기준을 확인하세요.</p></details>
+    <details><summary>KB와 KiB는 왜 결과가 다른가요?</summary><p>KB는 1,000바이트, KiB는 1,024바이트를 뜻합니다. 저장장치 표기와 운영체제 표시가 다른 이유 중 하나입니다.</p></details>
+    <details><summary>음수 온도도 변환할 수 있나요?</summary><p>섭씨와 화씨의 음수는 가능하지만 변환 결과가 0켈빈보다 낮아지는 물리적으로 불가능한 값은 제한합니다.</p></details>
+    <details><summary>소수점이 긴 결과는 정확한가요?</summary><p>내부 계산 후 최대 유효 숫자 12자리로 표시합니다. 전문 측정에는 원자료의 정밀도와 오차를 함께 고려하세요.</p></details>
+    <details><summary>변환한 숫자가 서버에 저장되나요?</summary><p>아닙니다. 입력 숫자와 결과는 브라우저에서만 처리하며 선택한 단위 설정만 현재 기기에 저장합니다.</p></details>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 관련 도구 위 --><span>광고</span></div>
+  <section class="section"><h2>함께 쓰기 좋은 도구</h2><div class="tools-grid">
+    <a class="tool-card" href="/date-calculator/"><span class="tool-icon" aria-hidden="true">📅</span><h3>날짜 계산</h3><p>두 날짜 차이와 날짜 더하기</p></a>
+    <a class="tool-card" href="/currency-exchange-calculator/"><span class="tool-icon" aria-hidden="true">💱</span><h3>환전 계산기</h3><p>환율 우대와 수수료 반영</p></a>
+    <a class="tool-card" href="/meat-calculator/"><span class="tool-icon" aria-hidden="true">🥩</span><h3>인원별 고기량</h3><p>필요한 고기 kg 계산</p></a>
+  </div></section>
+</div></main><div data-site-footer></div></body></html>

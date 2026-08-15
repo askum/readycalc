@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>텍스트 도구 | 글자 수·공백·중복 줄 정리</title>
+  <meta name="description" content="글자 수, 단어 수, 줄 수와 UTF-8 용량을 확인하고 공백 정리, 빈 줄 제거, 중복 줄 제거, 줄 정렬과 대소문자 변환을 실행하세요.">
+  <link rel="canonical" href="https://readytools.kr/text-tools/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
+  <meta property="og:title" content="텍스트 도구 | 생활계산소"><meta property="og:description" content="글자 수를 세고 공백·빈 줄·중복 줄을 브라우저에서 간편하게 정리하세요."><meta property="og:url" content="https://readytools.kr/text-tools/"><meta property="og:image" content="https://readytools.kr/assets/og.png"><meta property="og:image:alt" content="생활계산소 텍스트 도구">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="텍스트 도구 | 생활계산소"><meta name="twitter:description" content="글자 수 분석과 여러 줄 텍스트 정리를 한 번에 처리하세요."><meta name="twitter:image" content="https://readytools.kr/assets/og.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=20260815-3"><script src="/assets/site-config.js?v=20260815-3"></script><script src="/assets/head.js?v=20260815-3"></script><script src="/assets/site.js?v=20260815-3" defer></script><script src="/assets/utilities.js?v=20260815-3" defer></script>
+  <script type="application/ld+json" data-breadcrumb-schema>{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"텍스트 도구","url":"https://readytools.kr/text-tools/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"JavaScript 사용 가능 브라우저","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"inLanguage":"ko-KR","description":"글자 수 분석, 공백과 줄 정리, 중복 제거와 대소문자 변환을 제공하는 무료 웹 도구"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산소","item":"https://readytools.kr/"},{"@type":"ListItem","position":2,"name":"전체 계산기","item":"https://readytools.kr/#tools"},{"@type":"ListItem","position":3,"name":"텍스트 도구","item":"https://readytools.kr/text-tools/"}]}]}</script>
+</head>
+<body><div data-site-header></div>
+<main id="main"><div class="container">
+  <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">텍스트 도구</li></ol></nav>
+  <section class="hero"><p class="eyebrow">Clean words, clear work</p><h1>텍스트 도구</h1><p>글자 수를 분석하고 공백, 빈 줄, 중복 줄과 대소문자를 빠르게 정리하세요.</p></section>
+  <section class="calculator-layout" aria-label="텍스트 분석과 정리">
+    <form class="panel form-grid" data-utility="text" novalidate>
+      <div class="field"><label for="text-operation">작업 선택</label><select id="text-operation" name="operation"><option value="analyze">글자 수와 문장 분석</option><option value="clean-spaces">연속 공백 정리</option><option value="remove-empty">빈 줄 제거</option><option value="deduplicate">중복 줄 제거</option><option value="sort-lines">가나다·알파벳 순 줄 정렬</option><option value="uppercase">영문 대문자로 변환</option><option value="lowercase">영문 소문자로 변환</option><option value="reverse">글자 순서 뒤집기</option></select></div>
+      <div class="field"><label for="source-text">원본 텍스트</label><textarea id="source-text" name="sourceText" maxlength="100000" placeholder="분석하거나 정리할 텍스트를 입력하세요." aria-describedby="source-text-hint source-text-error">생활계산소에서 텍스트를 정리해 보세요.
+
+같은 줄
+같은 줄</textarea><p class="hint" id="source-text-hint">최대 100,000자까지 현재 브라우저에서만 처리합니다.</p><p class="error" id="source-text-error"></p></div>
+      <div class="button-row"><button class="button button-primary" type="submit">텍스트 처리하기</button><button class="button button-secondary" type="reset">입력 초기화</button></div>
+    </form>
+    <aside class="panel result-panel" aria-live="polite" aria-label="텍스트 처리 결과"><div class="result-empty" data-result-empty>텍스트와 작업을 선택하고<br>처리하기를 눌러주세요.</div><div class="result-content" data-result-content tabindex="-1" hidden><span class="result-kicker">처리 결과</span><div class="result-value" data-result-value></div><ul class="result-list" data-result-list></ul><p class="notice" data-result-note></p><div class="button-row"><button class="button button-primary" type="button" data-copy-result>처리 결과 복사</button><button class="button button-secondary" type="button" data-share-result>결과 공유</button></div></div></aside>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 결과 아래 --><span>광고</span></div>
+  <article class="section content-copy">
+    <h2>글자 수 분석과 텍스트 정리 기준</h2>
+    <p>텍스트 도구는 입력한 문장을 브라우저의 유니코드 문자열로 읽어 글자, 공백 제외 글자, 단어, 줄, 문장과 UTF-8 바이트 수를 계산합니다. 글자 수는 Array.from으로 유니코드 코드 포인트를 세어 한글과 일반 이모지를 가능한 한 화면에서 보이는 문자에 가깝게 처리합니다. 다만 피부색 조합이나 가족 이모지처럼 여러 코드 포인트가 하나의 그림으로 결합되는 문자는 둘 이상으로 계산될 수 있습니다. 공백 제외 글자 수는 띄어쓰기뿐 아니라 줄바꿈과 탭 같은 공백 문자를 제거한 뒤 셉니다.</p>
+    <p>단어 수는 앞뒤 공백을 제거하고 하나 이상의 공백을 경계로 나눕니다. 한국어는 영어처럼 모든 단어가 공백으로 분리되지 않기 때문에 형태소 수가 아니라 띄어쓰기 기준 어절 수에 가깝습니다. 문장 수는 마침표, 물음표, 느낌표와 한국어·동아시아권 문장 부호를 경계로 나눈 참고치입니다. 줄 수는 줄바꿈 기준이며 빈 줄도 한 줄로 포함합니다. UTF-8 바이트는 웹 입력 제한이나 데이터 전송 크기를 가늠할 때 도움이 되지만 서비스가 UTF-16이나 다른 인코딩을 사용하면 실제 저장 용량은 달라질 수 있습니다.</p>
+    <p>연속 공백 정리는 각 줄의 여러 칸과 탭을 한 칸으로 바꾸고 줄의 앞뒤 공백을 제거합니다. 빈 줄 제거는 내용이 없는 줄을 없애며, 중복 줄 제거는 처음 등장한 줄만 남기고 이후 같은 줄을 삭제합니다. 이때 대소문자와 공백이 다르면 서로 다른 줄로 봅니다. 줄 정렬은 한국어 로케일 비교를 사용해 가나다와 영문 순서를 정리하며 숫자와 특수문자가 섞인 목록은 사용자가 기대한 자연 정렬과 다를 수 있습니다. 대문자와 소문자 변환은 주로 영문에 적용되고 한글은 그대로 유지됩니다.</p>
+    <p>입력한 원문과 처리 결과는 서버로 보내거나 localStorage에 저장하지 않습니다. 브라우저에는 마지막으로 선택한 작업 종류만 사용자 설정으로 남습니다. 페이지를 새로 고치면 원문과 결과가 사라지므로 필요한 내용은 결과 복사 버튼으로 보관하세요. 개인정보, 비밀번호, 계약서 원문처럼 민감한 내용을 다룰 때도 계산은 로컬에서 이루어지지만 화면 공유, 브라우저 확장 프로그램, 클립보드 기록 등 기기 환경의 보안은 사용자가 별도로 확인해야 합니다.</p>
+    <h2>텍스트 도구 사용 예시</h2>
+    <div class="content-grid three">
+      <section class="info-card"><h3>자기소개 글자 수</h3><p>지원서 문장을 붙여 넣고 분석을 선택하면 공백 포함·제외 글자 수와 UTF-8 바이트를 함께 확인할 수 있습니다.</p></section>
+      <section class="info-card"><h3>이메일 주소 중복 제거</h3><p>한 줄에 하나씩 정리한 목록에서 중복 줄 제거를 실행하면 처음 등장한 항목만 유지합니다.</p></section>
+      <section class="info-card"><h3>복사한 문서 공백 정리</h3><p>PDF나 웹에서 복사하며 생긴 여러 칸의 공백과 탭을 한 칸으로 줄여 읽기 편한 문장으로 만듭니다.</p></section>
+    </div>
+  </article>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 설명 중간 --><span>광고</span></div>
+  <section class="section faq"><h2>텍스트 도구 FAQ</h2>
+    <details><summary>한글 단어 수는 어떻게 계산하나요?</summary><p>형태소 분석이 아니라 띄어쓰기 기준으로 나눈 어절 수입니다. 국어학적인 단어 수와 다를 수 있습니다.</p></details>
+    <details><summary>이모지는 한 글자로 계산되나요?</summary><p>일반 이모지는 한 글자에 가깝게 세지만 여러 문자를 결합한 이모지는 둘 이상으로 계산될 수 있습니다.</p></details>
+    <details><summary>중복 줄 제거는 대소문자를 구분하나요?</summary><p>예. 영문 대소문자와 공백이 다르면 서로 다른 줄로 처리합니다. 필요하면 먼저 소문자 변환과 공백 정리를 적용하세요.</p></details>
+    <details><summary>빈 줄도 줄 수에 포함되나요?</summary><p>예. 분석에서는 줄바꿈으로 구분되는 빈 줄도 한 줄로 셉니다. 빈 줄 제거 후 다시 분석하면 달라집니다.</p></details>
+    <details><summary>처리한 텍스트가 저장되나요?</summary><p>원문과 결과는 저장하거나 서버로 보내지 않습니다. 선택한 작업 종류만 브라우저 설정으로 기억합니다.</p></details>
+    <details><summary>아주 긴 글도 처리할 수 있나요?</summary><p>모바일 브라우저의 메모리와 응답성을 고려해 100,000자로 제한합니다. 더 긴 문서는 여러 부분으로 나눠 처리하세요.</p></details>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 관련 도구 위 --><span>광고</span></div>
+  <section class="section"><h2>함께 쓰기 좋은 도구</h2><div class="tools-grid">
+    <a class="tool-card" href="/qr-code-generator/"><span class="tool-icon" aria-hidden="true">▦</span><h3>QR 코드 생성기</h3><p>텍스트를 QR로 만들기</p></a>
+    <a class="tool-card" href="/password-generator/"><span class="tool-icon" aria-hidden="true">🔐</span><h3>비밀번호 생성기</h3><p>안전한 무작위 문자열 생성</p></a>
+    <a class="tool-card" href="/random-team-generator/"><span class="tool-icon" aria-hidden="true">🎲</span><h3>랜덤 팀 배정</h3><p>이름 목록을 무작위 배정</p></a>
+  </div></section>
+</div></main><div data-site-footer></div></body></html>

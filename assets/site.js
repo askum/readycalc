@@ -14,7 +14,7 @@
   if (footerHost) footerHost.innerHTML = `
     <footer class="site-footer"><div class="container footer-grid"><div><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">생</span><span>생활계산소</span></a><p class="hint">복잡한 생활 계산을 빠르고 가볍게.</p></div><nav class="footer-links" aria-label="하단 메뉴"><a href="/about/">사이트 소개</a><a href="/contact/">문의하기</a><a href="/privacy/">개인정보처리방침</a><a href="/terms/">이용약관</a><a href="/disclaimer/">면책조항</a></nav></div><div class="container copyright">© 2026 생활계산소. All rights reserved.</div></footer><div class="toast" id="toast" role="status" aria-live="polite" hidden></div>`;
 
-  const calculatorForm = document.querySelector('[data-calculator]');
+  const calculatorForm = document.querySelector('[data-calculator], [data-utility]');
   const calculatorLayout = document.querySelector('.calculator-layout');
   if (calculatorForm && calculatorLayout) {
     const reviewed = siteConfig.lastReviewed.replaceAll('-', '.');

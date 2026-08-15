@@ -13,7 +13,9 @@ const routes = [
   'random-team-generator', 'chicken-calculator', 'company-dinner-drink-calculator',
   'pizza-calculator', 'travel-packing-checklist', 'currency-exchange-calculator',
   'travel-budget-calculator',
-  'international-travel-cost-calculator', 'about', 'contact', 'privacy', 'terms', 'disclaimer'
+  'international-travel-cost-calculator', 'unit-converter', 'date-calculator',
+  'qr-code-generator', 'password-generator', 'text-tools',
+  'about', 'contact', 'privacy', 'terms', 'disclaimer'
 ];
 const calculatorRoutes = new Set([
   'meat-calculator', 'fuel-cost-calculator', 'camping-food-calculator',
@@ -21,7 +23,8 @@ const calculatorRoutes = new Set([
   'random-team-generator', 'chicken-calculator', 'company-dinner-drink-calculator',
   'pizza-calculator', 'travel-packing-checklist', 'currency-exchange-calculator',
   'travel-budget-calculator',
-  'international-travel-cost-calculator'
+  'international-travel-cost-calculator', 'unit-converter', 'date-calculator',
+  'qr-code-generator', 'password-generator', 'text-tools'
 ]);
 
 for (const route of routes) {
