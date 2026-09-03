@@ -70,3 +70,15 @@
 /cake-size-calculator /calculator/cake-size-calculator/ 200
 /cake-size-calculator/ /calculator/cake-size-calculator/ 200
 /cake-size-calculator/* /calculator/cake-size-calculator/:splat 200
+/subscription-split-calculator /calculator/subscription-split-calculator/ 200
+/subscription-split-calculator/ /calculator/subscription-split-calculator/ 200
+/subscription-split-calculator/* /calculator/subscription-split-calculator/:splat 200
+/ev-vs-ice-cost-calculator /calculator/ev-vs-ice-cost-calculator/ 200
+/ev-vs-ice-cost-calculator/ /calculator/ev-vs-ice-cost-calculator/ 200
+/ev-vs-ice-cost-calculator/* /calculator/ev-vs-ice-cost-calculator/:splat 200
+/pet-treat-dehydration-calculator /calculator/pet-treat-dehydration-calculator/ 200
+/pet-treat-dehydration-calculator/ /calculator/pet-treat-dehydration-calculator/ 200
+/pet-treat-dehydration-calculator/* /calculator/pet-treat-dehydration-calculator/:splat 200
+/overseas-purchase-duty-calculator /calculator/overseas-purchase-duty-calculator/ 200
+/overseas-purchase-duty-calculator/ /calculator/overseas-purchase-duty-calculator/ 200
+/overseas-purchase-duty-calculator/* /calculator/overseas-purchase-duty-calculator/:splat 200

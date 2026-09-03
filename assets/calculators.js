@@ -14,10 +14,12 @@
   const persistentTypes = new Set([
     'chicken', 'company-drinks', 'pizza', 'packing-list', 'currency-exchange',
     'travel-budget', 'international-cost', 'parcel-box', 'first-birthday-food',
-    'cake-size'
+    'cake-size', 'subscription-split', 'ev-vs-ice', 'pet-treat-yield',
+    'overseas-duty'
   ]);
   const storageKey = `living-calc-inputs:${type}`;
   let shareText = '';
+  let refreshDynamicUi = () => {};
 
   const electricityPresets = {
     aircon: { name: '에어컨', power: 1000, hours: 8, days: 30, duty: 60, note: '설정 온도에 도달하면 압축기가 쉬는 시간을 고려한 예시입니다.' },
@@ -40,6 +42,15 @@
     { label: '5호급', dimensions: [48, 38, 34] },
     { label: '6호급', dimensions: [52, 48, 40] }
   ];
+
+  const petTreatPresets = {
+    chicken: { name: '닭가슴살', yield: 30 },
+    beef: { name: '소고기 살코기', yield: 35 },
+    duck: { name: '오리고기', yield: 35 },
+    salmon: { name: '연어', yield: 40 },
+    sweetPotato: { name: '고구마', yield: 30 },
+    custom: { name: '직접 입력 재료', yield: 30 }
+  };
 
   const scrollToResultOnMobile = () => {
     if (!window.matchMedia('(max-width: 899px)').matches) return;
@@ -375,6 +386,122 @@
       const total = flights + localKrw + cardFeeKrw + fixed;
       show(won(total), [['항공권 합계', won(flights)], ['현지 지출 원화 환산', won(localKrw)], ['예상 해외결제 수수료', won(cardFeeKrw)], ['보험·통신', won(fixed)], ['1인당 총경비', won(total / people)], ['현지통화 필요액', local.toLocaleString('ko-KR', { maximumFractionDigits: 2 })]], '환율은 직접 입력한 값으로 고정 계산됩니다. 카드사 환율 적용일과 해외서비스 수수료, 현금 인출 수수료에 따라 실제 청구액이 달라집니다.', { updateUrl: false });
     },
+    'subscription-split'() {
+      const services = [];
+      for (let index = 1; index <= 3; index++) {
+        const enabled = form.elements[`sub${index}Enabled`]?.checked;
+        if (!enabled) continue;
+        const nameField = `sub${index}Name`;
+        const currentField = `sub${index}Current`;
+        const sharedField = `sub${index}Shared`;
+        const membersField = `sub${index}Members`;
+        const name = value(nameField);
+        if (!name) return invalidate(nameField, '포함할 구독 서비스 이름을 입력해 주세요.');
+        if (!range(currentField, 1, 1000000)) return;
+        const sharingType = value(`sub${index}Policy`);
+        let optimized = num(currentField);
+        if (sharingType !== 'individual') {
+          if (!range(sharedField, 1, 1000000) || !range(membersField, 2, 10)) return;
+          optimized = num(sharedField) / num(membersField);
+        }
+        services.push({ name, nameField, current: num(currentField), optimized, sharingType, members: sharingType === 'individual' ? 1 : num(membersField) });
+      }
+      if (!services.length) return invalidate('sub1Name', '계산에 포함할 구독 서비스를 하나 이상 선택해 주세요.');
+      const duplicate = services.find((service, index) => services.findIndex((candidate) => candidate.name === service.name) !== index);
+      if (duplicate) return invalidate(duplicate.nameField, '서비스 이름은 서로 다르게 입력해 주세요.');
+      const currentTotal = services.reduce((sum, service) => sum + service.current, 0);
+      const optimizedTotal = services.reduce((sum, service) => sum + service.optimized, 0);
+      const monthlySavings = currentTotal - optimizedTotal;
+      const verifyCount = services.filter((service) => service.sharingType === 'verify').length;
+      const items = services.map((service) => [service.name, service.sharingType === 'individual'
+        ? `${won(service.current)} · 개인 전용`
+        : `${won(service.current)} → ${won(service.optimized)} (${service.members}명)`]);
+      items.push(['현재 월 구독료', won(currentTotal)]);
+      items.push(['조정 후 월 부담액', won(optimizedTotal)]);
+      items.push(['연간 차이', monthlySavings >= 0 ? `${won(monthlySavings * 12)} 절약` : `${won(Math.abs(monthlySavings * 12))} 증가`]);
+      show(monthlySavings >= 0 ? `월 ${won(monthlySavings)} 절약` : `월 ${won(Math.abs(monthlySavings))} 증가`, items,
+        `${verifyCount ? `${verifyCount}개 서비스는 최신 공유 약관을 직접 확인해야 합니다. ` : ''}가족·추가 회원 요금제는 반드시 서비스가 허용하는 대상과 방식으로만 이용하세요.`, { updateUrl: false });
+    },
+    'ev-vs-ice'() {
+      const required = [
+        ['dailyDistance', .1, 1000], ['drivingDays', 1, 366], ['fuelEfficiency', 1, 50], ['fuelPrice', 100, 10000],
+        ['evEfficiency', .1, 20], ['homeShare', 0, 100], ['workShare', 0, 100], ['publicShare', 0, 100],
+        ['homeRate', 0, 5000], ['workRate', 0, 5000], ['publicRate', 0, 5000], ['iceTax', 0, 10000000],
+        ['evTax', 0, 10000000], ['iceMaintenance', 0, 10000000], ['evMaintenance', 0, 10000000],
+        ['iceInsurance', 0, 10000000], ['evInsurance', 0, 10000000], ['priceGap', 0, 500000000]
+      ];
+      if (!required.every(([name, min, max]) => range(name, min, max))) return;
+      const shareTotal = num('homeShare') + num('workShare') + num('publicShare');
+      if (Math.abs(shareTotal - 100) > .01) return invalidate('homeShare', `충전 비율 합계가 100%가 되도록 조정해 주세요. 현재 ${fmt(shareTotal, '%')}입니다.`);
+      const annualKm = num('dailyDistance') * num('drivingDays');
+      const fuelLiters = annualKm / num('fuelEfficiency');
+      const fuelCost = fuelLiters * num('fuelPrice');
+      const evKwh = annualKm / num('evEfficiency');
+      const weightedRate = (num('homeShare') * num('homeRate') + num('workShare') * num('workRate') + num('publicShare') * num('publicRate')) / 100;
+      const chargingCost = evKwh * weightedRate;
+      const iceAnnual = fuelCost + num('iceTax') + num('iceMaintenance') + num('iceInsurance');
+      const evAnnual = chargingCost + num('evTax') + num('evMaintenance') + num('evInsurance');
+      const annualSavings = iceAnnual - evAnnual;
+      const breakEven = annualSavings > 0 && num('priceGap') > 0 ? num('priceGap') / annualSavings : null;
+      show(annualSavings >= 0 ? `EV가 연 ${won(annualSavings)} 절약` : `내연기관이 연 ${won(Math.abs(annualSavings))} 절약`, [
+        ['연간 주행거리', fmt(annualKm, 'km')],
+        ['내연기관 연료비', won(fuelCost)],
+        ['EV 충전비', won(chargingCost)],
+        ['가중 충전단가', `${fmt(weightedRate)}원/kWh`],
+        ['내연기관 연간 합계', won(iceAnnual)],
+        ['EV 연간 합계', won(evAnnual)],
+        ['5년 비용 차이', annualSavings >= 0 ? `${won(annualSavings * 5)} EV 절약` : `${won(Math.abs(annualSavings * 5))} 내연기관 절약`],
+        ['구매가 차이 회수', breakEven ? `약 ${fmt(breakEven, '년')}` : num('priceGap') === 0 ? '구매가 차이 없음' : '현재 조건에서는 회수 어려움']
+      ], '차량 가격, 감가상각, 충전 손실, 소모품 교체와 실제 보험료는 차종과 운전자에 따라 달라집니다. 비교하려는 차량의 최신 값을 직접 입력하세요.', { updateUrl: false });
+    },
+    'pet-treat-yield'() {
+      if (![range('rawWeight', 1, 100000), range('yieldRate', 5, 90), range('portionWeight', .1, 1000)].every(Boolean)) return;
+      const preset = petTreatPresets[value('ingredient')] || petTreatPresets.custom;
+      const rawWeight = num('rawWeight');
+      const yieldRate = num('yieldRate');
+      const expected = rawWeight * yieldRate / 100;
+      const low = rawWeight * Math.max(1, yieldRate - 5) / 100;
+      const high = rawWeight * Math.min(95, yieldRate + 5) / 100;
+      const portions = Math.floor(expected / num('portionWeight'));
+      const petLabel = value('petType') === 'cat' ? '고양이' : '강아지';
+      show(`${fmt(expected, 'g')} 예상`, [
+        ['재료', preset.name],
+        ['생재료 중량', fmt(rawWeight, 'g')],
+        ['예상 완성 범위', `${fmt(low, 'g')}~${fmt(high, 'g')}`],
+        ['예상 중량 감소', fmt(rawWeight - expected, 'g')],
+        ['입력 수율', fmt(yieldRate, '%')],
+        [`${petLabel} 소분 수`, `${portions}개 · ${fmt(num('portionWeight'), 'g')}씩`]
+      ], '수율은 재료 두께, 지방·수분 함량, 건조 온도와 시간에 따라 달라집니다. 표시값은 중량 추정치이며 안전한 급여량이나 보관기간을 뜻하지 않습니다.', { updateUrl: false });
+    },
+    'overseas-duty'() {
+      const required = [
+        ['itemPrice', .01, 100000000], ['discount', 0, 100000000], ['localShipping', 0, 100000000],
+        ['currencyRate', .0001, 10000000], ['quoteUnit', 1, 1000], ['usdRate', 1, 10000000],
+        ['internationalCost', 0, 1000000000], ['tariffRate', 0, 100]
+      ];
+      if (!required.every(([name, min, max]) => range(name, min, max))) return;
+      if (num('discount') > num('itemPrice')) return invalidate('discount', '할인 금액은 상품 가격보다 클 수 없습니다.');
+      const paidForeign = num('itemPrice') - num('discount') + num('localShipping');
+      const goodsKrw = paidForeign / num('quoteUnit') * num('currencyRate');
+      const usdValue = goodsKrw / num('usdRate');
+      const listEligible = value('clearance') === 'list';
+      const limit = value('origin') === 'us' && listEligible ? 200 : 150;
+      const taxable = usdValue > limit;
+      const difference = Math.abs(limit - usdValue);
+      const taxBase = goodsKrw + num('internationalCost');
+      const duty = taxable ? taxBase * num('tariffRate') / 100 : 0;
+      const vat = taxable ? (taxBase + duty) * .1 : 0;
+      const code = value('currency');
+      show(taxable ? `면세 기준 ${difference.toFixed(2)}달러 초과` : `면세 기준 이내 예상`, [
+        ['면세판정 물품가격', `${paidForeign.toLocaleString('ko-KR', { maximumFractionDigits: 2 })} ${code}`],
+        ['달러 환산 금액', `${usdValue.toLocaleString('ko-KR', { maximumFractionDigits: 2 })} USD`],
+        ['적용한 면세 기준', `${limit} USD`],
+        [taxable ? '기준 초과액' : '기준까지 남은 금액', `${difference.toLocaleString('ko-KR', { maximumFractionDigits: 2 })} USD`],
+        ['예상 관세', taxable ? won(duty) : '과세 없음 예상'],
+        ['예상 부가세', taxable ? won(vat) : '과세 없음 예상'],
+        ['예상 관부가세 합계', taxable ? won(duty + vat) : '0원 예상']
+      ], `${listEligible ? '일반 목록통관 가능 품목' : '목록통관 배제 가능 품목'}으로 계산했습니다. 품목, 원산지, 수량, 합산 여부와 수입신고 시점의 관세청 과세환율에 따라 실제 통관 결과가 달라질 수 있습니다.`, { updateUrl: false });
+    },
     boxes() {
       if (![range('people', 1, 20), range('rooms', 1, 20), range('years', 0, 50)].every(Boolean)) return;
       const factor = Number(value('amount'));
@@ -451,7 +578,7 @@
     try {
       const saved = {};
       [...form.elements].forEach((el) => {
-        if (el.name && el.type !== 'submit' && el.type !== 'button') saved[el.name] = el.value;
+        if (el.name && el.type !== 'submit' && el.type !== 'button') saved[el.name] = el.type === 'checkbox' ? el.checked : el.value;
       });
       localStorage.setItem(storageKey, JSON.stringify(saved));
     } catch (_) {}
@@ -463,7 +590,11 @@
       const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
       let restored = false;
       Object.entries(saved).forEach(([name, savedValue]) => {
-        if (form.elements[name]) { form.elements[name].value = savedValue; restored = true; }
+        if (form.elements[name]) {
+          if (form.elements[name].type === 'checkbox') form.elements[name].checked = Boolean(savedValue);
+          else form.elements[name].value = savedValue;
+          restored = true;
+        }
       });
       return restored;
     } catch (_) { return false; }
@@ -483,6 +614,45 @@
     form.elements.appliance.addEventListener('change', applyElectricityPreset);
     form.addEventListener('reset', () => setTimeout(applyElectricityPreset, 0));
     applyElectricityPreset();
+  }
+
+  if (type === 'pet-treat-yield') {
+    const applyPetTreatPreset = () => {
+      const preset = petTreatPresets[value('ingredient')];
+      if (preset) form.elements.yieldRate.value = preset.yield;
+    };
+    form.elements.ingredient.addEventListener('change', applyPetTreatPreset);
+    form.addEventListener('reset', () => setTimeout(applyPetTreatPreset, 0));
+  }
+
+  if (type === 'subscription-split') {
+    const updateSubscriptionFields = () => {
+      for (let index = 1; index <= 3; index++) {
+        const individual = value(`sub${index}Policy`) === 'individual';
+        form.elements[`sub${index}Shared`].disabled = individual;
+        form.elements[`sub${index}Members`].disabled = individual;
+      }
+    };
+    for (let index = 1; index <= 3; index++) form.elements[`sub${index}Policy`].addEventListener('change', updateSubscriptionFields);
+    form.addEventListener('reset', () => setTimeout(updateSubscriptionFields, 0));
+    refreshDynamicUi = updateSubscriptionFields;
+    updateSubscriptionFields();
+  }
+
+  if (type === 'overseas-duty') {
+    const updateExchangeSearch = () => {
+      const code = value('currency');
+      const unit = value('quoteUnit');
+      const link = document.querySelector('[data-exchange-search]');
+      if (!link) return;
+      link.href = `https://www.google.com/search?q=${encodeURIComponent(`${unit} ${code} KRW 환율`)}`;
+      link.setAttribute('aria-label', `새 창에서 ${unit} ${code} 원화 환율 검색`);
+    };
+    form.elements.currency.addEventListener('change', updateExchangeSearch);
+    form.elements.quoteUnit.addEventListener('change', updateExchangeSearch);
+    form.addEventListener('reset', () => setTimeout(updateExchangeSearch, 0));
+    refreshDynamicUi = updateExchangeSearch;
+    updateExchangeSearch();
   }
 
   form.addEventListener('submit', (event) => {
@@ -520,6 +690,7 @@
   } else if (persistentTypes.has(type)) {
     if (location.search) history.replaceState(null, '', location.pathname);
     restoreSavedInputs();
+    refreshDynamicUi();
   } else if (restoreQuery() && type !== 'teams') {
     form.requestSubmit();
   }

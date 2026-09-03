@@ -112,6 +112,11 @@ h3 { margin-top: 0; font-size: 1.12rem; }
 .field { display: grid; gap: 7px; }
 .field-row { display: grid; gap: 14px; grid-template-columns: 1fr; }
 label { font-weight: 800; font-size: .94rem; }
+.input-card { display: grid; min-width: 0; gap: 16px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface-2); }
+.input-card legend { padding: 0 6px; color: var(--primary-dark); font-weight: 900; }
+.input-card .field-row { gap: 14px; }
+.check-inline { display: inline-flex; min-height: 44px; align-items: center; gap: 10px; margin-top: -6px; cursor: pointer; }
+.check-inline input { width: 22px; min-height: 22px; margin: 0; accent-color: var(--primary); }
 .hint { margin: 0; color: var(--muted); font-size: .82rem; }
 input, select, textarea { width: 100%; min-width: 0; min-height: 48px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--text); }
 textarea { min-height: 130px; resize: vertical; }
@@ -125,6 +130,8 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--
 .date-panel { display: grid; gap: 18px; margin: 0; padding: 0; border: 0; }
 .error { min-height: 1.2em; margin: 0; color: var(--danger); font-size: .83rem; font-weight: 700; }
 .button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.compact-actions { gap: 8px; }
+.compact-actions .button { flex: 1 1 190px; }
 .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; padding: 11px 17px; border: 1px solid transparent; border-radius: 13px; cursor: pointer; font-weight: 900; text-align: center; text-decoration: none; }
 .button-primary { flex: 1; background: var(--primary); color: #fff; }
 :root[data-theme="dark"] .button-primary { color: #0b2019; }
