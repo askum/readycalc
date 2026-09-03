@@ -16,7 +16,7 @@ const routes = [
   'international-travel-cost-calculator', 'unit-converter', 'date-calculator',
   'qr-code-generator', 'password-generator', 'text-tools', 'electricity-cost-calculator',
   'parcel-box-calculator', 'first-birthday-food-calculator', 'cake-size-calculator',
-  'about', 'contact', 'privacy', 'terms', 'disclaimer'
+  'about', 'methodology', 'contact', 'privacy', 'terms', 'disclaimer'
 ];
 const calculatorRoutes = new Set([
   'meat-calculator', 'fuel-cost-calculator', 'camping-food-calculator',

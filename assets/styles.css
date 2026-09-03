@@ -161,7 +161,8 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--
 .calculator-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .calculator-links a { display: inline-flex; min-height: 44px; align-items: center; font-weight: 800; font-size: .9rem; }
 .notice { padding: 14px 16px; border-left: 4px solid var(--accent); border-radius: 8px; background: var(--surface-2); color: var(--muted); font-size: .88rem; }
-.ad-slot { display: grid; min-height: 120px; place-items: center; margin: 28px auto; border: 1px dashed var(--line); border-radius: 16px; color: var(--muted); background: color-mix(in srgb, var(--surface) 55%, transparent); font-size: .8rem; }
+.ad-slot { display: none; min-height: 120px; place-items: center; margin: 28px auto; border: 1px dashed var(--line); border-radius: 16px; color: var(--muted); background: color-mix(in srgb, var(--surface) 55%, transparent); font-size: .8rem; }
+.ads-enabled .ad-slot { display: grid; }
 .content-grid { display: grid; gap: 14px; }
 .info-card { padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
 .info-card p:last-child, .info-card ul:last-child { margin-bottom: 0; }

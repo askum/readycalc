@@ -29,6 +29,7 @@
 - 돌잔치 음식량 계산기
 - 케이크 호수 계산기
 - 사이트 소개
+- 계산 기준과 편집 원칙
 - 문의하기
 - 개인정보처리방침
 - 이용약관
@@ -51,10 +52,13 @@
 - `calculator/`: 23개 계산기·도구 페이지를 한 폴더 아래에 모아 관리
 - `_redirects`: 계산기 소스 위치를 옮겨도 기존 공개 URL이 유지되도록 Cloudflare Pages 내부 rewrite 적용
 - 메인·소개·약관·면책조항·404 HTML: 공통 설정 로드와 정적 자산 버전 정리
+- `methodology/index.html`: 계산식 선정, 검수, 수정과 운영 책임을 공개하는 편집 원칙
 - `scripts/sync-site-url.mjs`: 기본 URL을 SEO 메타와 검색엔진 파일에 동기화
 - `README.md`: 운영 및 재배포 안내 갱신
 
 ## 새로 생성한 페이지
+
+- `methodology/index.html`: 운영자 정보, 계산 기준 선정 방식, 출시 전 검수와 수정 원칙
 
 - `calculator/chicken-calculator/index.html`: 인원과 식사 상황에 따른 치킨 주문량 계산
 - `calculator/company-dinner-drink-calculator/index.html`: 회식 주류·생수·무알코올 음료 준비량 계산
@@ -112,7 +116,9 @@ node scripts/sync-site-url.mjs
 
 공통 head 진입점인 `assets/head.js`에서 AdSense 게시자 `ca-pub-4297698834736188`의 계정 메타태그와 광고 스크립트를 모든 페이지의 `<head>`에 추가합니다. 루트 `ads.txt`에는 같은 게시자 ID의 Google DIRECT 항목이 있습니다.
 
-각 계산기 아래의 `.ad-slot`에는 최소 높이가 설정되어 있어 광고가 로드될 때 레이아웃 이동을 줄입니다. 실제 광고 단위는 AdSense 승인 후 자동 광고를 켜거나 각 `.ad-slot`에 수동 광고 단위를 연결하여 운영합니다.
+AdSense 승인 검토 중에는 빈 광고 자리 56개가 미완성 영역처럼 보이지 않도록 `assets/site-config.js`의 `showAdSlots`가 `false`로 설정되어 있습니다. 계정 확인용 공통 스크립트, 메타태그와 `ads.txt`는 그대로 유지됩니다.
+
+승인 후 수동 광고 코드를 각 `.ad-slot`에 연결했다면 `showAdSlots`를 `true`로 변경하여 예약 영역을 표시할 수 있습니다. `.ad-slot`에는 최소 높이가 설정되어 있어 광고가 로드될 때 레이아웃 이동을 줄입니다. Google 자동 광고만 사용하는 경우에는 이 값을 켤 필요가 없습니다.
 
 ## 로컬 테스트 방법
 
@@ -196,7 +202,7 @@ calculator/
   parcel-box-calculator/index.html
   first-birthday-food-calculator/index.html
   cake-size-calculator/index.html
-about/ contact/ privacy/ terms/ disclaimer/
+about/ methodology/ contact/ privacy/ terms/ disclaimer/
 _headers
 _redirects
 robots.txt

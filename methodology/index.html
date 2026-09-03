@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>계산 기준과 편집 원칙 | 생활계산소</title>
+  <meta name="description" content="생활계산소의 계산식 선정 방법, 추정치 표시 원칙, 검수 과정과 수정 정책을 안내합니다.">
+  <link rel="canonical" href="https://readytools.kr/methodology/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
+  <meta property="og:title" content="계산 기준과 편집 원칙 | 생활계산소"><meta property="og:description" content="생활계산소가 계산식을 만들고 검토하는 방법을 공개합니다."><meta property="og:url" content="https://readytools.kr/methodology/"><meta property="og:image" content="https://readytools.kr/assets/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="생활계산소 - 생활의 애매함을 숫자로 정리해요">
+  <link rel="stylesheet" href="/assets/styles.css?v=20260903-1"><script src="/assets/site-config.js?v=20260903-1"></script><script src="/assets/head.js?v=20260903-1"></script><script src="/assets/site.js?v=20260903-1" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"계산 기준과 편집 원칙","url":"https://readytools.kr/methodology/","description":"생활계산소의 계산식 선정 방법과 검수 및 수정 원칙","inLanguage":"ko-KR","dateModified":"2026-09-03"}</script>
+</head>
+<body><div data-site-header></div><main id="main"><div class="container">
+  <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li aria-current="page">계산 기준과 편집 원칙</li></ol></nav>
+  <section class="hero"><p class="eyebrow">How we calculate</p><h1>계산 결과가 만들어지는<br>과정을 공개합니다.</h1><p>생활계산소는 숫자만 보여주지 않고 어떤 가정과 계산식을 사용했는지, 결과를 어디까지 믿고 조정해야 하는지 함께 설명합니다.</p></section>
+  <article class="section content-copy">
+    <h2>운영과 편집 책임</h2>
+    <p>생활계산소는 운영자 Askumi가 기획하고 관리하는 생활 도구 사이트입니다. 각 계산기의 입력 항목, 계산식, 설명과 예시는 사이트에서 직접 작성하고 검토합니다. 다른 사이트의 글을 가져와 단어만 바꾸거나, 검색어를 늘리기 위해 내용이 거의 같은 페이지를 반복해서 만들지 않습니다. 계산 결과나 설명에서 오류를 발견하면 <a href="/contact/">문의하기</a>에 안내된 이메일로 알려주세요. 재현 가능한 입력값과 예상 결과를 함께 보내주시면 계산식과 화면 설명을 확인합니다.</p>
+
+    <h2>계산 기준을 정하는 방법</h2>
+    <p>단위 변환, 날짜 차이, 비용 합산처럼 수학적으로 결과가 정해지는 도구는 계산식을 그대로 코드로 구현합니다. 여행 주유비는 이동거리 ÷ 연비로 필요한 연료를 구한 뒤 리터당 가격과 통행료를 더하고, 경비 분배는 총 결제액을 참가자 수로 나누어 각자의 과부족 금액을 맞춥니다. 계산기 본문에는 사용한 식과 입력 단위를 설명하여 사용자가 직접 결과를 검산할 수 있게 합니다.</p>
+    <p>음식량, 이사 박스, 행사 준비처럼 하나의 정답이 없는 도구는 일반적인 계획을 위한 기준값을 먼저 정하고 인원, 기간, 상황에 따른 계수를 적용합니다. 이런 결과에는 ‘추천’, ‘예상’, ‘추정치’라고 표시하며 공인 권장량이나 구매 보증처럼 표현하지 않습니다. 개인차가 큰 요소, 계산에 포함하지 않은 비용, 판매처마다 달라지는 규격도 각 페이지의 주의사항에 안내합니다.</p>
+    <p>전기요금, 환율, 택배비처럼 시기와 사업자에 따라 바뀌는 값은 외부 API로 자동 수집하지 않습니다. 사용자가 최신 값을 직접 입력하도록 하거나, 특정 공개 기준을 사용한 경우 적용 기준일과 범위를 계산기 본문에 표시합니다. 실제 결제 전에는 해당 기관이나 사업자의 최신 고지 내용을 다시 확인해야 합니다.</p>
+
+    <h2>출시 전 검수 항목</h2>
+    <div class="content-grid three">
+      <section class="info-card"><h3>계산 검산</h3><p>보통값, 최솟값과 최댓값, 0이나 빈 값처럼 오류가 나기 쉬운 입력을 확인하고 본문의 계산 예시가 실제 코드 결과와 맞는지 비교합니다.</p></section>
+      <section class="info-card"><h3>사용성 확인</h3><p>휴대전화와 넓은 화면에서 입력, 계산, 초기화와 결과 복사가 동작하는지 확인하고 키보드와 화면 읽기 프로그램을 위한 레이블과 상태 메시지를 점검합니다.</p></section>
+      <section class="info-card"><h3>내용 검토</h3><p>계산 기준, 단위, 포함·제외 항목과 주의사항이 충분한지 확인합니다. 각 페이지의 마지막 검토일은 공통 안내 영역에서 확인할 수 있습니다.</p></section>
+    </div>
+
+    <h2>수정과 업데이트 원칙</h2>
+    <p>오류가 확인되면 계산 코드와 설명을 함께 수정해 서로 다른 결과가 나오지 않도록 합니다. 요금이나 규격처럼 바뀔 수 있는 정보는 기준일을 새로 표시하며, 전체 계산기의 공통 검토일도 실제 점검 시점에만 변경합니다. 기능을 추가할 때는 기존 URL을 가능한 유지하고, 없어진 페이지는 사용자가 길을 잃지 않도록 관련 도구로 안내합니다.</p>
+    <p>생활계산소의 결과는 준비와 비교를 돕는 출발점입니다. 의료·법률·세무·투자 판단을 대신하지 않으며, 큰 금액이나 안전에 영향을 주는 결정은 공식 자료와 전문가의 안내를 우선해야 합니다. 자세한 책임 범위는 <a href="/disclaimer/">면책조항</a>에서 확인할 수 있습니다.</p>
+  </article>
+</div></main><div data-site-footer></div></body>
+</html>

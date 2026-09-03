@@ -140,9 +140,10 @@
     drinks() {
       if (![range('guests', 1, 1000), range('hours', 1, 24)].every(Boolean)) return;
       const guests = num('guests'); const hours = num('hours'); const weather = Number(value('weather'));
+      const weatherLabel = weather < 1 ? '서늘한 환경 10% 감량' : weather > 1 ? '더운 환경 25% 증량' : '보통 환경 기준';
       const beverage = guests * (.6 + Math.max(0, hours - 2) * .15) * weather;
       const cans = Math.ceil(beverage / .355); const ice = guests * .45 * weather;
-      show(`${fmt(beverage, 'L')} 준비`, [['355mL 캔 기준', `${cans}캔`], ['얼음', fmt(ice, 'kg')], ['500mL 생수', `${Math.ceil(guests * .8 * weather)}병`], ['예비분', '계산값에 약 10% 반영']], '주류는 참석자 연령과 행사 성격을 확인해 별도로 계산하고, 얼음은 음료용과 보냉용을 나눠 담으세요.');
+      show(`${fmt(beverage, 'L')} 준비`, [['355mL 캔 기준', `${cans}캔`], ['얼음', fmt(ice, 'kg')], ['500mL 생수', `${Math.ceil(guests * .8 * weather)}병`], ['환경 보정', weatherLabel]], '주류는 참석자 연령과 행사 성격을 확인해 별도로 계산하고, 얼음은 음료용과 보냉용을 나눠 담으세요.');
     },
     electricity() {
       if (![range('power', 1, 10000), range('hours', .1, 24), range('days', 1, 31), range('quantity', 1, 20), range('duty', 1, 100), range('rate', 1, 2000)].every(Boolean)) return;

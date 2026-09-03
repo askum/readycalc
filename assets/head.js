@@ -1,5 +1,7 @@
 /* 공통 head 요소: Google AdSense 계정 확인, 광고 스크립트, 파비콘과 테마 색상 */
 (() => {
+  if (globalThis.SITE_CONFIG?.showAdSlots) document.documentElement.classList.add('ads-enabled');
+
   const adsenseAccount = 'ca-pub-4297698834736188';
 
   if (!document.querySelector('meta[name="google-adsense-account"]')) {
