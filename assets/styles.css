@@ -110,7 +110,7 @@ h3 { margin-top: 0; font-size: 1.12rem; }
 .panel { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
 .form-grid { display: grid; gap: 18px; }
 .field { display: grid; gap: 7px; }
-.field-row { display: grid; gap: 14px; grid-template-columns: 1fr; }
+.field-row { display: grid; gap: 14px; grid-template-columns: 1fr; align-items: start; }
 label { font-weight: 800; font-size: .94rem; }
 .input-card { display: grid; min-width: 0; gap: 16px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface-2); }
 .input-card legend { padding: 0 6px; color: var(--primary-dark); font-weight: 900; }
@@ -119,6 +119,7 @@ label { font-weight: 800; font-size: .94rem; }
 .check-inline input { width: 22px; min-height: 22px; margin: 0; accent-color: var(--primary); }
 .hint { margin: 0; color: var(--muted); font-size: .82rem; }
 input, select, textarea { width: 100%; min-width: 0; min-height: 48px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--text); }
+input:not([type="checkbox"]):not([type="radio"]), select { height: 50px; }
 textarea { min-height: 130px; resize: vertical; }
 input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--danger); }
 .check-grid { display: grid; gap: 8px; grid-template-columns: 1fr; }
@@ -229,7 +230,14 @@ th, td { padding: 10px; overflow-wrap: anywhere; }
 @media (min-width: 620px) {
   .tools-grid { grid-template-columns: repeat(2, 1fr); }
   .popular-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .field-row { grid-template-columns: repeat(2, 1fr); }
+  .field-row, .input-card .field-row { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto auto auto auto; column-gap: 14px; row-gap: 0; }
+  .field-row > .field { display: contents; }
+  .field-row > .field:nth-child(1) > * { grid-column: 1; }
+  .field-row > .field:nth-child(2) > * { grid-column: 2; }
+  .field-row > .field > label { grid-row: 1; margin-bottom: 7px; }
+  .field-row > .field > input, .field-row > .field > select, .field-row > .field > textarea { grid-row: 2; }
+  .field-row > .field > .hint { grid-row: 3; margin-top: 7px; }
+  .field-row > .field > .error { grid-row: 4; margin-top: 7px; }
   .check-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .metrics-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .content-grid { grid-template-columns: repeat(2, 1fr); }
