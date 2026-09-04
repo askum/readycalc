@@ -18,6 +18,16 @@
     'overseas-duty'
   ]);
   const storageKey = `living-calc-inputs:${type}`;
+  const groupedNumberFields = new Set(({
+    fuel: ['price', 'toll'],
+    electricity: ['rate'],
+    'currency-exchange': ['krw', 'rate', 'fixedFee'],
+    'travel-budget': ['transport', 'lodging', 'food', 'activities', 'other'],
+    'international-cost': ['flight', 'lodgingLocal', 'dailyLocal', 'exchangeRate', 'insurance', 'connectivity'],
+    'subscription-split': ['sub1Current', 'sub1Shared', 'sub2Current', 'sub2Shared', 'sub3Current', 'sub3Shared'],
+    'ev-vs-ice': ['fuelPrice', 'homeRate', 'workRate', 'publicRate', 'iceTax', 'iceMaintenance', 'iceInsurance', 'evTax', 'evMaintenance', 'evInsurance', 'priceGap'],
+    'overseas-duty': ['itemPrice', 'discount', 'localShipping', 'currencyRate', 'usdRate', 'internationalCost']
+  })[type] || []);
   let shareText = '';
   let refreshDynamicUi = () => {};
 
@@ -70,11 +80,47 @@
   });
 
   const won = (value) => `${Math.round(value).toLocaleString('ko-KR')}원`;
-  const num = (name) => Number(form.elements[name]?.value);
+  const numericText = (raw) => String(raw ?? '').replaceAll(',', '').trim();
+  const num = (name) => Number(numericText(form.elements[name]?.value));
   const value = (name) => String(form.elements[name]?.value || '').trim();
   const fmt = (value, unit = '') => `${Number(value.toFixed(1)).toLocaleString('ko-KR')}${unit}`;
   const escapeHtml = (text) => String(text).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
   const labelText = (name) => form.querySelector(`label[for="${form.elements[name]?.id}"]`)?.textContent || name;
+
+  const groupedNumber = (raw) => {
+    const cleaned = String(raw ?? '').replaceAll(',', '').replace(/[^0-9.]/g, '');
+    if (!cleaned) return '';
+    const dot = cleaned.indexOf('.');
+    const integerRaw = (dot < 0 ? cleaned : cleaned.slice(0, dot)).replace(/\D/g, '');
+    const integer = (integerRaw || '0').replace(/^0+(?=\d)/, '');
+    const fraction = dot < 0 ? '' : cleaned.slice(dot + 1).replace(/\D/g, '');
+    const formatted = integer.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return dot < 0 ? formatted : `${formatted}.${fraction}`;
+  };
+  const formatGroupedInput = (input) => {
+    const raw = input.value;
+    const cursor = input.selectionStart;
+    const tokensBeforeCursor = cursor == null ? null : raw.slice(0, cursor).replace(/[^0-9.]/g, '').length;
+    const formatted = groupedNumber(raw);
+    if (formatted === raw) return;
+    input.value = formatted;
+    if (document.activeElement !== input || tokensBeforeCursor == null) return;
+    let position = 0;
+    let tokenCount = 0;
+    while (position < formatted.length && tokenCount < tokensBeforeCursor) {
+      if (/[0-9.]/.test(formatted[position])) tokenCount += 1;
+      position += 1;
+    }
+    input.setSelectionRange(position, position);
+  };
+  const groupedInputs = [...groupedNumberFields].map((name) => form.elements[name]).filter(Boolean);
+  groupedInputs.forEach((input) => {
+    input.type = 'text';
+    input.dataset.numberFormat = 'grouped';
+    input.addEventListener('input', () => formatGroupedInput(input));
+  });
+  const formatGroupedInputs = () => groupedInputs.forEach(formatGroupedInput);
+  formatGroupedInputs();
 
   const clearErrors = () => {
     form.querySelectorAll('[aria-invalid="true"]').forEach((el) => el.removeAttribute('aria-invalid'));
@@ -516,7 +562,9 @@
       const lines = value('payments').split('\n').map((s) => s.trim()).filter(Boolean);
       if (!lines.length) return invalidate('payments', '결제 내역을 한 줄 이상 입력해 주세요.');
       for (const [i, line] of lines.entries()) {
-        const split = line.split(','); const payer = split[0]?.trim(); const amount = Number(split[1]?.replace(/[^0-9.-]/g, ''));
+        const separator = line.indexOf(',');
+        const payer = separator < 0 ? '' : line.slice(0, separator).trim();
+        const amount = Number((separator < 0 ? '' : line.slice(separator + 1)).replace(/[^0-9.-]/g, ''));
         if (!(payer in paid) || !Number.isFinite(amount) || amount <= 0) return invalidate('payments', `${i + 1}번째 줄을 “이름, 금액” 형식으로 확인해 주세요.`);
         paid[payer] += amount;
       }
@@ -670,7 +718,7 @@
         try { localStorage.removeItem('living-calc-checklist:packing-list'); } catch (_) {}
       }
     }
-    setTimeout(() => { clearErrors(); resultEmpty.hidden = false; resultContent.hidden = true; history.replaceState(null, '', location.pathname); }, 0);
+    setTimeout(() => { formatGroupedInputs(); clearErrors(); resultEmpty.hidden = false; resultContent.hidden = true; history.replaceState(null, '', location.pathname); }, 0);
   });
   resultCopy?.addEventListener('click', () => window.copyText(shareText, '결과를 복사했습니다.'));
   shareButton?.addEventListener('click', async () => {
@@ -690,8 +738,10 @@
   } else if (persistentTypes.has(type)) {
     if (location.search) history.replaceState(null, '', location.pathname);
     restoreSavedInputs();
+    formatGroupedInputs();
     refreshDynamicUi();
   } else if (restoreQuery() && type !== 'teams') {
+    formatGroupedInputs();
     form.requestSubmit();
   }
 })();
