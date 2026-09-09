@@ -14,7 +14,7 @@ const routes = [
   'pizza-calculator', 'travel-packing-checklist', 'currency-exchange-calculator',
   'travel-budget-calculator',
   'international-travel-cost-calculator', 'unit-converter', 'date-calculator',
-  'qr-code-generator', 'password-generator', 'text-tools', 'electricity-cost-calculator',
+  'qr-code-generator', 'password-generator', 'text-tools', 'image-tools', 'electricity-cost-calculator',
   'parcel-box-calculator', 'first-birthday-food-calculator', 'cake-size-calculator',
   'subscription-split-calculator', 'ev-vs-ice-cost-calculator',
   'pet-treat-dehydration-calculator', 'overseas-purchase-duty-calculator',
@@ -27,7 +27,7 @@ const calculatorRoutes = new Set([
   'pizza-calculator', 'travel-packing-checklist', 'currency-exchange-calculator',
   'travel-budget-calculator',
   'international-travel-cost-calculator', 'unit-converter', 'date-calculator',
-  'qr-code-generator', 'password-generator', 'text-tools', 'electricity-cost-calculator',
+  'qr-code-generator', 'password-generator', 'text-tools', 'image-tools', 'electricity-cost-calculator',
   'parcel-box-calculator', 'first-birthday-food-calculator', 'cake-size-calculator',
   'subscription-split-calculator', 'ev-vs-ice-cost-calculator',
   'pet-treat-dehydration-calculator', 'overseas-purchase-duty-calculator'

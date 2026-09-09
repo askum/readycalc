@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>이미지 크기 변경·JPG PNG 변환·사진 압축 도구</title>
+  <meta name="description" content="이미지 크기 변경, JPG→PNG 변환, JPEG·WebP 사진 압축과 회전·뒤집기를 서버 전송 없이 브라우저에서 무료로 처리하세요.">
+  <link rel="canonical" href="https://readytools.kr/image-tools/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
+  <meta property="og:title" content="이미지 크기 변경·압축·변환 도구 | 생활계산소"><meta property="og:description" content="사진 크기 변경, JPG→PNG 변환, 이미지 압축과 회전·뒤집기를 브라우저에서 안전하게 처리하세요."><meta property="og:url" content="https://readytools.kr/image-tools/"><meta property="og:image" content="https://readytools.kr/assets/og.png"><meta property="og:image:alt" content="생활계산소 이미지 도구">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="이미지 크기 변경·압축·변환 도구 | 생활계산소"><meta name="twitter:description" content="이미지를 업로드하지 않고 현재 브라우저에서 크기·형식·품질·방향을 바꾸세요."><meta name="twitter:image" content="https://readytools.kr/assets/og.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=image-tools-20260909"><script src="/assets/site-config.js?v=20260903-2"></script><script src="/assets/head.js?v=20260903-2"></script><script src="/assets/site.js?v=page-review-20260909" defer></script><script src="/assets/image-tools.js?v=20260909-1" defer></script>
+  <script type="application/ld+json" data-breadcrumb-schema>{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"이미지 크기 변경·압축·변환 도구","url":"https://readytools.kr/image-tools/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"JavaScript 및 Canvas API 사용 가능 브라우저","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"inLanguage":"ko-KR","description":"이미지 크기 변경, JPG PNG 변환, JPEG WebP 압축과 사진 회전·뒤집기를 브라우저에서 처리하는 무료 도구"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"생활계산소","item":"https://readytools.kr/"},{"@type":"ListItem","position":2,"name":"전체 계산기","item":"https://readytools.kr/#tools"},{"@type":"ListItem","position":3,"name":"이미지 도구","item":"https://readytools.kr/image-tools/"}]}]}</script>
+</head>
+<body><div data-site-header></div>
+<main id="main"><div class="container">
+  <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">이미지 도구</li></ol></nav>
+  <section class="hero"><p class="eyebrow">Resize, convert, compress</p><h1>이미지 크기 변경·압축 도구</h1><p>JPG·PNG·WebP 사진의 크기, 파일 형식, 품질과 방향을 서버 전송 없이 현재 브라우저에서 바꾸세요.</p></section>
+  <section class="calculator-layout" aria-label="이미지 변환 설정과 결과">
+    <form class="panel form-grid" data-image-tool data-reviewed="2026-09-09" novalidate>
+      <div class="field"><label for="image-file">이미지 파일</label><input id="image-file" name="imageFile" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="image-file-hint image-file-name image-file-error"><p class="hint" id="image-file-hint">JPG, PNG, WebP 파일 1개를 선택하세요. 최대 25MB·4,000만 화소까지 처리합니다.</p><p class="selected-file" id="image-file-name" data-selected-file>선택된 파일 없음</p><p class="error" id="image-file-error" aria-live="polite"></p></div>
+      <fieldset class="input-card"><legend>이미지 크기 변경</legend>
+        <div class="field-row">
+          <div class="field"><label for="image-width">가로 크기(px)</label><input id="image-width" name="imageWidth" type="number" inputmode="numeric" min="1" max="12000" step="1" placeholder="예: 1200" disabled aria-describedby="image-width-hint image-width-error"><p class="hint" id="image-width-hint">1~12,000px</p><p class="error" id="image-width-error" aria-live="polite"></p></div>
+          <div class="field"><label for="image-height">세로 크기(px)</label><input id="image-height" name="imageHeight" type="number" inputmode="numeric" min="1" max="12000" step="1" placeholder="예: 800" disabled aria-describedby="image-height-hint image-height-error"><p class="hint" id="image-height-hint">1~12,000px</p><p class="error" id="image-height-error" aria-live="polite"></p></div>
+        </div>
+        <label class="check-inline" for="keep-aspect"><input id="keep-aspect" name="keepAspect" type="checkbox" checked><span>원본 가로세로 비율 유지</span></label>
+      </fieldset>
+      <fieldset class="input-card"><legend>파일 형식과 압축</legend>
+        <div class="field"><label for="output-format">저장 형식</label><select id="output-format" name="outputFormat"><option value="original">원본 형식 유지</option><option value="image/png">PNG로 변환</option><option value="image/jpeg">JPG로 변환·압축</option><option value="image/webp">WebP로 변환·압축</option></select></div>
+        <div class="field"><div class="range-label"><label for="image-quality">압축 품질</label><output id="image-quality-value" for="image-quality">82%</output></div><input id="image-quality" name="imageQuality" type="range" min="10" max="100" value="82" step="1" aria-describedby="image-quality-hint"><p class="hint" id="image-quality-hint" data-quality-hint>JPG·WebP 저장 시 적용됩니다. 값이 낮을수록 파일이 작아지고 화질 손실이 커집니다.</p></div>
+      </fieldset>
+      <fieldset class="input-card"><legend>사진 회전·뒤집기</legend>
+        <div class="field"><label for="image-rotation">회전 각도</label><select id="image-rotation" name="imageRotation"><option value="0">회전하지 않음</option><option value="90">오른쪽으로 90°</option><option value="180">180°</option><option value="270">왼쪽으로 90°</option></select></div>
+        <div class="check-grid"><label class="check-field" for="flip-horizontal"><input id="flip-horizontal" name="flipHorizontal" type="checkbox"><span>좌우 뒤집기</span></label><label class="check-field" for="flip-vertical"><input id="flip-vertical" name="flipVertical" type="checkbox"><span>상하 뒤집기</span></label></div>
+      </fieldset>
+      <p class="status-message" data-image-status aria-live="polite"></p>
+      <div class="button-row"><button class="button button-primary" type="submit" data-process-image>이미지 처리하기</button><button class="button button-secondary" type="reset">설정 초기화</button></div>
+    </form>
+    <aside class="panel result-panel image-result-panel" aria-live="polite" aria-label="이미지 처리 결과"><div class="result-empty" data-image-result-empty>이미지를 선택하고<br>처리하기를 눌러주세요.</div><div class="result-content" data-image-result tabindex="-1" hidden><span class="result-kicker">처리 결과</span><div class="result-value image-result-value" data-image-result-value></div><figure class="image-preview"><img data-image-preview alt="처리된 이미지 미리보기"><figcaption data-image-caption></figcaption></figure><ul class="result-list" data-image-result-list></ul><p class="notice" data-image-result-note></p><div class="button-row"><button class="button button-primary" type="button" data-download-image>이미지 다운로드</button><button class="button button-secondary" type="button" data-copy-image-info>처리 정보 복사</button><button class="button button-secondary" type="button" data-share-image>이미지 공유</button></div></div></aside>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 결과 아래 --><span>광고</span></div>
+  <article class="section content-copy">
+    <h2>이미지 크기 변경과 압축 원리</h2>
+    <p>이미지 크기 변경은 사진을 이루는 가로·세로 픽셀 수를 새 값으로 다시 계산하는 작업입니다. 예를 들어 4,000×3,000픽셀 사진을 1,200×900픽셀로 줄이면 화면에 그려야 할 픽셀이 약 1,200만 개에서 108만 개로 감소합니다. 같은 파일 형식과 비슷한 품질이라면 픽셀 수가 줄어든 만큼 파일 용량도 대체로 작아집니다. ‘원본 가로세로 비율 유지’를 선택하면 가로 또는 세로 중 하나를 변경할 때 다른 값이 자동으로 계산되어 사진이 눌리거나 늘어나는 현상을 예방합니다.</p>
+    <p>이미지 압축은 저장 형식과 품질 값에 따라 결과가 달라집니다. JPG와 WebP는 사람의 눈에 덜 민감한 세부 정보를 일부 줄이는 손실 압축을 지원하므로 품질을 낮추면 보통 파일 크기가 작아집니다. 품질 82%는 웹 게시용 사진의 출발점으로 사용할 수 있지만 작은 글자, 도면, 제품 라벨처럼 선명한 경계가 중요한 이미지는 더 높은 값을 권장합니다. PNG는 픽셀을 손실 없이 저장하는 형식이라 품질 슬라이더가 적용되지 않습니다. PNG 용량을 줄이려면 가로·세로 크기를 줄이거나 사진인 경우 JPG·WebP로 바꾸는 편이 효과적입니다.</p>
+    <h2>JPG를 PNG로 변환할 때 알아둘 점</h2>
+    <p>저장 형식에서 ‘PNG로 변환’을 고르면 JPG 사진을 브라우저의 Canvas에 그린 뒤 PNG 파일로 다시 저장합니다. 확장자 이름만 바꾸는 방식이 아니라 실제 이미지 데이터가 PNG로 인코딩됩니다. 다만 JPG에서 이미 압축으로 사라진 세부 정보가 PNG 변환으로 복구되지는 않습니다. 사진은 PNG로 바꾸면 오히려 용량이 커질 수 있으며, 투명 배경이 필요하거나 로고·도형·화면 캡처처럼 경계가 분명한 이미지에 PNG가 적합합니다. 반대로 PNG의 투명 영역을 JPG로 저장하면 투명도를 표현할 수 없어 흰색 배경으로 채웁니다.</p>
+    <p>회전은 오른쪽 90도, 180도, 왼쪽 90도를 지원합니다. 90도 또는 270도 회전하면 최종 파일의 가로와 세로 크기가 서로 바뀝니다. 좌우 뒤집기는 거울처럼 수평 방향을 반전하고, 상하 뒤집기는 위아래 방향을 반전합니다. 회전과 뒤집기를 동시에 선택할 수도 있으므로 셀카 방향 수정, 스캔 문서 바로 세우기, 제품 사진의 방향 통일에 활용할 수 있습니다. 처리 후 미리보기와 최종 픽셀 크기를 확인한 다음 파일을 내려받으세요.</p>
+    <p>선택한 원본 파일과 결과 이미지는 생활계산소 서버로 업로드되지 않습니다. 파일 읽기, 리사이즈, 회전, 압축과 형식 변환은 현재 브라우저의 Canvas API에서 실행됩니다. localStorage에는 저장 형식, 압축 품질, 비율 유지와 회전·뒤집기 같은 사용자 설정만 보관하며 이미지 파일과 미리보기는 저장하지 않습니다. 탭을 닫거나 새로 고치면 결과가 사라지므로 필요한 파일은 반드시 다운로드하세요. 25MB 또는 4,000만 화소를 넘는 이미지는 모바일 기기의 메모리 부족과 브라우저 중단을 줄이기 위해 제한합니다.</p>
+    <h2>이미지 도구 사용 예시</h2>
+    <div class="content-grid three">
+      <section class="info-card"><h3>블로그 사진 크기 줄이기</h3><p>4,032×3,024px 스마트폰 사진의 가로를 1,200px로 입력하고 비율 유지를 켜면 세로가 자동 계산됩니다. JPG 품질 80~85%부터 비교해 보세요.</p></section>
+      <section class="info-card"><h3>JPG 로고를 PNG로 저장</h3><p>JPG 파일을 선택하고 ‘PNG로 변환’을 지정하면 실제 PNG 데이터로 저장됩니다. 원본 JPG의 배경이 자동으로 투명해지는 기능은 아닙니다.</p></section>
+      <section class="info-card"><h3>옆으로 누운 사진 바로 세우기</h3><p>오른쪽 또는 왼쪽 90도 회전을 선택해 처리합니다. 필요하면 좌우 뒤집기를 함께 적용하고 미리보기에서 글자 방향을 확인하세요.</p></section>
+    </div>
+  </article>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 설명 중간 --><span>광고</span></div>
+  <section class="section faq"><h2>이미지 크기 변경·압축 FAQ</h2>
+    <details><summary>이미지가 서버로 업로드되나요?</summary><p>아닙니다. 파일 선택부터 변환과 미리보기 생성까지 현재 브라우저에서만 처리합니다. 이미지 파일을 서버나 localStorage에 저장하지 않습니다.</p></details>
+    <details><summary>JPG를 PNG로 바꾸면 화질이 좋아지나요?</summary><p>아닙니다. PNG로 다시 저장해도 JPG 압축 과정에서 이미 사라진 정보는 복구되지 않습니다. 사진은 파일 용량이 더 커질 수도 있습니다.</p></details>
+    <details><summary>이미지 압축 품질은 몇 퍼센트가 적당한가요?</summary><p>일반 웹 사진은 75~85%에서 시작해 결과를 비교해 보세요. 작은 글자나 선이 중요한 이미지는 90% 이상 또는 PNG가 더 적합할 수 있습니다.</p></details>
+    <details><summary>PNG에서 압축 품질을 선택할 수 없는 이유는 무엇인가요?</summary><p>브라우저 Canvas의 PNG 저장은 무손실 방식이며 JPG·WebP와 같은 손실 품질 값을 사용하지 않습니다. 픽셀 크기를 줄이면 PNG 용량을 줄이는 데 도움이 됩니다.</p></details>
+    <details><summary>회전하면 가로와 세로 입력값도 바뀌나요?</summary><p>입력값은 회전 전 크기를 나타냅니다. 90도 또는 270도로 처리한 최종 파일은 가로와 세로가 서로 바뀌며 결과 카드에 최종 크기가 표시됩니다.</p></details>
+    <details><summary>용량이 원본보다 커질 수도 있나요?</summary><p>그럴 수 있습니다. JPG를 PNG로 바꾸거나 품질을 높여 다시 저장하면 용량이 증가할 수 있습니다. 결과 카드에서 원본과 결과 용량을 비교하세요.</p></details>
+    <details><summary>움직이는 GIF나 HEIC 사진도 지원하나요?</summary><p>현재는 JPG, PNG, WebP 정지 이미지만 지원합니다. 애니메이션 WebP는 첫 화면만 처리될 수 있으므로 사용하지 마세요. HEIC와 GIF는 지원 대상이 아닙니다.</p></details>
+  </section>
+  <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 관련 도구 위 --><span>광고</span></div>
+  <section class="section"><h2>함께 쓰기 좋은 도구</h2><div class="tools-grid">
+    <a class="tool-card" href="/qr-code-generator/"><span class="tool-icon" aria-hidden="true">▦</span><h3>QR 코드 생성기</h3><p>주소와 텍스트를 QR 이미지로 저장</p></a>
+    <a class="tool-card" href="/text-tools/"><span class="tool-icon" aria-hidden="true">📝</span><h3>텍스트 도구</h3><p>글자수와 여러 줄 텍스트 정리</p></a>
+    <a class="tool-card" href="/unit-converter/"><span class="tool-icon" aria-hidden="true">📏</span><h3>단위 변환기</h3><p>길이·넓이·무게 단위 변환</p></a>
+  </div></section>
+</div></main><div data-site-footer></div></body></html>
