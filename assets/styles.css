@@ -158,6 +158,17 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--
 .metric span { color: var(--muted); font-size: .78rem; font-weight: 800; }
 .metric strong { color: var(--text); text-align: left; font-size: 1.02rem; overflow-wrap: anywhere; }
 .text-output { min-height: 220px; margin-top: 7px; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+.code-output { white-space: pre; overflow: auto; tab-size: 2; }
+fieldset.field { min-width: 0; padding: 0; margin: 0; border: 0; }
+fieldset.field > legend { padding: 0; margin-bottom: 7px; font-weight: 800; font-size: .94rem; }
+.rgb-grid { display: grid; min-width: 0; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.rgb-grid > div { min-width: 0; }
+.rgb-grid label { display: block; margin-bottom: 7px; }
+.color-picker-input { height: 76px !important; padding: 6px; cursor: pointer; }
+.color-picker-input::-webkit-color-swatch-wrapper { padding: 0; }
+.color-picker-input::-webkit-color-swatch { border: 0; border-radius: 8px; }
+.color-picker-input::-moz-color-swatch { border: 0; border-radius: 8px; }
+.color-preview { display: grid; min-height: 136px; place-items: center; margin: 0 0 18px; padding: 20px; border: 1px solid var(--line); border-radius: 16px; font-weight: 900; text-align: center; overflow-wrap: anywhere; }
 .selected-file, .status-message { min-height: 1.4em; margin: 0; color: var(--muted); font-size: .84rem; overflow-wrap: anywhere; }
 .status-message { font-weight: 800; }
 .range-label { display: flex; align-items: center; justify-content: space-between; gap: 12px; }

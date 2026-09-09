@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>생활계산소 | 전기요금·여행·음식 생활 계산기</title>
-  <meta name="description" content="이미지 크기 변경·압축, 텍스트 정리, 구독료 N빵, 전기차 유지비와 여행·전기요금 등 28개 생활 계산기와 도구를 검색하세요.">
+  <meta name="description" content="JSON·Base64·URL 변환, HEX·RGB 색상 선택, 이미지·텍스트 정리와 여행·전기요금 등 30개 생활 계산기와 도구를 검색하세요.">
   <link rel="canonical" href="https://readytools.kr/">
   <meta name="google-adsense-account" content="ca-pub-4297698834736188">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4297698834736188" crossorigin="anonymous"></script>
@@ -23,14 +23,14 @@
     <li><a class="popular-card" href="/date-calculator/"><span class="popular-rank">5</span><span aria-hidden="true">📅</span><strong>날짜 계산</strong></a></li>
   </ol></div></section>
   <section class="section"><div class="container"><div class="section-heading"><p class="eyebrow">Just added</p><h2>최신 계산기</h2><p>최근 추가한 계산기와 브라우저 도구를 모았습니다.</p></div><div class="tools-grid latest-grid">
+    <a class="tool-card latest-card" href="/developer-tools/"><span class="new-badge">NEW</span><span class="tool-icon" aria-hidden="true">{ }</span><h3>JSON·Base64·URL 도구</h3><p>개발 문자열 정리·인코딩·디코딩</p></a>
+    <a class="tool-card latest-card" href="/color-tools/"><span class="new-badge">NEW</span><span class="tool-icon" aria-hidden="true">🎨</span><h3>HEX·RGB 색상 도구</h3><p>색상 선택·코드 변환·대비 확인</p></a>
     <a class="tool-card latest-card" href="/image-tools/"><span class="new-badge">NEW</span><span class="tool-icon" aria-hidden="true">🖼️</span><h3>이미지 크기 변경·압축</h3><p>JPG·PNG·WebP 크기·품질·방향 변경</p></a>
     <a class="tool-card latest-card" href="/ev-vs-ice-cost-calculator/"><span class="new-badge">NEW</span><span class="tool-icon" aria-hidden="true">🔋</span><h3>EV vs 내연기관 유지비</h3><p>연료·충전·세금·보험·정비비 비교</p></a>
     <a class="tool-card latest-card" href="/subscription-split-calculator/"><span class="new-badge">NEW</span><span class="tool-icon" aria-hidden="true">📺</span><h3>구독 서비스 N빵</h3><p>공식 공유 요금제의 월·연간 절약액</p></a>
     <a class="tool-card latest-card" href="/overseas-purchase-duty-calculator/"><span class="new-badge">NEW</span><span class="tool-icon" aria-hidden="true">🛒</span><h3>해외직구 면세 한도</h3><p>환율과 발송국별 면세 기준 확인</p></a>
-    <a class="tool-card latest-card" href="/pet-treat-dehydration-calculator/"><span class="new-badge">NEW</span><span class="tool-icon" aria-hidden="true">🐾</span><h3>반려동물 간식 수율</h3><p>건조 후 예상 중량과 소분 수 계산</p></a>
-    <a class="tool-card latest-card" href="/parcel-box-calculator/"><span class="tool-icon" aria-hidden="true">📮</span><h3>택배 박스 크기</h3><p>물품 크기별 박스 호수급과 예상 택배비</p></a>
   </div></div></section>
-  <section class="section" id="tools"><div class="container"><div class="section-heading"><p class="eyebrow">28 useful tools</p><h2>오늘 필요한 계산기</h2><p>카테고리를 고르거나 검색어를 입력하면 바로 찾을 수 있습니다.</p></div>
+  <section class="section" id="tools"><div class="container"><div class="section-heading"><p class="eyebrow">30 useful tools</p><h2>오늘 필요한 계산기</h2><p>카테고리를 고르거나 검색어를 입력하면 바로 찾을 수 있습니다.</p></div>
     <div class="tool-finder" role="search" aria-label="계산기 검색과 필터">
       <div class="search-field"><span aria-hidden="true">🔍</span><label class="sr-only" for="tool-search">계산기 검색</label><input id="tool-search" type="search" placeholder="계산기를 검색하세요..." autocomplete="off" data-tool-search><button class="search-clear" type="button" aria-label="검색어 지우기" data-clear-search>×</button></div>
       <div class="category-tabs" role="group" aria-label="계산기 카테고리"><button type="button" data-category-filter="all" aria-controls="calculator-grid" aria-pressed="true">전체</button><button type="button" data-category-filter="food" aria-controls="calculator-grid" aria-pressed="false">🍽️ 식사</button><button type="button" data-category-filter="travel" aria-controls="calculator-grid" aria-pressed="false">🚗 여행</button><button type="button" data-category-filter="camping" aria-controls="calculator-grid" aria-pressed="false">🏕️ 캠핑</button><button type="button" data-category-filter="money" aria-controls="calculator-grid" aria-pressed="false">💰 돈</button><button type="button" data-category-filter="electricity" aria-controls="calculator-grid" aria-pressed="false">⚡ 전기요금</button><button type="button" data-category-filter="home" aria-controls="calculator-grid" aria-pressed="false">🏠 생활</button><button type="button" data-category-filter="tools" aria-controls="calculator-grid" aria-pressed="false">🛠️ 도구</button></div>
@@ -57,6 +57,8 @@
       <a class="tool-card" data-tool-card data-category="tools" data-search="비밀번호 암호 패스워드 랜덤" href="/password-generator/"><span class="tool-icon" aria-hidden="true">🔐</span><h2>비밀번호 생성기</h2><p>안전한 무작위 비밀번호 생성</p></a>
       <a class="tool-card" data-tool-card data-category="tools" data-search="텍스트 글자수 글자 수 띄어쓰기 대소문자 줄바꿈 중복 줄 가나다 ABC 정렬" href="/text-tools/"><span class="tool-icon" aria-hidden="true">📝</span><h2>텍스트 도구</h2><p>글자수·대소문자·줄바꿈·중복 줄 정리</p></a>
       <a class="tool-card" data-tool-card data-category="tools home" data-search="이미지 사진 그림 크기 변경 리사이즈 압축 용량 줄이기 jpg jpeg png webp 변환 회전 뒤집기" href="/image-tools/"><span class="tool-icon" aria-hidden="true">🖼️</span><h2>이미지 크기 변경·압축</h2><p>사진 리사이즈·형식 변환·회전·뒤집기</p></a>
+      <a class="tool-card" data-tool-card data-category="tools" data-search="개발 json 제이슨 정리 beautify minify base64 베이스64 url 주소 인코딩 디코딩" href="/developer-tools/"><span class="tool-icon" aria-hidden="true">{ }</span><h2>JSON·Base64·URL 도구</h2><p>개발 문자열 정리·인코딩·디코딩</p></a>
+      <a class="tool-card" data-tool-card data-category="tools" data-search="색상 컬러 hex rgb 변환 색상 선택기 팔레트 picker hsl 대비" href="/color-tools/"><span class="tool-icon" aria-hidden="true">🎨</span><h2>HEX·RGB 색상 도구</h2><p>색상 선택·코드 변환·대비 확인</p></a>
       <a class="tool-card" data-tool-card data-category="electricity home money" data-search="전기 전기요금 가전 에어컨 선풍기 제습기 건조기 세탁기 tv 컴퓨터 냉장고 전자레인지 인덕션" href="/electricity-cost-calculator/"><span class="tool-icon" aria-hidden="true">⚡</span><h2>전기요금 계산기</h2><p>가전 소비전력으로 월 사용량과 추가 요금 추정</p></a>
       <a class="tool-card" data-tool-card data-category="home tools money" data-search="택배 박스 크기 호수 배송 포장 무게 택배비 우체국" href="/parcel-box-calculator/"><span class="tool-icon" aria-hidden="true">📮</span><h2>택배 박스 크기</h2><p>크기·무게로 박스 호수급과 예상 택배비 계산</p></a>
       <a class="tool-card" data-tool-card data-category="food home" data-search="돌잔치 돌 음식량 첫돌 뷔페 파티 행사" href="/first-birthday-food-calculator/"><span class="tool-icon" aria-hidden="true">🎉</span><h2>돌잔치 음식량</h2><p>성인·아이 인원별 식사와 음료 준비량</p></a>

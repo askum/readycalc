@@ -25,6 +25,8 @@
 - 비밀번호 생성기
 - 텍스트 도구
 - 이미지 크기 변경·압축·형식 변환 도구
+- JSON·Base64·URL 개발자 도구
+- HEX·RGB 변환·색상 선택기
 - 전기요금 계산기
 - 택배 박스 크기 추천 계산기
 - 돌잔치 음식량 계산기
@@ -47,8 +49,10 @@
 - `assets/calculators.js`: 빈 값 검증, 오류 안내, 여행 경비 결과 복사 및 URL 개인정보 보호
 - `assets/utilities.js`: 단위·날짜·QR·비밀번호·텍스트 도구의 로컬 처리, 검증, 복사와 공유
 - `assets/image-tools.js`: 이미지 크기 변경, JPG·PNG·WebP 변환·압축, 회전·뒤집기와 다운로드
+- `assets/developer-tools.js`: JSON 정리·압축, UTF-8 Base64와 URL 인코딩·디코딩
+- `assets/color-tools.js`: HEX·RGB 양방향 변환, 색상 선택, HSL과 글자 대비 계산
 - `assets/home.js`: 메인 카테고리 필터, 실시간 검색과 검색 결과 안내
-- `index.html`: 인기 TOP 5, 최신 계산기, 8개 카테고리와 28개 계산기·도구 검색 UI
+- `index.html`: 인기 TOP 5, 최신 계산기, 8개 카테고리와 30개 계산기·도구 검색 UI
 - `assets/styles.css`: 모바일 터치 영역, 긴 결과, 카드·표·버튼 반응형 처리
 - `assets/favicon.svg`, `assets/head.js`: 공통 파비콘과 브라우저 테마 색상 적용
 - `_headers`: 파일명 고정 CSS·JavaScript가 이전 버전으로 남지 않도록 재검증 캐시 정책 적용
@@ -56,7 +60,7 @@
 - 쿠팡파트너스 제휴 영역: 관련 계산기 12곳에 상품 카드 2개씩, 공통 수수료 고지와 주의사항 적용
 - `contact/index.html`: 확정되지 않은 운영자 이메일 제거
 - `travel-expense-splitter/index.html`: 공유 URL 버튼 제거 및 안내 수정
-- `calculator/`: 27개 계산기·도구 페이지를 한 폴더 아래에 모아 관리
+- `calculator/`: 30개 계산기·도구 페이지를 한 폴더 아래에 모아 관리
 - `_redirects`: 계산기 소스 위치를 옮겨도 기존 공개 URL이 유지되도록 Cloudflare Pages 내부 rewrite 적용
 - 메인·소개·약관·면책조항·404 HTML: 공통 설정 로드와 정적 자산 버전 정리
 - `methodology/index.html`: 계산식 선정, 검수, 수정과 운영 책임을 공개하는 편집 원칙
@@ -80,6 +84,8 @@
 - `calculator/password-generator/index.html`: Web Crypto 기반 무작위 비밀번호 생성
 - `calculator/text-tools/index.html`: 글자 수 분석과 공백·줄 정리
 - `calculator/image-tools/index.html`: 이미지 크기 변경, JPG·PNG·WebP 변환·압축과 회전·뒤집기
+- `calculator/developer-tools/index.html`: JSON 정리·압축, Base64 및 URL 인코딩·디코딩
+- `calculator/color-tools/index.html`: HEX·RGB 변환, 색상 선택기, HSL과 대비 확인
 - `calculator/electricity-cost-calculator/index.html`: 10개 가전의 월 전력사용량과 예상 추가 요금 계산
 - `calculator/parcel-box-calculator/index.html`: 물품 크기별 대표 박스 호수급과 우체국 창구 등기소포 예상 요금 계산
 - `calculator/first-birthday-food-calculator/index.html`: 돌잔치 성인·어린이 인원별 식사·후식·음료 준비량 계산
@@ -97,7 +103,7 @@
 - 문의 이메일: `hnmshop55@gmail.com`
 - 대표 도메인: `https://readytools.kr`
 
-개인정보처리방침의 시행일은 `2026년 8월 6일`, 마지막 수정일은 `2026년 9월 9일`로 표시되어 있습니다. 실제 공개 정책이 변경될 때 날짜도 함께 갱신하세요.
+개인정보처리방침의 시행일은 `2026년 8월 6일`, 마지막 수정일은 `2026년 9월 10일`로 표시되어 있습니다. 실제 공개 정책이 변경될 때 날짜도 함께 갱신하세요.
 
 ## 사이트 기본 URL 관리
 
@@ -192,6 +198,8 @@ assets/
   calculators.js     계산, 검증, 결과 복사 로직
   utilities.js       단위·날짜·QR·비밀번호·텍스트 도구 로직
   image-tools.js     이미지 크기·형식·품질·방향 변환 로직
+  developer-tools.js JSON·Base64·URL 문자열 변환 로직
+  color-tools.js     HEX·RGB 변환과 색상 대비 계산 로직
   home.js            메인 카테고리와 검색 필터 로직
   favicon.svg        공통 파비콘
   head.js            광고 등 공통 head 코드 진입점
@@ -221,6 +229,8 @@ calculator/
   password-generator/index.html
   text-tools/index.html
   image-tools/index.html
+  developer-tools/index.html
+  color-tools/index.html
   electricity-cost-calculator/index.html
   parcel-box-calculator/index.html
   first-birthday-food-calculator/index.html
