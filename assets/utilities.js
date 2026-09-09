@@ -674,7 +674,7 @@
   };
 
   const analyzeText = (text) => {
-    const lines = text ? text.split(/\r?\n/) : [];
+    const lines = text ? text.split(/\r\n?|\n/) : [];
     const trimmed = text.trim();
     const words = trimmed ? trimmed.split(/\s+/u).length : 0;
     const sentences = trimmed ? trimmed.split(/[.!?。！？]+/u).filter((part) => part.trim()).length : 0;
@@ -691,16 +691,19 @@
   const transformText = (text, operation) => {
     if (operation === 'uppercase') return text.toLocaleUpperCase('ko-KR');
     if (operation === 'lowercase') return text.toLocaleLowerCase('ko-KR');
-    if (operation === 'clean-spaces') return text.split(/\r?\n/).map((line) => line.replace(/[ \t]+/g, ' ').trim()).join('\n').trim();
-    if (operation === 'remove-empty') return text.split(/\r?\n/).filter((line) => line.trim()).join('\n');
+    if (operation === 'remove-breaks') return text.replace(/\r\n?|\n/g, ' ').replace(/[ \t]+/g, ' ').trim();
+    if (operation === 'clean-spaces') return text.split(/\r\n?|\n/).map((line) => line.replace(/[ \t]+/g, ' ').trim()).join('\n').trim();
+    if (operation === 'remove-empty') return text.split(/\r\n?|\n/).filter((line) => line.trim()).join('\n');
     if (operation === 'deduplicate') {
       const seen = new Set();
-      return text.split(/\r?\n/).filter((line) => {
+      return text.split(/\r\n?|\n/).filter((line) => {
         if (seen.has(line)) return false;
         seen.add(line); return true;
       }).join('\n');
     }
-    if (operation === 'sort-lines') return text.split(/\r?\n/).sort((left, right) => left.localeCompare(right, 'ko')).join('\n');
+    if (operation === 'sort-lines') return text.split(/\r\n?|\n/).sort((left, right) =>
+      left.localeCompare(right, 'ko-KR', { numeric: true, sensitivity: 'base' })
+    ).join('\n');
     if (operation === 'reverse') return Array.from(text).reverse().join('');
     return text;
   };
@@ -714,7 +717,7 @@
     const metrics = analyzeText(transformed);
     const operationLabel = form.elements.operation.options[form.elements.operation.selectedIndex].textContent;
     const custom = '<li class="result-custom"><div class="metrics-grid">' +
-      [['글자 수', metrics.characters.toLocaleString('ko-KR')], ['공백 제외', metrics.noSpaces.toLocaleString('ko-KR')], ['단어 수', metrics.words.toLocaleString('ko-KR')], ['줄 수', metrics.lines.toLocaleString('ko-KR')], ['문장 수', metrics.sentences.toLocaleString('ko-KR')], ['UTF-8', metrics.bytes.toLocaleString('ko-KR') + 'B']]
+      [['띄어쓰기 포함', metrics.characters.toLocaleString('ko-KR') + '자'], ['띄어쓰기 제외', metrics.noSpaces.toLocaleString('ko-KR') + '자'], ['단어 수', metrics.words.toLocaleString('ko-KR')], ['줄 수', metrics.lines.toLocaleString('ko-KR')], ['문장 수', metrics.sentences.toLocaleString('ko-KR')], ['UTF-8', metrics.bytes.toLocaleString('ko-KR') + 'B']]
         .map((metric) => '<div class="metric"><span>' + metric[0] + '</span><strong>' + metric[1] + '</strong></div>').join('') +
       '</div><label for="text-result">처리 결과</label><textarea id="text-result" class="text-output" readonly>' +
       escapeHtml(transformed) + '</textarea></li>';
