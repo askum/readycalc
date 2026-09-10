@@ -27,6 +27,21 @@
 - 이미지 크기 변경·압축·형식 변환 도구
 - JSON·Base64·URL 개발자 도구
 - HEX·RGB 변환·색상 선택기
+- HEX·RGB·HSL 색상 변환기
+- 색상 선택기
+- 사진 색상 팔레트 추출기
+- 사진 EXIF 개인정보 제거 도구
+- 사진 픽셀 색상 추출기
+- 이모지 검색·복사 도구
+- 온라인 주사위
+- 파일 용량 단위 변환기
+- 대출 계산기
+- 복리 계산기
+- 물가상승 계산기
+- 투자수익률 ROI 계산기
+- 견적서·청구서 생성기
+- 참고문헌 생성기
+- 문장 가독성 분석기
 - 전기요금 계산기
 - 택배 박스 크기 추천 계산기
 - 돌잔치 음식량 계산기
@@ -51,8 +66,13 @@
 - `assets/image-tools.js`: 이미지 크기 변경, JPG·PNG·WebP 변환·압축, 회전·뒤집기와 다운로드
 - `assets/developer-tools.js`: JSON 정리·압축, UTF-8 Base64와 URL 인코딩·디코딩
 - `assets/color-tools.js`: HEX·RGB 양방향 변환, 색상 선택, HSL과 글자 대비 계산
+- `assets/color-image-tools.js`: HEX·RGB·HSL 전용 변환, 색상 선택, 사진 팔레트와 픽셀 색상 추출
+- `assets/exif-remover.js`: JPG EXIF 존재 확인과 Canvas 재인코딩 제거본 생성
+- `assets/everyday-tools.js`: 이모지 검색·복사, Web Crypto 주사위와 파일 용량 변환
+- `assets/finance-tools.js`: 대출·복리·물가상승·ROI 계산과 연도별 표 생성
+- `assets/document-tools.js`: 견적서·청구서, 참고문헌과 한글·영문 가독성 분석
 - `assets/home.js`: 메인 카테고리 필터, 실시간 검색과 검색 결과 안내
-- `index.html`: 인기 TOP 5, 최신 계산기, 8개 카테고리와 30개 계산기·도구 검색 UI
+- `index.html`: 인기 TOP 5, 최신 계산기, 8개 카테고리와 45개 계산기·도구 검색 UI
 - `assets/styles.css`: 모바일 터치 영역, 긴 결과, 카드·표·버튼 반응형 처리
 - `assets/favicon.svg`, `assets/head.js`: 공통 파비콘과 브라우저 테마 색상 적용
 - `_headers`: 파일명 고정 CSS·JavaScript가 이전 버전으로 남지 않도록 재검증 캐시 정책 적용
@@ -60,11 +80,12 @@
 - 쿠팡파트너스 제휴 영역: 관련 계산기 12곳에 상품 카드 2개씩, 공통 수수료 고지와 주의사항 적용
 - `contact/index.html`: 확정되지 않은 운영자 이메일 제거
 - `travel-expense-splitter/index.html`: 공유 URL 버튼 제거 및 안내 수정
-- `calculator/`: 30개 계산기·도구 페이지를 한 폴더 아래에 모아 관리
+- `calculator/`: 45개 계산기·도구 페이지를 한 폴더 아래에 모아 관리
 - `_redirects`: 계산기 소스 위치를 옮겨도 기존 공개 URL이 유지되도록 Cloudflare Pages 내부 rewrite 적용
 - 메인·소개·약관·면책조항·404 HTML: 공통 설정 로드와 정적 자산 버전 정리
 - `methodology/index.html`: 계산식 선정, 검수, 수정과 운영 책임을 공개하는 편집 원칙
 - `scripts/sync-site-url.mjs`: 기본 URL을 SEO 메타와 검색엔진 파일에 동기화
+- `scripts/sync-calculator-redirects.mjs`: 계산기 폴더를 읽어 Pages 제한 안에서 공개 URL rewrite 생성
 - `README.md`: 운영 및 재배포 안내 갱신
 
 ## 새로 생성한 페이지
@@ -86,6 +107,21 @@
 - `calculator/image-tools/index.html`: 이미지 크기 변경, JPG·PNG·WebP 변환·압축과 회전·뒤집기
 - `calculator/developer-tools/index.html`: JSON 정리·압축, Base64 및 URL 인코딩·디코딩
 - `calculator/color-tools/index.html`: HEX·RGB 변환, 색상 선택기, HSL과 대비 확인
+- `calculator/color-converter/index.html`: HEX·RGB·HSL 상호 변환과 색상 미리보기
+- `calculator/color-picker/index.html`: 브라우저 색상 선택기의 실시간 코드 표시
+- `calculator/color-palette-extractor/index.html`: 이미지 대표 색상 5~8개 추출
+- `calculator/exif-remover/index.html`: JPG EXIF 확인과 메타데이터 제거본 생성
+- `calculator/image-color-picker/index.html`: 사진의 선택 픽셀 색상 추출
+- `calculator/emoji-picker/index.html`: 카테고리별 이모지 검색과 복사
+- `calculator/dice-roller/index.html`: Web Crypto 기반 다면체 주사위
+- `calculator/file-size-converter/index.html`: Byte·KB·MB·GB·TB와 이진 단위 변환
+- `calculator/loan-calculator/index.html`: 상환방식별 월 납입금과 총이자 계산
+- `calculator/compound-interest-calculator/index.html`: 적립식 복리와 연도별 자산 변화
+- `calculator/inflation-calculator/index.html`: 미래 필요금액과 구매력 변화 계산
+- `calculator/roi-calculator/index.html`: 순수익·ROI·연환산 수익률 계산
+- `calculator/invoice-generator/index.html`: 인쇄·PDF용 견적서와 청구서 생성
+- `calculator/citation-generator/index.html`: APA·MLA·Chicago 참고문헌 초안
+- `calculator/readability-checker/index.html`: 한글 문장 통계와 영문 Flesch 지표
 - `calculator/electricity-cost-calculator/index.html`: 10개 가전의 월 전력사용량과 예상 추가 요금 계산
 - `calculator/parcel-box-calculator/index.html`: 물품 크기별 대표 박스 호수급과 우체국 창구 등기소포 예상 요금 계산
 - `calculator/first-birthday-food-calculator/index.html`: 돌잔치 성인·어린이 인원별 식사·후식·음료 준비량 계산
@@ -96,6 +132,13 @@
 - `calculator/overseas-purchase-duty-calculator/index.html`: 발송국·통관 유형·직접 입력 환율에 따른 면세 한도와 참고 관부가세 계산
 
 위 신규 페이지는 각자 고유한 SEO 메타, WebApplication·BreadcrumbList 구조화 데이터, 800자 이상의 계산 설명, 예시 3개 이상, FAQ 5개 이상과 관련 계산기 링크를 포함합니다.
+
+## 기존 기능과의 중복 정리
+
+- 기존 `color-tools`는 HEX·RGB 변환과 색상 선택을 함께 제공하는 통합 도구로 유지합니다. 새 `color-converter`와 `color-picker`는 검색 의도에 맞춘 독립 URL이며 통합 페이지에서 서로 연결합니다.
+- 기존 `unit-converter`에도 파일 용량 항목이 있지만 새 `file-size-converter`는 KB·MB·GB와 KiB·MiB·GiB의 1000·1024 기준 차이를 집중 설명하는 전용 도구입니다.
+- 기존 `image-tools`의 형식 변환은 재인코딩 과정에서 일반 메타데이터가 제외될 수 있으나, 새 `exif-remover`는 EXIF·GPS·촬영 정보의 존재 확인과 제거 사본 생성에 집중합니다.
+- 기존 `text-tools`는 글자수와 줄 정리가 중심이며, 새 `readability-checker`는 문장·문단 통계와 영문 Flesch 지표를 제공하되 한국어에는 영문 공식을 적용하지 않습니다.
 
 ## 운영자 정보
 
@@ -143,7 +186,7 @@ node scripts/sync-site-url.mjs
 
 공통 head 진입점인 `assets/head.js`에서 AdSense 게시자 `ca-pub-4297698834736188`의 계정 메타태그와 광고 스크립트를 모든 페이지의 `<head>`에 추가합니다. 루트 `ads.txt`에는 같은 게시자 ID의 Google DIRECT 항목이 있습니다.
 
-AdSense 승인 검토 중에는 빈 광고 자리 56개가 미완성 영역처럼 보이지 않도록 `assets/site-config.js`의 `showAdSlots`가 `false`로 설정되어 있습니다. 계정 확인용 공통 스크립트, 메타태그와 `ads.txt`는 그대로 유지됩니다.
+AdSense 승인 검토 중에는 빈 광고 자리가 미완성 영역처럼 보이지 않도록 `assets/site-config.js`의 `showAdSlots`가 `false`로 설정되어 있습니다. 계정 확인용 공통 스크립트, 메타태그와 `ads.txt`는 그대로 유지됩니다.
 
 승인 후 수동 광고 코드를 각 `.ad-slot`에 연결했다면 `showAdSlots`를 `true`로 변경하여 예약 영역을 표시할 수 있습니다. `.ad-slot`에는 최소 높이가 설정되어 있어 광고가 로드될 때 레이아웃 이동을 줄입니다. Google 자동 광고만 사용하는 경우에는 이 값을 켤 필요가 없습니다.
 
@@ -166,6 +209,8 @@ node --check assets/utilities.js
 node --check assets/site-config.js
 node --check scripts/sync-site-url.mjs
 node scripts/sync-site-url.mjs
+node scripts/sync-calculator-redirects.mjs
+node scripts/audit-new-tools.mjs
 ```
 
 ## Cloudflare Pages 재배포
@@ -200,6 +245,11 @@ assets/
   image-tools.js     이미지 크기·형식·품질·방향 변환 로직
   developer-tools.js JSON·Base64·URL 문자열 변환 로직
   color-tools.js     HEX·RGB 변환과 색상 대비 계산 로직
+  color-image-tools.js 전용 색상·사진 색상 도구 로직
+  exif-remover.js    JPG EXIF 확인·제거 로직
+  everyday-tools.js  이모지·주사위·파일 용량 변환 로직
+  finance-tools.js   대출·복리·물가·ROI 계산 로직
+  document-tools.js  견적서·참고문헌·가독성 로직
   home.js            메인 카테고리와 검색 필터 로직
   favicon.svg        공통 파비콘
   head.js            광고 등 공통 head 코드 진입점
@@ -208,6 +258,8 @@ assets/
   styles.css         모바일 우선 공통 스타일
 scripts/
   sync-site-url.mjs  SEO URL 동기화 도구
+  sync-calculator-redirects.mjs 계산기 공개 URL rewrite 생성
+  audit-new-tools.mjs 신규 페이지 SEO·콘텐츠·label·공개 경로 검사
 calculator/
   meat-calculator/index.html
   fuel-cost-calculator/index.html
@@ -231,6 +283,21 @@ calculator/
   image-tools/index.html
   developer-tools/index.html
   color-tools/index.html
+  color-converter/index.html
+  color-picker/index.html
+  color-palette-extractor/index.html
+  exif-remover/index.html
+  image-color-picker/index.html
+  emoji-picker/index.html
+  dice-roller/index.html
+  file-size-converter/index.html
+  loan-calculator/index.html
+  compound-interest-calculator/index.html
+  inflation-calculator/index.html
+  roi-calculator/index.html
+  invoice-generator/index.html
+  citation-generator/index.html
+  readability-checker/index.html
   electricity-cost-calculator/index.html
   parcel-box-calculator/index.html
   first-birthday-food-calculator/index.html

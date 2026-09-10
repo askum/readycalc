@@ -18,6 +18,10 @@ const routes = [
   'parcel-box-calculator', 'first-birthday-food-calculator', 'cake-size-calculator',
   'subscription-split-calculator', 'ev-vs-ice-cost-calculator',
   'pet-treat-dehydration-calculator', 'overseas-purchase-duty-calculator',
+  'color-converter', 'color-picker', 'color-palette-extractor', 'exif-remover',
+  'image-color-picker', 'emoji-picker', 'dice-roller', 'file-size-converter',
+  'loan-calculator', 'compound-interest-calculator', 'inflation-calculator',
+  'roi-calculator', 'invoice-generator', 'citation-generator', 'readability-checker',
   'about', 'methodology', 'contact', 'privacy', 'terms', 'disclaimer'
 ];
 const calculatorRoutes = new Set([
@@ -30,7 +34,11 @@ const calculatorRoutes = new Set([
   'qr-code-generator', 'password-generator', 'text-tools', 'image-tools', 'developer-tools', 'color-tools', 'electricity-cost-calculator',
   'parcel-box-calculator', 'first-birthday-food-calculator', 'cake-size-calculator',
   'subscription-split-calculator', 'ev-vs-ice-cost-calculator',
-  'pet-treat-dehydration-calculator', 'overseas-purchase-duty-calculator'
+  'pet-treat-dehydration-calculator', 'overseas-purchase-duty-calculator',
+  'color-converter', 'color-picker', 'color-palette-extractor', 'exif-remover',
+  'image-color-picker', 'emoji-picker', 'dice-roller', 'file-size-converter',
+  'loan-calculator', 'compound-interest-calculator', 'inflation-calculator',
+  'roi-calculator', 'invoice-generator', 'citation-generator', 'readability-checker'
 ]);
 
 for (const route of routes) {
