@@ -26,6 +26,7 @@
 - 텍스트 도구
 - 이미지 크기 변경·압축·형식 변환 도구
 - JSON·Base64·URL 개발자 도구
+- 브라우저 개발 도구 허브와 독립 개발 유틸리티 18개
 - HEX·RGB 변환·색상 선택기
 - HEX·RGB·HSL 색상 변환기
 - 색상 선택기
@@ -71,8 +72,9 @@
 - `assets/everyday-tools.js`: 이모지 검색·복사, Web Crypto 주사위와 파일 용량 변환
 - `assets/finance-tools.js`: 대출·복리·물가상승·ROI 계산과 연도별 표 생성
 - `assets/document-tools.js`: 견적서·청구서, 참고문헌과 한글·영문 가독성 분석
+- `assets/developer-suite.js`: JSON Diff, 데이터 변환, Regex, URL, 네트워크·보안 값 분석 로직
 - `assets/home.js`: 메인 카테고리 필터, 실시간 검색과 검색 결과 안내
-- `index.html`: 인기 TOP 5, 최신 계산기, 8개 카테고리와 45개 계산기·도구 검색 UI
+- `index.html`: 최신 계산기, 개발 도구 18개 직접 노출과 63개 계산기·도구 카드 검색 UI
 - `assets/styles.css`: 모바일 터치 영역, 긴 결과, 카드·표·버튼 반응형 처리
 - `assets/favicon.svg`, `assets/head.js`: 공통 파비콘과 브라우저 테마 색상 적용
 - `_headers`: 파일명 고정 CSS·JavaScript가 이전 버전으로 남지 않도록 재검증 캐시 정책 적용
@@ -80,12 +82,14 @@
 - 쿠팡파트너스 제휴 영역: 관련 계산기 12곳에 상품 카드 2개씩, 공통 수수료 고지와 주의사항 적용
 - `contact/index.html`: 확정되지 않은 운영자 이메일 제거
 - `travel-expense-splitter/index.html`: 공유 URL 버튼 제거 및 안내 수정
-- `calculator/`: 45개 계산기·도구 페이지를 한 폴더 아래에 모아 관리
+- `calculator/`: 생활 계산기와 개발 도구 페이지를 한 폴더 아래에 모아 관리
 - `_redirects`: 계산기 소스 위치를 옮겨도 기존 공개 URL이 유지되도록 Cloudflare Pages 내부 rewrite 적용
 - 메인·소개·약관·면책조항·404 HTML: 공통 설정 로드와 정적 자산 버전 정리
 - `methodology/index.html`: 계산식 선정, 검수, 수정과 운영 책임을 공개하는 편집 원칙
 - `scripts/sync-site-url.mjs`: 기본 URL을 SEO 메타와 검색엔진 파일에 동기화
 - `scripts/sync-calculator-redirects.mjs`: 계산기 폴더를 읽어 Pages 제한 안에서 공개 URL rewrite 생성
+- `scripts/generate-developer-suite.mjs`: 개발 도구 허브와 독립 페이지 정적 HTML 생성
+- `scripts/audit-developer-suite.mjs`: 개발 도구 기능·SEO·콘텐츠·접근성·공개 경로 검사
 - `README.md`: 운영 및 재배포 안내 갱신
 
 ## 새로 생성한 페이지
@@ -122,6 +126,25 @@
 - `calculator/invoice-generator/index.html`: 인쇄·PDF용 견적서와 청구서 생성
 - `calculator/citation-generator/index.html`: APA·MLA·Chicago 참고문헌 초안
 - `calculator/readability-checker/index.html`: 한글 문장 통계와 영문 Flesch 지표
+- `calculator/developer/index.html`: 독립 개발 도구 18개를 연결하는 개발 도구 허브
+- `calculator/developer/json-diff/index.html`: 두 JSON의 추가·삭제·변경 경로 비교
+- `calculator/developer/json-csv-converter/index.html`: 객체 배열 JSON과 CSV 양방향 변환
+- `calculator/developer/xml-tools/index.html`: XML 정리와 XML·JSON 양방향 변환
+- `calculator/developer/yaml-json-converter/index.html`: 기본 YAML과 JSON 양방향 변환
+- `calculator/developer/html-tools/index.html`: HTML 정리와 엔티티 인코딩·디코딩
+- `calculator/developer/css-minifier/index.html`: CSS 주석·공백 축소
+- `calculator/developer/sql-formatter/index.html`: 일반 SQL 키워드와 절 정리
+- `calculator/developer/regex-tester/index.html`: JavaScript 정규식 일치·캡처 그룹 검사
+- `calculator/developer/url-inspector/index.html`: URL 분석과 Query String 생성
+- `calculator/developer/uuid-generator/index.html`: Web Crypto 기반 UUID v4 생성
+- `calculator/developer/timestamp-converter/index.html`: Unix 초·밀리초와 날짜 변환
+- `calculator/developer/base-converter/index.html`: BigInt 기반 2~36진수 정수 변환
+- `calculator/developer/http-mime-reference/index.html`: HTTP 상태코드와 MIME Type 조회
+- `calculator/developer/cron-tools/index.html`: 표준 5필드 Cron 생성·분석
+- `calculator/developer/subnet-calculator/index.html`: IPv4 CIDR 네트워크 범위 계산
+- `calculator/developer/jwt-decoder/index.html`: JWT Header·Payload 디코딩
+- `calculator/developer/hash-generator/index.html`: Web Crypto SHA 해시 생성
+- `calculator/developer/unicode-inspector/index.html`: Unicode·UTF-8·UTF-16 값 확인
 - `calculator/electricity-cost-calculator/index.html`: 10개 가전의 월 전력사용량과 예상 추가 요금 계산
 - `calculator/parcel-box-calculator/index.html`: 물품 크기별 대표 박스 호수급과 우체국 창구 등기소포 예상 요금 계산
 - `calculator/first-birthday-food-calculator/index.html`: 돌잔치 성인·어린이 인원별 식사·후식·음료 준비량 계산

@@ -22,6 +22,13 @@ const routes = [
   'image-color-picker', 'emoji-picker', 'dice-roller', 'file-size-converter',
   'loan-calculator', 'compound-interest-calculator', 'inflation-calculator',
   'roi-calculator', 'invoice-generator', 'citation-generator', 'readability-checker',
+  'developer', 'developer/json-diff', 'developer/json-csv-converter',
+  'developer/xml-tools', 'developer/yaml-json-converter', 'developer/html-tools',
+  'developer/css-minifier', 'developer/sql-formatter', 'developer/regex-tester',
+  'developer/url-inspector', 'developer/uuid-generator', 'developer/timestamp-converter',
+  'developer/base-converter', 'developer/http-mime-reference', 'developer/cron-tools',
+  'developer/subnet-calculator', 'developer/jwt-decoder', 'developer/hash-generator',
+  'developer/unicode-inspector',
   'about', 'methodology', 'contact', 'privacy', 'terms', 'disclaimer'
 ];
 const calculatorRoutes = new Set([
@@ -38,7 +45,14 @@ const calculatorRoutes = new Set([
   'color-converter', 'color-picker', 'color-palette-extractor', 'exif-remover',
   'image-color-picker', 'emoji-picker', 'dice-roller', 'file-size-converter',
   'loan-calculator', 'compound-interest-calculator', 'inflation-calculator',
-  'roi-calculator', 'invoice-generator', 'citation-generator', 'readability-checker'
+  'roi-calculator', 'invoice-generator', 'citation-generator', 'readability-checker',
+  'developer', 'developer/json-diff', 'developer/json-csv-converter',
+  'developer/xml-tools', 'developer/yaml-json-converter', 'developer/html-tools',
+  'developer/css-minifier', 'developer/sql-formatter', 'developer/regex-tester',
+  'developer/url-inspector', 'developer/uuid-generator', 'developer/timestamp-converter',
+  'developer/base-converter', 'developer/http-mime-reference', 'developer/cron-tools',
+  'developer/subnet-calculator', 'developer/jwt-decoder', 'developer/hash-generator',
+  'developer/unicode-inspector'
 ]);
 
 for (const route of routes) {
