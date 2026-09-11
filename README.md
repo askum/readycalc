@@ -26,7 +26,7 @@
 - 텍스트 도구
 - 이미지 크기 변경·압축·형식 변환 도구
 - JSON·Base64·URL 개발자 도구
-- 브라우저 개발 도구 허브와 독립 개발 유틸리티 18개
+- 메인 개발 카테고리에 직접 연결된 독립 개발 유틸리티 18개
 - HEX·RGB 변환·색상 선택기
 - HEX·RGB·HSL 색상 변환기
 - 색상 선택기
@@ -74,7 +74,7 @@
 - `assets/document-tools.js`: 견적서·청구서, 참고문헌과 한글·영문 가독성 분석
 - `assets/developer-suite.js`: JSON Diff, 데이터 변환, Regex, URL, 네트워크·보안 값 분석 로직
 - `assets/home.js`: 메인 카테고리 필터, 실시간 검색과 검색 결과 안내
-- `index.html`: 최신 계산기, 개발 도구 18개 직접 노출과 63개 계산기·도구 카드 검색 UI
+- `index.html`: 최신 도구, 개발 도구 18개 직접 노출과 63개 계산기·온라인 도구 카드 검색 UI
 - `assets/styles.css`: 모바일 터치 영역, 긴 결과, 카드·표·버튼 반응형 처리
 - `assets/favicon.svg`, `assets/head.js`: 공통 파비콘과 브라우저 테마 색상 적용
 - `_headers`: 파일명 고정 CSS·JavaScript가 이전 버전으로 남지 않도록 재검증 캐시 정책 적용
@@ -88,7 +88,7 @@
 - `methodology/index.html`: 계산식 선정, 검수, 수정과 운영 책임을 공개하는 편집 원칙
 - `scripts/sync-site-url.mjs`: 기본 URL을 SEO 메타와 검색엔진 파일에 동기화
 - `scripts/sync-calculator-redirects.mjs`: 계산기 폴더를 읽어 Pages 제한 안에서 공개 URL rewrite 생성
-- `scripts/generate-developer-suite.mjs`: 개발 도구 허브와 독립 페이지 정적 HTML 생성
+- `scripts/generate-developer-suite.mjs`: 독립 개발 도구 페이지 정적 HTML 생성
 - `scripts/audit-developer-suite.mjs`: 개발 도구 기능·SEO·콘텐츠·접근성·공개 경로 검사
 - `README.md`: 운영 및 재배포 안내 갱신
 
@@ -126,7 +126,6 @@
 - `calculator/invoice-generator/index.html`: 인쇄·PDF용 견적서와 청구서 생성
 - `calculator/citation-generator/index.html`: APA·MLA·Chicago 참고문헌 초안
 - `calculator/readability-checker/index.html`: 한글 문장 통계와 영문 Flesch 지표
-- `calculator/developer/index.html`: 독립 개발 도구 18개를 연결하는 개발 도구 허브
 - `calculator/developer/json-diff/index.html`: 두 JSON의 추가·삭제·변경 경로 비교
 - `calculator/developer/json-csv-converter/index.html`: 객체 배열 JSON과 CSV 양방향 변환
 - `calculator/developer/xml-tools/index.html`: XML 정리와 XML·JSON 양방향 변환

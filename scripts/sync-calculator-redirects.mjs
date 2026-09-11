@@ -18,8 +18,8 @@ for (const route of routes) {
   lines.push(`/${route}/ /calculator/${route}/ 200`);
 }
 
-lines.push('/developer /developer/ 301');
-lines.push('/developer/ /calculator/developer/ 200');
+lines.push('/developer / 301');
+lines.push('/developer/ / 301');
 lines.push('/developer/* /calculator/developer/:splat 200');
 lines.push('/travel-itinerary-generator/* / 301');
 

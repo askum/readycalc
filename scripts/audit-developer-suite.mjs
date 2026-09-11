@@ -15,7 +15,6 @@ const descriptions = new Set();
 const sitemap = await readFile(resolve(root, 'sitemap.xml'), 'utf8');
 const redirects = await readFile(resolve(root, '_redirects'), 'utf8');
 const home = await readFile(resolve(root, 'index.html'), 'utf8');
-const hub = await readFile(resolve(root, 'calculator', 'developer', 'index.html'), 'utf8');
 const script = await readFile(resolve(root, 'assets', 'developer-suite.js'), 'utf8');
 
 for (const route of routes) {
@@ -42,12 +41,14 @@ for (const route of routes) {
     if (!html.includes('for="' + control[1] + '"')) failures.push(route + ': #' + control[1] + ' label 누락');
   }
   if (!sitemap.includes('https://readytools.kr/developer/' + route + '/')) failures.push(route + ': sitemap 누락');
-  if (!hub.includes('href="/developer/' + route + '/"')) failures.push(route + ': 허브 링크 누락');
   if (!home.includes('href="/developer/' + route + '/"')) failures.push(route + ': 메인 개발 카테고리 직접 링크 누락');
+  if (html.includes('<a href="/developer/">개발 도구</a>')) failures.push(route + ': 삭제된 중간 breadcrumb 링크가 남아 있음');
+  if (!html.includes('<a href="/#tools">전체 계산기</a>')) failures.push(route + ': 전체 계산기 breadcrumb 누락');
   if (!script.includes("'" + route + "'")) failures.push(route + ': 실행 로직 누락');
 }
 
 if (!redirects.includes('/developer/* /calculator/developer/:splat 200')) failures.push('개발 도구 wildcard rewrite 누락');
+if (!redirects.includes('/developer/ / 301')) failures.push('삭제된 개발 허브 홈 redirect 누락');
 if (!home.includes('data-category-filter="developer"')) failures.push('메인 개발 카테고리 탭 누락');
 
 if (failures.length) {

@@ -27,7 +27,7 @@
     const categoryLabel = categoryButtons.find((button) => button.dataset.categoryFilter === activeCategory)?.textContent.trim() || '전체';
     status.textContent = query
       ? `‘${searchInput.value.trim()}’ 검색 결과 ${visibleCount}개`
-      : `${categoryLabel} 계산기 ${visibleCount}개`;
+      : `${categoryLabel} 도구 ${visibleCount}개`;
     emptyState.hidden = visibleCount !== 0;
   };
 

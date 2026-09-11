@@ -90,7 +90,7 @@
 /travel-packing-checklist/ /calculator/travel-packing-checklist/ 200
 /unit-converter /unit-converter/ 301
 /unit-converter/ /calculator/unit-converter/ 200
-/developer /developer/ 301
-/developer/ /calculator/developer/ 200
+/developer / 301
+/developer/ / 301
 /developer/* /calculator/developer/:splat 200
 /travel-itinerary-generator/* / 301
