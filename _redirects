@@ -1,5 +1,7 @@
 /travel-itinerary-generator / 301
 /travel-itinerary-generator/ / 301
+/ai-style-test /ai-style-test/ 301
+/ai-style-test/ /calculator/ai-style-test/ 200
 /cake-size-calculator /cake-size-calculator/ 301
 /cake-size-calculator/ /calculator/cake-size-calculator/ 200
 /camping-food-calculator /camping-food-calculator/ 301
@@ -44,6 +46,8 @@
 /first-birthday-food-calculator/ /calculator/first-birthday-food-calculator/ 200
 /fuel-cost-calculator /fuel-cost-calculator/ 301
 /fuel-cost-calculator/ /calculator/fuel-cost-calculator/ 200
+/hobby-test /hobby-test/ 301
+/hobby-test/ /calculator/hobby-test/ 200
 /image-color-picker /image-color-picker/ 301
 /image-color-picker/ /calculator/image-color-picker/ 200
 /image-tools /image-tools/ 301
@@ -56,6 +60,8 @@
 /invoice-generator/ /calculator/invoice-generator/ 200
 /loan-calculator /loan-calculator/ 301
 /loan-calculator/ /calculator/loan-calculator/ 200
+/mbti-test /mbti-test/ 301
+/mbti-test/ /calculator/mbti-test/ 200
 /meat-calculator /meat-calculator/ 301
 /meat-calculator/ /calculator/meat-calculator/ 200
 /moving-box-calculator /moving-box-calculator/ 301
@@ -78,8 +84,12 @@
 /readability-checker/ /calculator/readability-checker/ 200
 /roi-calculator /roi-calculator/ 301
 /roi-calculator/ /calculator/roi-calculator/ 200
+/spending-style-test /spending-style-test/ 301
+/spending-style-test/ /calculator/spending-style-test/ 200
 /subscription-split-calculator /subscription-split-calculator/ 301
 /subscription-split-calculator/ /calculator/subscription-split-calculator/ 200
+/tests /tests/ 301
+/tests/ /calculator/tests/ 200
 /text-tools /text-tools/ 301
 /text-tools/ /calculator/text-tools/ 200
 /travel-budget-calculator /travel-budget-calculator/ 301
@@ -88,8 +98,12 @@
 /travel-expense-splitter/ /calculator/travel-expense-splitter/ 200
 /travel-packing-checklist /travel-packing-checklist/ 301
 /travel-packing-checklist/ /calculator/travel-packing-checklist/ 200
+/travel-style-test /travel-style-test/ 301
+/travel-style-test/ /calculator/travel-style-test/ 200
 /unit-converter /unit-converter/ 301
 /unit-converter/ /calculator/unit-converter/ 200
+/work-style-test /work-style-test/ 301
+/work-style-test/ /calculator/work-style-test/ 200
 /developer / 301
 /developer/ / 301
 /developer/* /calculator/developer/:splat 200

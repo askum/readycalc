@@ -47,7 +47,7 @@ for (const route of routes) {
 }
 
 const cardCount = (home.match(/data-tool-card/g) || []).length;
-if (cardCount !== 63) failures.push(`메인 카드 수 ${cardCount}개 (기대 63개)`);
+if (cardCount !== 67) failures.push(`메인 카드 수 ${cardCount}개 (기대 67개)`);
 if (failures.length) {
   console.error(failures.join('\n'));
   process.exitCode = 1;
