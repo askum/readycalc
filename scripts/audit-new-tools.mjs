@@ -6,7 +6,8 @@ const routes = [
   'color-converter', 'color-picker', 'color-palette-extractor', 'exif-remover',
   'image-color-picker', 'emoji-picker', 'dice-roller', 'file-size-converter',
   'loan-calculator', 'compound-interest-calculator', 'inflation-calculator',
-  'roi-calculator', 'invoice-generator', 'citation-generator', 'readability-checker'
+  'roi-calculator', 'invoice-generator', 'citation-generator', 'readability-checker',
+  'real-estate-brokerage-fee-calculator'
 ];
 const failures = [];
 const titles = new Set();
@@ -47,7 +48,7 @@ for (const route of routes) {
 }
 
 const cardCount = (home.match(/data-tool-card/g) || []).length;
-if (cardCount !== 69) failures.push(`메인 카드 수 ${cardCount}개 (기대 69개)`);
+if (cardCount !== 70) failures.push(`메인 카드 수 ${cardCount}개 (기대 70개)`);
 if (failures.length) {
   console.error(failures.join('\n'));
   process.exitCode = 1;
