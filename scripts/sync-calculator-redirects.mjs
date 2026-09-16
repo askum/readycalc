@@ -10,7 +10,9 @@ const routes = (await readdir(calculatorRoot, { withFileTypes: true }))
 
 const lines = [
   '/travel-itinerary-generator / 301',
-  '/travel-itinerary-generator/ / 301'
+  '/travel-itinerary-generator/ / 301',
+  '/tests / 301',
+  '/tests/ / 301'
 ];
 
 for (const route of routes) {

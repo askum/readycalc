@@ -321,56 +321,9 @@
   text-align: center;
 }
 
-.tests-hub-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.test-hub-card {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 1rem;
-  padding: 1.25rem;
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: var(--surface);
-  box-shadow: var(--shadow);
-}
-
-.test-hub-icon {
-  display: grid;
-  place-items: center;
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
-  font-size: 1.75rem;
-}
-
-.test-hub-card h2 {
-  margin: 0 0 0.35rem;
-  font-size: 1.25rem;
-}
-
-.test-hub-card p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.test-hub-card .test-meta {
-  justify-content: flex-start;
-  margin: 0.9rem 0;
-}
-
-.test-hub-card .button {
-  width: fit-content;
-}
-
 @media (min-width: 720px) {
   .result-sections,
-  .hobby-grid,
-  .tests-hub-grid {
+  .hobby-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -401,10 +354,6 @@
   .score-row {
     grid-template-columns: minmax(4.5rem, auto) minmax(0, 1fr) 2.7rem;
     gap: 0.5rem;
-  }
-
-  .test-hub-card {
-    grid-template-columns: 1fr;
   }
 }
 

@@ -74,7 +74,7 @@
 - `assets/document-tools.js`: 견적서·청구서, 참고문헌과 한글·영문 가독성 분석
 - `assets/developer-suite.js`: JSON Diff, 데이터 변환, Regex, URL, 네트워크·보안 값 분석 로직
 - `assets/home.js`: 메인 카테고리 필터, 실시간 검색과 검색 결과 안내
-- `index.html`: 최신 도구, 개발 도구와 성향·재미 테스트를 포함한 67개 계산기·온라인 도구 카드 검색 UI
+- `index.html`: 최신 도구, 개발 도구와 성향·재미 테스트를 포함한 69개 계산기·온라인 도구 카드 검색 UI
 - `assets/styles.css`: 모바일 터치 영역, 긴 결과, 카드·표·버튼 반응형 처리
 - `assets/favicon.svg`, `assets/head.js`: 공통 파비콘과 브라우저 테마 색상 적용
 - `_headers`: 파일명 고정 CSS·JavaScript가 이전 버전으로 남지 않도록 재검증 캐시 정책 적용
@@ -126,7 +126,6 @@
 - `calculator/invoice-generator/index.html`: 인쇄·PDF용 견적서와 청구서 생성
 - `calculator/citation-generator/index.html`: APA·MLA·Chicago 참고문헌 초안
 - `calculator/readability-checker/index.html`: 한글 문장 통계와 영문 Flesch 지표
-- `calculator/tests/index.html`: 성향·재미 테스트 6종 모아보기
 - `calculator/mbti-test/index.html`: 20문항 비공식 MBTI 성향 체크
 - `calculator/travel-style-test/index.html`: 계획·즉흥·미식·휴양 여행 스타일 테스트
 - `calculator/spending-style-test/index.html`: 계획·경험·절약·즉흥 소비 습관 테스트

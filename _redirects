@@ -1,5 +1,7 @@
 /travel-itinerary-generator / 301
 /travel-itinerary-generator/ / 301
+/tests / 301
+/tests/ / 301
 /ai-style-test /ai-style-test/ 301
 /ai-style-test/ /calculator/ai-style-test/ 200
 /cake-size-calculator /cake-size-calculator/ 301
@@ -88,8 +90,6 @@
 /spending-style-test/ /calculator/spending-style-test/ 200
 /subscription-split-calculator /subscription-split-calculator/ 301
 /subscription-split-calculator/ /calculator/subscription-split-calculator/ 200
-/tests /tests/ 301
-/tests/ /calculator/tests/ 200
 /text-tools /text-tools/ 301
 /text-tools/ /calculator/text-tools/ 200
 /travel-budget-calculator /travel-budget-calculator/ 301

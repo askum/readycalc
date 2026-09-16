@@ -6,7 +6,7 @@ const siteConfigSource = await readFile(resolve(root, 'assets/site-config.js'), 
 const baseUrlMatch = siteConfigSource.match(/baseUrl:\s*['"]([^'"]+)['"]/);
 if (!baseUrlMatch) throw new Error('assets/site-config.js에서 baseUrl을 찾을 수 없습니다.');
 const baseUrl = baseUrlMatch[1].replace(/\/$/, '');
-const reviewed = '2026-09-12';
+const reviewed = '2026-09-16';
 
 const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
@@ -299,8 +299,8 @@ const pageHtml = (test) => `<!doctype html>
   <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
   <meta property="og:title" content="${escapeHtml(test.title)} | 생활계산소"><meta property="og:description" content="${escapeHtml(test.description)}"><meta property="og:url" content="${baseUrl}/${test.slug}/"><meta property="og:image" content="${baseUrl}/assets/og.png">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeHtml(test.title)}"><meta name="twitter:description" content="${escapeHtml(test.description)}"><meta name="twitter:image" content="${baseUrl}/assets/og.png">
-  <link rel="stylesheet" href="/assets/styles.css?v=20260912"><link rel="stylesheet" href="/assets/personality-tests.css?v=20260912">
-  <script src="/assets/site-config.js"></script><script src="/assets/head.js"></script><script src="/assets/site.js" defer></script><script src="/assets/personality-tests.js?v=20260912" defer></script>
+  <link rel="stylesheet" href="/assets/styles.css?v=20260916"><link rel="stylesheet" href="/assets/personality-tests.css?v=20260916">
+  <script src="/assets/site-config.js"></script><script src="/assets/head.js"></script><script src="/assets/site.js" defer></script><script src="/assets/personality-tests.js?v=20260916" defer></script>
   <script type="application/ld+json" data-breadcrumb-schema>${jsonForHtml(schemaFor(test))}</script>
 </head><body><div data-site-header></div><main id="main"><div class="container">
   <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">${escapeHtml(test.title)}</li></ol></nav>
@@ -317,7 +317,7 @@ const pageHtml = (test) => `<!doctype html>
   <div class="ad-slot" aria-label="광고 영역"><span>광고</span></div>
   <section class="section faq"><h2>${escapeHtml(test.title)} FAQ</h2>${test.faqs.map(([question,answer]) => `<details><summary>${escapeHtml(question)}</summary><p>${escapeHtml(answer)}</p></details>`).join('')}</section>
   <section class="section"><h2>관련 도구</h2><div class="tools-grid">${test.related.map(([href,icon,name,desc]) => `<a class="tool-card" href="${href}"><span class="tool-icon" aria-hidden="true">${icon}</span><h3>${escapeHtml(name)}</h3><p>${escapeHtml(desc)}</p></a>`).join('')}</div></section>
-  <aside class="calculator-guide" aria-label="도구 안내"><a href="/">홈으로 이동</a><a href="/#tools">전체 계산기 보기</a><a href="/tests/">성향·재미 테스트 모아보기</a><p>마지막 검토일 <time datetime="${reviewed}">${reviewed}</time> · 이 결과는 일반적인 자기이해용 참고 정보입니다.</p></aside>
+  <aside class="calculator-guide" aria-label="도구 안내"><a href="/">홈으로 이동</a><a href="/#tools">전체 계산기 보기</a><p>마지막 검토일 <time datetime="${reviewed}">${reviewed}</time> · 이 결과는 일반적인 자기이해용 참고 정보입니다.</p></aside>
 </div></main><div data-site-footer></div><script type="application/json" data-test-config>${jsonForHtml(test)}</script></body></html>`;
 
 for (const test of tests) {
@@ -326,14 +326,4 @@ for (const test of tests) {
   await writeFile(resolve(directory, 'index.html'), pageHtml(test));
 }
 
-const hubDescription = '생활 속 선택을 가볍게 돌아보는 MBTI 성향, 여행·소비·업무·AI 활용 스타일, 취미 찾기 테스트를 브라우저에서 무료로 이용하세요.';
-const hubSchema = {'@context':'https://schema.org','@graph':[
-  {'@type':'CollectionPage',name:'성향·재미 테스트',url:`${baseUrl}/tests/`,inLanguage:'ko-KR',description:hubDescription},
-  {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'생활계산소',item:`${baseUrl}/`},{'@type':'ListItem',position:2,name:'성향·재미 테스트',item:`${baseUrl}/tests/`}]}
-]};
-const hubHtml = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>성향·재미 테스트 모음 | 생활계산소</title><meta name="description" content="${hubDescription}"><link rel="canonical" href="${baseUrl}/tests/"><meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소"><meta property="og:title" content="성향·재미 테스트 모음"><meta property="og:description" content="${hubDescription}"><meta property="og:url" content="${baseUrl}/tests/"><meta property="og:image" content="${baseUrl}/assets/og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="성향·재미 테스트 모음"><meta name="twitter:description" content="${hubDescription}"><meta name="twitter:image" content="${baseUrl}/assets/og.png"><link rel="stylesheet" href="/assets/styles.css?v=20260912"><link rel="stylesheet" href="/assets/personality-tests.css?v=20260912"><script src="/assets/site-config.js"></script><script src="/assets/head.js"></script><script src="/assets/site.js" defer></script><script type="application/ld+json" data-breadcrumb-schema>${jsonForHtml(hubSchema)}</script></head><body><div data-site-header></div><main id="main"><div class="container"><nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li aria-current="page">성향·재미 테스트</li></ol></nav><section class="hero"><p class="eyebrow">A small test, a useful clue</p><h1>성향·재미 테스트</h1><p>정답을 맞히는 검사가 아니라 일상의 선택을 돌아보는 가벼운 질문입니다. 답변은 서버에 저장하지 않고 현재 브라우저에서만 결과를 계산합니다.</p></section><section class="section tests-hub-grid" aria-label="테스트 목록">${tests.map((test) => `<article class="test-hub-card"><span class="test-hub-icon" aria-hidden="true">${test.icon}</span><div><h2>${escapeHtml(test.title)}</h2><p>${escapeHtml(test.description)}</p><ul class="test-meta" aria-label="${escapeHtml(test.title)} 정보"><li>${test.questions.length}개 질문</li><li>${test.time}</li></ul><a class="button button-primary" href="/${test.slug}/">${escapeHtml(test.title)} 시작</a></div></article>`).join('')}</section><div class="ad-slot" aria-label="광고 영역"><span>광고</span></div><article class="section content-copy"><h2>생활계산소 테스트를 만든 기준</h2><p>이곳의 테스트는 진단이나 능력 평가가 아니라 사용자가 반복해서 선택하는 생활 속 선호를 이해하기 위한 콘텐츠입니다. 각 질문은 특정 지식이 없어도 답할 수 있는 상황으로 작성했고, 모든 문항을 완료하기 전에는 결과를 보여 주지 않습니다. 결과 페이지에는 유형 이름뿐 아니라 특징, 강점, 주의할 점, 잘 맞는 환경과 바로 해볼 행동을 함께 제공하여 가벼운 재미가 실제 생활의 작은 변화로 이어지도록 구성했습니다.</p><p>답변과 점수는 JavaScript로 현재 브라우저 안에서만 처리됩니다. 회원가입, 외부 API, 서버 전송을 사용하지 않으며 선택한 답은 공유 URL에도 들어가지 않습니다. 결과가 마음에 들지 않거나 현재 모습과 다르다고 느끼면 틀린 것이 아니라 상황에 따라 다른 경향을 쓰고 있을 수 있습니다. 유형을 사람을 단정하거나 채용, 의료, 금융 같은 중요한 판단에 사용하지 마세요.</p><h2>테스트를 더 유용하게 사용하는 방법</h2><p>이상적으로 보이고 싶은 답보다 최근 실제 행동에 가까운 선택을 고르세요. 결과를 확인한 뒤 모든 문장을 그대로 받아들이기보다 공감되는 두 문장과 다른 한 문장을 표시해 보는 것이 좋습니다. 공감되는 부분은 이번 주에 실행할 작은 행동으로 바꾸고, 다른 부분은 역할이나 환경이 답변에 영향을 주었는지 살펴보세요. 친구나 동료와 공유할 때는 유형의 우열을 비교하지 말고 서로 편한 여행 일정, 업무 소통, 소비 기준을 묻는 출발점으로 활용해 주세요.</p></article><section class="section"><h2>계산기와 실용 도구도 둘러보세요</h2><div class="tools-grid"><a class="tool-card" href="/travel-budget-calculator/"><span class="tool-icon">💰</span><h3>여행 예산 계산</h3><p>여행비와 1인당 예산 정리</p></a><a class="tool-card" href="/text-tools/"><span class="tool-icon">✍️</span><h3>텍스트 도구</h3><p>글자 수와 문장 정리</p></a><a class="tool-card" href="/random-team-generator/"><span class="tool-icon">🎲</span><h3>랜덤 팀 배정</h3><p>이름을 공정하게 팀으로 나누기</p></a></div></section></div></main><div data-site-footer></div></body></html>`;
-const hubDirectory = resolve(root, 'calculator', 'tests');
-await mkdir(hubDirectory, { recursive: true });
-await writeFile(resolve(hubDirectory, 'index.html'), hubHtml);
-
-console.log(`${tests.length}개 테스트와 테스트 허브를 생성했습니다.`);
+console.log(`${tests.length}개 테스트 페이지를 생성했습니다.`);

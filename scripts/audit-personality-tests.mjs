@@ -72,12 +72,15 @@ for (const slug of slugs) {
   }
 }
 
-const hub = await readFile(resolve(root, 'calculator/tests/index.html'), 'utf8');
-if (matchCount(hub, /class="test-hub-card"/g) !== 6) failures.push('tests: 카드 6개 아님');
-if (!sitemap.includes('https://readytools.kr/tests/')) failures.push('tests: sitemap 누락');
-if (!redirects.includes('/tests/ /calculator/tests/ 200')) failures.push('tests: redirect 누락');
+if (await exists(resolve(root, 'calculator/tests/index.html'))) failures.push('tests: 불필요한 별도 모아보기 페이지가 남아 있음');
+if (sitemap.includes('https://readytools.kr/tests/')) failures.push('tests: 제거된 모아보기 URL이 sitemap에 남아 있음');
+if (!redirects.includes('/tests/ / 301')) failures.push('tests: 이전 모아보기 URL 영구 이동 누락');
 if (!main.includes('data-category-filter="test"')) failures.push('메인: 테스트 카테고리 누락');
-if (matchCount(main, /data-category="[^"]*test/g) < 4) failures.push('메인: 테스트 대표 카드 4개 미만');
+if (matchCount(main, /data-category="[^"]*test/g) !== 6) failures.push('메인: 테스트 카드가 6개 아님');
+if (main.includes('테스트 전체보기') || main.includes('href="/tests/"')) failures.push('메인: 불필요한 테스트 모아보기 링크가 남아 있음');
+for (const slug of slugs) {
+  if (!main.includes(`href="/${slug}/"`)) failures.push(`메인: ${slug} 직접 링크 누락`);
+}
 if (!runtime.includes('navigator.share') || !runtime.includes('navigator.clipboard')) failures.push('공통 JS: 공유/복사 기능 누락');
 if (!runtime.includes('tieDimensions') || !runtime.includes('renderTieQuestion')) failures.push('공통 JS: MBTI 동점 질문 처리 누락');
 if (runtime.includes('localStorage') || runtime.includes('URLSearchParams')) failures.push('공통 JS: 저장/query string 사용 흔적');
@@ -91,5 +94,5 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exitCode = 1;
 } else {
-  console.log('테스트 콘텐츠 점검 통과: 6개 테스트, 허브, SEO, 공유, 개인정보 조건을 확인했습니다.');
+  console.log('테스트 콘텐츠 점검 통과: 메인에 직접 노출된 6개 테스트와 SEO, 공유, 개인정보 조건을 확인했습니다.');
 }
