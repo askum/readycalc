@@ -72,10 +72,11 @@
 - `assets/everyday-tools.js`: 이모지 검색·복사, Web Crypto 주사위와 파일 용량 변환
 - `assets/finance-tools.js`: 대출·복리·물가상승·ROI 계산과 연도별 표 생성
 - `assets/real-estate-brokerage-fee.js`: 지역·물건·거래방식별 중개보수 상한, 월세 환산과 부가세 참고 계산
+- `assets/real-estate-acquisition-tax.js`: 취득 원인·주택 수·조정대상지역·면적별 취득세와 부가세목 참고 계산
 - `assets/document-tools.js`: 견적서·청구서, 참고문헌과 한글·영문 가독성 분석
 - `assets/developer-suite.js`: JSON Diff, 데이터 변환, Regex, URL, 네트워크·보안 값 분석 로직
 - `assets/home.js`: 메인 카테고리 필터, 실시간 검색과 검색 결과 안내
-- `index.html`: 최신 도구, 개발 도구와 성향·재미 테스트를 포함한 70개 계산기·온라인 도구 카드 검색 UI
+- `index.html`: 최신 도구, 개발 도구와 성향·재미 테스트를 포함한 71개 계산기·온라인 도구 카드 검색 UI
 - `assets/styles.css`: 모바일 터치 영역, 긴 결과, 카드·표·버튼 반응형 처리
 - `assets/favicon.svg`, `assets/head.js`: 공통 파비콘과 브라우저 테마 색상 적용
 - `_headers`: 파일명 고정 CSS·JavaScript가 이전 버전으로 남지 않도록 재검증 캐시 정책 적용
@@ -123,6 +124,7 @@
 - `calculator/file-size-converter/index.html`: Byte·KB·MB·GB·TB와 이진 단위 변환
 - `calculator/loan-calculator/index.html`: 상환방식별 월 납입금과 총이자 계산
 - `calculator/real-estate-brokerage-fee-calculator/index.html`: 지역·물건·거래방식별 부동산 중개보수 상한과 협의 복비 계산
+- `calculator/real-estate-acquisition-tax-calculator/index.html`: 매매·증여·상속·원시취득의 취득세·지방교육세·농어촌특별세 참고 계산
 - `calculator/compound-interest-calculator/index.html`: 적립식 복리와 연도별 자산 변화
 - `calculator/inflation-calculator/index.html`: 미래 필요금액과 구매력 변화 계산
 - `calculator/roi-calculator/index.html`: 순수익·ROI·연환산 수익률 계산
