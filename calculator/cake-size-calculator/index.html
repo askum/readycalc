@@ -21,7 +21,7 @@
   <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">케이크 몇 호?</li></ol></nav>
   <section class="hero"><p class="eyebrow">A slice for everyone</p><h1>케이크 몇 호?</h1><p>성인과 어린이 인원, 식사 후 제공 여부를 반영해 필요한 케이크 호수와 조각 수를 확인하세요.</p></section>
   <section class="calculator-layout" aria-label="케이크 호수 계산">
-    <form class="panel form-grid" data-calculator="cake-size" novalidate>
+    <form class="panel form-grid" data-calculator="cake-size" novalidate data-reviewed="2026-10-01">
       <div class="field-row"><div class="field"><label for="adults">성인 인원</label><input id="adults" name="adults" type="number" inputmode="numeric" min="0" max="300" step="1" value="8" aria-describedby="adults-error"><p class="error" id="adults-error"></p></div><div class="field"><label for="children">어린이 인원</label><input id="children" name="children" type="number" inputmode="numeric" min="0" max="200" step="1" value="2" aria-describedby="children-hint children-error"><p class="hint" id="children-hint">어린이는 성인 1인분의 약 60%로 계산합니다.</p><p class="error" id="children-error"></p></div></div>
       <div class="field"><label for="occasion">케이크 제공 방식</label><select id="occasion" name="occasion"><option value="afterMeal" selected>식사 후 디저트</option><option value="mainDessert">케이크가 주된 디저트</option><option value="otherDesserts">다른 디저트도 충분함</option></select></div>
       <div class="button-row"><button class="button button-primary" type="submit">케이크 호수 계산하기</button><button class="button button-secondary" type="reset">입력 초기화</button></div>
@@ -35,9 +35,15 @@
     <p>이 도구의 대표 규격은 미니 지름 약 12cm·3조각, 1호 약 15cm·6조각, 2호 약 18cm·10조각, 3호 약 21cm·15조각, 4호 약 24cm·20조각, 5호 약 27cm·25조각입니다. 같은 지름이라도 시트의 높이, 크림 두께, 장식과 자르는 모양에 따라 실제 제공 인원은 크게 달라집니다. 특히 키가 높은 레터링 케이크나 단단한 떡케이크, 직사각형 케이크는 일반 원형 생크림 케이크와 조각 수가 같지 않으므로 결과의 지름과 목표 조각 수를 매장에 함께 전달하세요.</p>
     <p>성인 8명과 어린이 2명이 식사 후 케이크를 먹는다면 성인 환산 인원은 9.2명이고 필요한 양은 약 8조각입니다. 대표 규격으로는 2호가 적당합니다. 같은 인원이라도 케이크가 생일 파티의 주된 디저트라면 약 11조각이 필요해 3호가 추천될 수 있습니다. 반대로 아이들이 케이크를 거의 먹지 않거나 다른 후식이 많으면 더 작은 호수도 가능합니다. 중요한 것은 초대 인원 전체가 아니라 실제로 케이크를 먹을 사람과 한 조각을 어느 정도 크기로 자를지입니다.</p>
     <p>돌잔치나 결혼기념일처럼 사진 촬영용 장식이 중요한 행사는 먹는 양과 외관 크기를 따로 판단해야 합니다. 계산상 1호면 충분해도 장식 공간 때문에 2호를 선택할 수 있고, 많은 손님에게 빠르게 나눌 때는 큰 케이크 한 개보다 중간 크기 여러 개가 자르기 쉽습니다. 알레르기, 유제품과 견과류 포함 여부, 상온 보관 가능 시간도 주문 전에 확인하세요. 이 결과는 일반적인 원형 케이크 크기를 비교하는 추정치이며 제과점의 실제 호수표와 최소 주문 규격을 대신하지 않습니다.</p>
-    <h2>인원별 케이크 크기 예시</h2>
-    <div class="content-grid three"><section class="info-card"><h3>가족 5명</h3><p>성인 4명과 어린이 1명이 식사 후 나눠 먹는다면 약 4조각이 필요합니다. 대표적으로 1호를 검토할 수 있습니다.</p></section><section class="info-card"><h3>생일 모임 10명</h3><p>성인 8명과 어린이 2명에게 케이크가 주된 디저트라면 약 11조각으로 계산되어 3호가 여유롭습니다.</p></section><section class="info-card"><h3>돌잔치 30명</h3><p>식사와 다른 후식 뒤에 제공한다면 실제 케이크 조각 수가 줄어듭니다. 여러 케이크 조합은 커팅과 이동도 고려해 주문하세요.</p></section></div>
-  </article>
+
+<h2>호수표와 환산 인원의 적용 범위</h2>
+<p>어린이 0.6인분과 제공 방식별 계수, 호수별 조각 수는 계산에 사용하는 자체 가정입니다. 제과업계 전체에 적용되는 법정 규격이나 소비량 통계가 아닙니다. 필요한 조각 수는 소수점을 올리고, 그 수를 담을 수 있는 호수를 표에서 찾습니다. 인원마다 한 조각씩 반드시 배식해야 한다면 작은 조각을 나누는 방식까지 매장과 별도로 협의해야 합니다.</p>
+<h2>인원과 제공 방식에 따른 케이크 계산 예시</h2>
+<p>아래는 입력 조건과 결과 해석을 설명하기 위한 가상 상황입니다. 실제 사용 기록이나 조사 결과가 아닙니다.</p>
+<section class="calculation-example"><h3>성인 4명과 어린이 1명이 식사 후 나누는 경우</h3><p>성인 환산 인원은 4 + 1 × 0.6 = 4.6명입니다. 식사 후 디저트 계수 0.8을 적용하면 3.68조각이고, 올림한 필요량은 4조각입니다. 대표표의 미니는 3조각으로 부족하므로 6조각으로 가정한 1호를 추천하며 여유분은 2조각입니다. 실제 가족은 5명이므로 모두에게 나누려면 케이크를 최소 5개로 잘라야 하며, 필요 조각 수는 먹는 양을 환산한 값으로 이해하세요.</p></section>
+<section class="calculation-example"><h3>성인 8명과 어린이 2명에게 주된 디저트로 내는 경우</h3><p>케이크가 주된 디저트라면 환산 인원 8 + 2 × 0.6 = 9.2명에 1.1을 곱합니다. 10.12조각을 올려 11조각이 필요하므로 10조각 기준인 2호보다 15조각 기준인 3호를 추천합니다. 대표 지름은 약 21cm이고 계산상 여유분은 4조각입니다. 같은 인원에게 식사 후 디저트로 제공하면 9.2 × 0.8 = 7.36을 올린 8조각이므로 추천은 2호로 달라집니다.</p></section>
+<section class="calculation-example"><h3>성인 30명이 다른 디저트와 함께 먹는 경우</h3><p>어린이 0명과 다른 디저트도 충분함을 선택하면 30 × 0.65 = 19.5조각을 올려 필요량 20조각이 됩니다. 표에서 20조각을 담는 4호, 대표 지름 약 24cm를 추천하고 여유분은 0조각으로 표시합니다. 30명 모두에게 제공하려면 한 조각 크기를 작게 나누어야 합니다. 1인당 표준 크기 한 조각이 필요한 행사라면 이 설정으로는 부족할 수 있으므로 주된 디저트 조건도 비교하세요.</p></section>
+</article>
   <section class="section affiliate-section" aria-labelledby="cake-products-title">
     <span class="affiliate-label">쿠팡파트너스 제휴 링크</span>
     <h2 id="cake-products-title">생일 케이크 장식용품 둘러보기</h2>

@@ -1,3 +1,4 @@
+import { withContentExamples } from './content-examples.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
@@ -161,15 +162,15 @@ const tools = [
     slug:'hash-generator', name:'Hash Generator', icon:'#️⃣', title:'Hash Generator | SHA-256 SHA-512 해시 생성', description:'텍스트에서 SHA-1, SHA-256, SHA-384, SHA-512 해시를 Web Crypto API로 생성하는 무료 브라우저 도구입니다.', eyebrow:'Digest text locally', intro:'UTF-8 텍스트를 Web Crypto API로 처리해 선택한 SHA 해시의 16진수 요약값을 만듭니다.',
     form:`${select('algorithm','해시 알고리즘',[['SHA-256','SHA-256'],['SHA-384','SHA-384'],['SHA-512','SHA-512'],['SHA-1','SHA-1 · 레거시 호환용']])}${textarea('source','해시를 생성할 텍스트')}`,
     principle:'해시 함수는 길이가 다른 입력을 고정 길이의 요약값으로 바꾸며 같은 입력에는 같은 결과를 냅니다. 이 도구는 문자열을 UTF-8 바이트로 변환하고 브라우저 Web Crypto API의 SHA-1, SHA-256, SHA-384 또는 SHA-512 digest를 실행한 뒤 각 바이트를 두 자리 16진수로 표시합니다. 입력의 한 글자만 달라져도 결과가 크게 바뀌지만 해시만으로 원문을 복원할 수는 없습니다. SHA-1은 충돌 공격 때문에 보안 용도로 권장되지 않으며 레거시 비교에만 제공합니다.',
-    practice:'배포 파일의 공식 해시와 내려받은 텍스트 조각을 비교하거나 API 서명 개발 중 예상 digest를 확인하고, 문서 버전의 변경 여부를 기록할 때 사용할 수 있습니다. 파일 업로드가 아니라 텍스트 입력만 지원하므로 줄바꿈, Unicode 정규화와 마지막 공백이 달라지면 해시도 달라집니다. 두 시스템의 값이 다르면 문자 인코딩, 줄바꿈 LF·CRLF와 BOM 포함 여부를 먼저 확인하세요.',
+    practice:'배포 파일의 공식 해시와 내려받은 텍스트 조각을 비교하거나 API 서명 개발 중 예상 digest를 확인하고, 문서 버전의 변경 여부를 기록할 때 사용할 수 있습니다. 파일 업로드가 아니라 텍스트 입력만 지원하며 현재 구현은 입력 앞뒤의 공백과 줄바꿈을 제거합니다. 중간의 공백과 줄바꿈, Unicode 정규화가 달라지면 해시도 달라질 수 있습니다. 두 시스템의 값이 다르면 문자 인코딩, 줄바꿈 LF·CRLF와 BOM 포함 여부를 먼저 확인하세요.',
     examples:['같은 문자열의 SHA-256이 매번 같은지 확인합니다.','한 글자 변경 전후의 해시가 크게 달라지는지 비교합니다.','외부 시스템 문서의 UTF-8 digest 테스트 벡터를 재현합니다.'],
     caution:'일반 SHA 해시는 빠르기 때문에 비밀번호 저장에 직접 사용하면 무차별 대입 공격에 취약합니다. 비밀번호에는 Argon2, scrypt, bcrypt 또는 PBKDF2처럼 salt와 비용을 사용하는 전용 키 파생 함수를 서버에서 적용하세요. 해시 일치는 내용 동일성의 단서지만 출처 신뢰와 디지털 서명을 대신하지 않습니다.',
-    faqs:[['SHA-256 결과를 다시 원문으로 복원할 수 있나요?','정상적인 해시 함수는 단방향이므로 직접 복원할 수 없습니다. 짧고 흔한 입력은 사전 대입으로 추측될 수 있습니다.'],['비밀번호를 SHA-256으로 저장해도 되나요?','권장하지 않습니다. salt와 반복 비용이 있는 전용 비밀번호 해싱 방식을 사용해야 합니다.'],['왜 같은 글인데 해시가 다른가요?','공백, 줄바꿈, Unicode 정규화, 대소문자와 인코딩 바이트가 하나라도 다르면 결과가 달라집니다.']]
+    faqs:[['SHA-256 결과를 다시 원문으로 복원할 수 있나요?','정상적인 해시 함수는 단방향이므로 직접 복원할 수 없습니다. 짧고 흔한 입력은 사전 대입으로 추측될 수 있습니다.'],['비밀번호를 SHA-256으로 저장해도 되나요?','권장하지 않습니다. salt와 반복 비용이 있는 전용 비밀번호 해싱 방식을 사용해야 합니다.'],['왜 같은 글인데 해시가 다른가요?','현재 도구가 제거하는 앞뒤 공백을 제외하고, 중간 공백, 줄바꿈, Unicode 정규화, 대소문자와 인코딩 바이트가 다르면 결과가 달라질 수 있습니다.']]
   },
   {
     slug:'unicode-inspector', name:'Unicode Inspector', icon:'🔍', title:'Unicode Inspector | 코드 포인트 UTF-8 확인', description:'문자와 이모지의 Unicode 코드 포인트, UTF-8 바이트와 UTF-16 코드 유닛을 브라우저에서 확인합니다.', eyebrow:'Inspect every character', intro:'한글·영문·기호·이모지를 코드 포인트 단위로 나눠 U+ 표기와 UTF-8·UTF-16 값을 보여줍니다.', form:`${textarea('source','생활계산소 👩‍💻')}`,
     principle:'Unicode 코드 포인트는 문자를 U+AC00 같은 번호로 정의합니다. JavaScript 문자열은 내부적으로 UTF-16 코드 유닛을 사용하므로 기본 다국어 평면 밖의 이모지는 서로게이트 두 개로 표현될 수 있습니다. 이 도구는 Array.from으로 코드 포인트 단위의 문자를 순회하고 codePointAt으로 U+ 값을, TextEncoder로 UTF-8 바이트를, charCodeAt으로 UTF-16 코드 유닛을 표시합니다. 결합 문자와 ZWJ 이모지는 화면에서 하나처럼 보여도 여러 코드 포인트 행으로 나뉠 수 있습니다.',
-    practice:'눈에 같은 문자처럼 보이지만 문자열 비교가 실패할 때 조합형·분해형 차이, 일반 공백과 non-breaking space, 하이픈과 유사 기호를 찾는 데 유용합니다. 이모지의 피부색 수정자와 가족·직업 조합에는 여러 코드 포인트와 zero width joiner가 포함될 수 있습니다. 사용자에게 보이는 글자 수가 필요하면 코드 포인트 수가 아니라 grapheme cluster를 다루는 Intl.Segmenter 같은 기능을 고려해야 합니다.',
+    practice:'눈에 같은 문자처럼 보이지만 문자열 비교가 실패할 때 조합형·분해형 차이, 일반 공백과 non-breaking space, 하이픈과 유사 기호를 찾는 데 유용합니다. 이모지의 피부색 수정자와 가족·직업 조합에는 여러 코드 포인트와 zero width joiner가 포함될 수 있습니다. 현재 입력 앞뒤의 공백과 줄바꿈은 제거되므로 공백을 검사하려면 다른 문자 사이에 넣어야 합니다. 사용자에게 보이는 글자 수가 필요하면 코드 포인트 수가 아니라 grapheme cluster를 다루는 Intl.Segmenter 같은 기능을 고려해야 합니다.',
     examples:['한글 음절과 분해된 자모의 코드 포인트 차이를 확인합니다.','보이지 않는 공백 문자가 U+0020인지 다른 공백인지 찾습니다.','복합 이모지가 여러 UTF-16 코드 유닛으로 구성되는지 확인합니다.'],
     caution:'코드 포인트 하나가 사용자에게 보이는 문자 하나와 항상 같지는 않습니다. 정규화, 로케일별 대소문자와 글꼴 렌더링은 별도 층의 문제입니다. 보안 식별자에서는 모양이 비슷한 다른 문자로 속이는 homograph 공격 가능성이 있으므로 단순 육안 비교 대신 허용 문자 정책과 정규화를 적용하세요.',
     faqs:[['이모지 하나가 여러 줄로 나오는 이유는 무엇인가요?','피부색, 성별, 가족 조합은 여러 코드 포인트와 ZWJ를 합쳐 한 그림으로 표시할 수 있습니다.'],['UTF-8과 UTF-16 값이 왜 다른가요?','같은 코드 포인트를 서로 다른 바이트·코드 유닛 규칙으로 인코딩하기 때문입니다.'],['화면 글자 수와 코드 포인트 수는 같은가요?','결합 문자와 복합 이모지 때문에 다를 수 있습니다. 사용자 인식 글자는 grapheme cluster 기준이 적합합니다.']]
@@ -210,6 +211,6 @@ await mkdir(hubDir, { recursive:true });
 for (const tool of tools) {
   const directory = resolve(hubDir, tool.slug);
   await mkdir(directory, { recursive:true });
-  await writeFile(resolve(directory, 'index.html'), page(tool));
+  await writeFile(resolve(directory, 'index.html'), withContentExamples(page(tool), `developer/${tool.slug}`));
 }
 console.log(`독립 개발 도구 ${tools.length}개 페이지를 생성했습니다.`);

@@ -32,7 +32,7 @@ for (const route of routes) {
   }
   if ((html.match(/<h1(?:\s|>)/g) || []).length !== 1) failures.push(`${route}: h1 개수 오류`);
   if ((html.match(/<details>/g) || []).length < 5) failures.push(`${route}: FAQ 5개 미만`);
-  if (!html.includes('실제') || !html.includes('주의사항') || !html.includes('사용 방법')) failures.push(`${route}: 설명 구성 누락`);
+  if (!/<h2>[^<]*(?:예시|사례)/.test(html) || !html.includes('주의사항') || !html.includes('사용 방법')) failures.push(`${route}: 설명 구성 누락`);
   const articleText = (html.match(/<article[\s\S]*?<\/article>/)?.[0] || '').replace(/<[^>]+>/g, '').replace(/\s+/g, '');
   if (articleText.length < 800) failures.push(`${route}: 본문 설명 ${articleText.length}자 (800자 미만)`);
   if (!sitemap.includes(`https://readytools.kr/${route}/`)) failures.push(`${route}: sitemap 누락`);

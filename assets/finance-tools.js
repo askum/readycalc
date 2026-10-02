@@ -43,6 +43,6 @@
   if (type === 'roi-calculator') form.addEventListener('submit', (event) => {
     event.preventDefault(); clearErrors(); if (![valid('investment',1,100000000000),valid('finalValue',0,1000000000000),valid('cost',0,100000000000),valid('years',0.01,100)].every(Boolean)) return focusFirstError();
     const investment = number('investment'); const finalValue = number('finalValue'); const cost = number('cost'); const years = number('years'); const totalCost = investment + cost; const profit = finalValue - totalCost; const roi = profit / totalCost * 100; const annualized = ((finalValue / totalCost) ** (1 / years) - 1) * 100;
-    show(percent(roi) + ' ROI', [['총 투입금',won(totalCost)],['최종 평가금',won(finalValue)],['순수익',won(profit)],['단순 ROI',percent(roi)],['연환산 수익률',percent(annualized)],['투자기간',Number(years.toFixed(2)).toLocaleString('ko-KR') + '년']], '현금흐름이 시작과 종료 시점에 한 번씩 발생한다고 단순화한 세전·수수료 차감 전 결과입니다. 중간 입출금이 있으면 IRR 계산이 필요합니다.');
+    show(percent(roi) + ' ROI', [['총 투입금',won(totalCost)],['최종 평가금',won(finalValue)],['순수익',won(profit)],['단순 ROI',percent(roi)],['연환산 수익률',percent(annualized)],['투자기간',Number(years.toFixed(2)).toLocaleString('ko-KR') + '년']], '현금흐름이 시작과 종료 시점에 한 번씩 발생한다고 단순화한 결과입니다. 입력한 추가 비용은 반영하지만 그 밖의 세금과 수수료는 자동 반영하지 않습니다. 중간 입출금이 있으면 IRR 계산이 필요합니다.');
   });
 })();

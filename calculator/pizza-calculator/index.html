@@ -19,7 +19,7 @@
   <nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li><a href="/#tools">전체 계산기</a></li><li aria-current="page">피자 몇 판 계산기</li></ol></nav>
   <section class="hero"><p class="eyebrow">Pizza order planner</p><h1>피자 몇 판 시킬까?</h1><p>성인과 아이 인원, 식사 또는 간식 여부와 사이드 메뉴 양을 반영해 알맞은 피자 주문량을 계산해 보세요.</p></section>
   <section class="calculator-layout" aria-label="피자 주문량 계산">
-    <form class="panel form-grid" data-calculator="pizza" novalidate>
+    <form class="panel form-grid" data-calculator="pizza" novalidate data-reviewed="2026-10-01">
       <div class="field-row"><div class="field"><label for="adults">성인 인원</label><input id="adults" name="adults" type="number" inputmode="numeric" min="0" max="100" value="4" aria-describedby="adults-error"><p class="error" id="adults-error"></p></div><div class="field"><label for="children">아이 인원</label><input id="children" name="children" type="number" inputmode="numeric" min="0" max="100" value="0" aria-describedby="children-error"><p class="error" id="children-error"></p></div></div>
       <div class="field"><label for="gender-ratio">모임의 남녀 비율</label><select id="gender-ratio" name="genderRatio"><option value="0.9">여성 비율이 높은 편</option><option value="1" selected>비슷한 편</option><option value="1.1">남성 비율이 높은 편</option></select><p class="hint">개인의 식사량이 더 중요하며, 비율은 평균 주문량을 조금 조정하는 용도입니다.</p></div>
       <div class="field"><label for="occasion">피자를 어떻게 먹나요?</label><select id="occasion" name="occasion"><option value="meal" selected>한 끼 식사</option><option value="snack">간식·파티 음식</option></select></div>
@@ -33,17 +33,19 @@
 
   <article class="section content-copy">
     <h2>인원별 피자 주문량 계산 원리</h2>
-    <p>피자 몇 판을 주문할지 정하려면 단순히 사람 수를 한 판당 인원으로 나누는 것보다 조각 수로 계산하는 편이 정확합니다. 이 피자 계산기는 한 판을 보편적인 8조각으로 가정합니다. 한 끼 식사로 피자를 먹을 때는 성인 한 명당 3조각, 아이 한 명당 2조각을 기본으로 잡습니다. 생일 파티나 야식처럼 간식으로 먹을 때는 성인 1.8조각, 아이 1.2조각을 기준으로 낮춥니다. 인원별 조각 수를 모두 더한 뒤 모임의 평균 식사량을 보조하는 남녀 비율 계수와 사이드 메뉴 계수를 적용하고, 부족하지 않도록 필요한 전체 조각 수와 피자 판 수를 각각 올림합니다.</p>
+    <p>피자 몇 판을 주문할지 정하려면 단순히 사람 수를 한 판당 인원으로 나누는 것보다 조각 수로 계산하는 편이 정확합니다. 이 피자 계산기는 한 판을 보편적인 8조각으로 가정합니다. 한 끼 식사로 피자를 먹을 때는 성인 한 명당 3조각, 아이 한 명당 2조각을 기본으로 잡습니다. 생일 파티나 야식처럼 간식으로 먹을 때는 성인 1.8조각, 아이 1.2조각을 기준으로 낮춥니다. 인원별 조각 수를 모두 더한 뒤 자체 가정으로 정한 남녀 비율 계수와 사이드 메뉴 계수를 적용하고, 부족하지 않도록 필요한 전체 조각 수와 피자 판 수를 각각 올림합니다.</p>
     <p>남녀 비율은 실제 개인차를 대신할 수 없으므로 결과를 ±10% 안에서만 조정합니다. 운동 후 모임이나 평소 많이 먹는 사람이 많은 경우에는 성별 선택과 관계없이 사이드 메뉴를 ‘거의 없음’으로 고르거나 결과에 한 판을 추가하는 편이 좋습니다. 치킨, 파스타, 샐러드, 감자튀김처럼 함께 배를 채울 메뉴가 충분하면 0.85배를 적용하고, 간단한 피클이나 음료만 있다면 보통을 선택합니다. 피자가 사실상 유일한 메뉴일 때는 1.1배를 적용해 여유분을 확보합니다.</p>
     <p>브랜드마다 라지, 패밀리, 레귤러의 지름과 조각 수가 다르다는 점도 중요합니다. 같은 8조각이라도 큰 피자의 한 조각과 작은 피자의 한 조각은 포만감이 다릅니다. 계산 결과가 3판이라면 주문하려는 매장의 기본 사이즈와 조각 수를 확인한 뒤, 작은 사이즈만 주문할 경우 한 판을 더하거나 큰 사이즈로 바꾸세요. 여러 판을 주문할 때는 매운맛, 치즈, 고기, 채소 토핑을 섞어 취향을 맞추고 알레르기와 채식 여부도 미리 확인해야 합니다. 결과는 주문 계획을 돕는 일반적인 추정치이며 영양상 권장 섭취량은 아닙니다.</p>
 
-    <h2>피자 주문량 계산 예시</h2>
-    <div class="content-grid three">
-      <section class="info-card"><h3>성인 4명 한 끼 식사</h3><p>성인 4명은 기본 12조각이 필요합니다. 8조각 피자로 나누면 1.5판이므로 올림해 2판, 총 16조각을 주문하면 약 4조각의 여유가 생깁니다.</p></section>
-      <section class="info-card"><h3>성인 6명·아이 3명 파티</h3><p>간식 기준으로 성인 10.8조각과 아이 3.6조각을 합쳐 약 15조각입니다. 보통 사이드라면 피자 2판이 적당합니다.</p></section>
-      <section class="info-card"><h3>성인 8명, 사이드가 많을 때</h3><p>식사 기준 24조각에 사이드 메뉴 계수 0.85를 적용하면 20.4조각입니다. 올림한 21조각을 담으려면 8조각 피자 3판이 필요합니다.</p></section>
-    </div>
-  </article>
+
+<h2>조각 수 가정과 주문 단위</h2>
+<p>성인·어린이의 기준 조각 수와 0.85·1.1 보정값은 법정 또는 통계적 섭취 기준이 아닌 자체 준비량 가정입니다. 남녀 비율 계수도 검증된 성별 평균값을 뜻하지 않습니다. 아래 사례는 모두 비슷한 편인 1.0을 적용합니다. 계산상 조각 수를 먼저 올린 뒤 8로 나누어 판 수를 다시 올리므로, 필요한 양과 실제 주문량은 구분해서 읽어야 합니다.</p>
+<h2>피자 판 수를 계산하는 세 가지 가상 예시</h2>
+<p>아래는 입력 조건과 결과 해석을 설명하기 위한 가상 상황입니다. 실제 사용 기록이나 조사 결과가 아닙니다.</p>
+<section class="calculation-example"><h3>성인 4명이 간단한 사이드와 함께 한 끼 먹는 경우</h3><p>식사 모드에 성인 4명, 어린이 0명, 사이드 보통을 입력합니다. 필요한 양은 4 × 3 × 1.0 × 1.0 = 12조각입니다. 8조각 피자는 12 ÷ 8 = 1.5판이므로 2판으로 올림하며 총 16조각을 주문합니다. 화면의 여유분은 16 − 12 = 4조각입니다. 이는 전체 모임의 여유분이며 한 사람마다 4조각을 추가로 먹는다는 뜻은 아닙니다.</p></section>
+<section class="calculation-example"><h3>성인 6명과 어린이 3명이 파티 간식으로 먹는 경우</h3><p>간식·파티 음식과 사이드 보통을 고르면 성인 몫은 6 × 1.8 = 10.8조각, 어린이 몫은 3 × 1.2 = 3.6조각입니다. 합계 14.4조각을 올려 필요량 15조각으로 표시하고, 이를 담을 8조각 피자 2판을 제안합니다. 총 16조각에서 필요량을 뺀 여유분은 1조각입니다. 생일 케이크 등 다른 후식이 많으면 사이드 조건을 바꾸어 주문량을 비교할 수 있습니다.</p></section>
+<section class="calculation-example"><h3>성인 8명에게 치킨과 파스타도 함께 내는 경우</h3><p>식사 모드에서 성인 8명과 사이드 많음을 선택하면 기본 24조각에 0.85를 곱해 20.4조각이 됩니다. 필요량은 올림한 21조각이며 피자 3판은 24조각이므로 여유분은 3조각입니다. 같은 인원이라도 피자가 중심인 거의 없음으로 바꾸면 24 × 1.1 = 26.4조각을 올려 27조각, 즉 4판이 됩니다. 사이드 구성 하나로 주문 단위가 달라지는 사례입니다.</p></section>
+</article>
 
   <div class="ad-slot" role="complementary" aria-label="광고 영역"><!-- AdSense: 본문 설명 중간 반응형 광고 코드 삽입 위치 --><span>광고</span></div>
 
