@@ -1,3 +1,4 @@
+import { visibility, isIndexableTool } from './search-visibility.mjs';
 import { readFile, access } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
@@ -54,7 +55,7 @@ for (const slug of slugs) {
   }
   if (!html.includes('data-test-previous') || !html.includes('data-test-live')) failures.push(`${slug}: 이전/aria-live UI 누락`);
   if (html.includes('localStorage') || html.includes('URLSearchParams')) failures.push(`${slug}: 답변 저장 또는 query string 사용 흔적`);
-  if (!sitemap.includes(`https://readytools.kr/${slug}/`)) failures.push(`${slug}: sitemap 누락`);
+  if (sitemap.includes(`https://readytools.kr/${slug}/`) !== isIndexableTool(slug)) failures.push(`${slug}: sitemap 누락`);
   if (!redirects.includes(`/${slug}/ /calculator/${slug}/ 200`)) failures.push(`${slug}: redirect 누락`);
   for (const [key, result] of Object.entries(config.results)) {
     if (result.description.length < 300) failures.push(`${slug}/${key}: 결과 설명 ${result.description.length}자 (300자 미만)`);
@@ -75,11 +76,11 @@ for (const slug of slugs) {
 if (await exists(resolve(root, 'calculator/tests/index.html'))) failures.push('tests: 불필요한 별도 모아보기 페이지가 남아 있음');
 if (sitemap.includes('https://readytools.kr/tests/')) failures.push('tests: 제거된 모아보기 URL이 sitemap에 남아 있음');
 if (!redirects.includes('/tests/ / 301')) failures.push('tests: 이전 모아보기 URL 영구 이동 누락');
-if (!main.includes('data-category-filter="test"')) failures.push('메인: 테스트 카테고리 누락');
-if (matchCount(main, /data-category="[^"]*test/g) !== 6) failures.push('메인: 테스트 카드가 6개 아님');
+if (main.includes('data-category-filter="test"') !== slugs.some(isIndexableTool)) failures.push('메인: 테스트 카테고리 누락');
+if (matchCount(main, /data-category="[^"]*test/g) !== slugs.filter(isIndexableTool).length) failures.push('메인: 공개 테스트 카드 수 오류');
 if (main.includes('테스트 전체보기') || main.includes('href="/tests/"')) failures.push('메인: 불필요한 테스트 모아보기 링크가 남아 있음');
 for (const slug of slugs) {
-  if (!main.includes(`href="/${slug}/"`)) failures.push(`메인: ${slug} 직접 링크 누락`);
+  if (main.includes(`href="/${slug}/"`) !== isIndexableTool(slug)) failures.push(`메인: ${slug} 직접 링크 누락`);
 }
 if (!runtime.includes('navigator.share') || !runtime.includes('navigator.clipboard')) failures.push('공통 JS: 공유/복사 기능 누락');
 if (!runtime.includes('tieDimensions') || !runtime.includes('renderTieQuestion')) failures.push('공통 JS: MBTI 동점 질문 처리 누락');
@@ -94,5 +95,5 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exitCode = 1;
 } else {
-  console.log('테스트 콘텐츠 점검 통과: 메인에 직접 노출된 6개 테스트와 SEO, 공유, 개인정보 조건을 확인했습니다.');
+  console.log('테스트 콘텐츠 점검 통과: 6개 테스트의 공개 설정과 SEO, 공유, 개인정보 조건을 확인했습니다.');
 }

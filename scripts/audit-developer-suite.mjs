@@ -1,3 +1,4 @@
+import { visibility, isIndexableTool } from './search-visibility.mjs';
 import { readFile, access } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
@@ -40,8 +41,8 @@ for (const route of routes) {
   for (const control of html.matchAll(/<(?:input|select|textarea)\b[^>]*\sid="([^"]+)"[^>]*>/g)) {
     if (!html.includes('for="' + control[1] + '"')) failures.push(route + ': #' + control[1] + ' label 누락');
   }
-  if (!sitemap.includes('https://readytools.kr/developer/' + route + '/')) failures.push(route + ': sitemap 누락');
-  if (!home.includes('href="/developer/' + route + '/"')) failures.push(route + ': 메인 개발 카테고리 직접 링크 누락');
+  if (sitemap.includes('https://readytools.kr/developer/' + route + '/') !== isIndexableTool('developer/' + route)) failures.push(route + ': sitemap 누락');
+  if (home.includes('href="/developer/' + route + '/"') !== isIndexableTool('developer/' + route)) failures.push(route + ': 메인 개발 카테고리 직접 링크 누락');
   if (html.includes('<a href="/developer/">개발 도구</a>')) failures.push(route + ': 삭제된 중간 breadcrumb 링크가 남아 있음');
   if (!html.includes('<a href="/#tools">전체 계산기</a>')) failures.push(route + ': 전체 계산기 breadcrumb 누락');
   if (!script.includes("'" + route + "'")) failures.push(route + ': 실행 로직 누락');

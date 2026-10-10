@@ -1,0 +1,436 @@
+{
+  "date": "2026-10-10",
+  "criterion": "Original article text length excluding whitespace and HTML; exclude pages with affiliate links. Snapshot taken before navigation pruning.",
+  "indexable": [
+    "real-estate-acquisition-tax-calculator",
+    "real-estate-brokerage-fee-calculator",
+    "text-tools",
+    "developer-tools",
+    "color-tools",
+    "image-tools",
+    "travel-budget-calculator",
+    "date-calculator",
+    "developer/url-inspector",
+    "travel-expense-splitter"
+  ],
+  "excluded": [
+    "electricity-cost-calculator",
+    "cake-size-calculator",
+    "developer/xml-tools",
+    "unit-converter",
+    "subscription-split-calculator",
+    "developer/hash-generator",
+    "developer/unicode-inspector",
+    "developer/sql-formatter",
+    "developer/html-tools",
+    "fuel-cost-calculator",
+    "developer/jwt-decoder",
+    "developer/timestamp-converter",
+    "developer/yaml-json-converter",
+    "meat-calculator",
+    "travel-packing-checklist",
+    "developer/json-csv-converter",
+    "developer/regex-tester",
+    "event-drink-calculator",
+    "camping-food-calculator",
+    "first-birthday-food-calculator",
+    "developer/http-mime-reference",
+    "developer/json-diff",
+    "parcel-box-calculator",
+    "developer/subnet-calculator",
+    "developer/css-minifier",
+    "chicken-calculator",
+    "password-generator",
+    "moving-box-calculator",
+    "developer/uuid-generator",
+    "pizza-calculator",
+    "hobby-test",
+    "spending-style-test",
+    "developer/cron-tools",
+    "developer/base-converter",
+    "invoice-generator",
+    "travel-style-test",
+    "ev-vs-ice-cost-calculator",
+    "ai-style-test",
+    "file-size-converter",
+    "mbti-test",
+    "work-style-test",
+    "qr-code-generator",
+    "loan-calculator",
+    "international-travel-cost-calculator",
+    "overseas-purchase-duty-calculator",
+    "roi-calculator",
+    "inflation-calculator",
+    "image-color-picker",
+    "currency-exchange-calculator",
+    "company-dinner-drink-calculator",
+    "compound-interest-calculator",
+    "color-picker",
+    "citation-generator",
+    "color-palette-extractor",
+    "emoji-picker",
+    "readability-checker",
+    "exif-remover",
+    "pet-treat-dehydration-calculator",
+    "color-converter",
+    "dice-roller",
+    "random-team-generator"
+  ],
+  "ranking": [
+    {
+      "slug": "real-estate-acquisition-tax-calculator",
+      "characters": 3023,
+      "affiliate": false
+    },
+    {
+      "slug": "real-estate-brokerage-fee-calculator",
+      "characters": 2271,
+      "affiliate": false
+    },
+    {
+      "slug": "text-tools",
+      "characters": 2098,
+      "affiliate": false
+    },
+    {
+      "slug": "developer-tools",
+      "characters": 1873,
+      "affiliate": false
+    },
+    {
+      "slug": "color-tools",
+      "characters": 1806,
+      "affiliate": false
+    },
+    {
+      "slug": "image-tools",
+      "characters": 1648,
+      "affiliate": false
+    },
+    {
+      "slug": "electricity-cost-calculator",
+      "characters": 1644,
+      "affiliate": true
+    },
+    {
+      "slug": "travel-budget-calculator",
+      "characters": 1596,
+      "affiliate": false
+    },
+    {
+      "slug": "date-calculator",
+      "characters": 1585,
+      "affiliate": false
+    },
+    {
+      "slug": "cake-size-calculator",
+      "characters": 1565,
+      "affiliate": true
+    },
+    {
+      "slug": "developer/url-inspector",
+      "characters": 1555,
+      "affiliate": false
+    },
+    {
+      "slug": "travel-expense-splitter",
+      "characters": 1548,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/xml-tools",
+      "characters": 1533,
+      "affiliate": false
+    },
+    {
+      "slug": "unit-converter",
+      "characters": 1528,
+      "affiliate": true
+    },
+    {
+      "slug": "subscription-split-calculator",
+      "characters": 1527,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/hash-generator",
+      "characters": 1515,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/unicode-inspector",
+      "characters": 1511,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/sql-formatter",
+      "characters": 1510,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/html-tools",
+      "characters": 1506,
+      "affiliate": false
+    },
+    {
+      "slug": "fuel-cost-calculator",
+      "characters": 1506,
+      "affiliate": true
+    },
+    {
+      "slug": "developer/jwt-decoder",
+      "characters": 1503,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/timestamp-converter",
+      "characters": 1489,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/yaml-json-converter",
+      "characters": 1488,
+      "affiliate": false
+    },
+    {
+      "slug": "meat-calculator",
+      "characters": 1487,
+      "affiliate": true
+    },
+    {
+      "slug": "travel-packing-checklist",
+      "characters": 1485,
+      "affiliate": true
+    },
+    {
+      "slug": "developer/json-csv-converter",
+      "characters": 1483,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/regex-tester",
+      "characters": 1483,
+      "affiliate": false
+    },
+    {
+      "slug": "event-drink-calculator",
+      "characters": 1463,
+      "affiliate": true
+    },
+    {
+      "slug": "camping-food-calculator",
+      "characters": 1457,
+      "affiliate": true
+    },
+    {
+      "slug": "first-birthday-food-calculator",
+      "characters": 1455,
+      "affiliate": true
+    },
+    {
+      "slug": "developer/http-mime-reference",
+      "characters": 1451,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/json-diff",
+      "characters": 1438,
+      "affiliate": false
+    },
+    {
+      "slug": "parcel-box-calculator",
+      "characters": 1438,
+      "affiliate": true
+    },
+    {
+      "slug": "developer/subnet-calculator",
+      "characters": 1432,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/css-minifier",
+      "characters": 1406,
+      "affiliate": false
+    },
+    {
+      "slug": "chicken-calculator",
+      "characters": 1405,
+      "affiliate": false
+    },
+    {
+      "slug": "password-generator",
+      "characters": 1405,
+      "affiliate": false
+    },
+    {
+      "slug": "moving-box-calculator",
+      "characters": 1395,
+      "affiliate": true
+    },
+    {
+      "slug": "developer/uuid-generator",
+      "characters": 1389,
+      "affiliate": false
+    },
+    {
+      "slug": "pizza-calculator",
+      "characters": 1382,
+      "affiliate": false
+    },
+    {
+      "slug": "hobby-test",
+      "characters": 1376,
+      "affiliate": false
+    },
+    {
+      "slug": "spending-style-test",
+      "characters": 1362,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/cron-tools",
+      "characters": 1361,
+      "affiliate": false
+    },
+    {
+      "slug": "developer/base-converter",
+      "characters": 1355,
+      "affiliate": false
+    },
+    {
+      "slug": "invoice-generator",
+      "characters": 1354,
+      "affiliate": false
+    },
+    {
+      "slug": "travel-style-test",
+      "characters": 1340,
+      "affiliate": false
+    },
+    {
+      "slug": "ev-vs-ice-cost-calculator",
+      "characters": 1333,
+      "affiliate": false
+    },
+    {
+      "slug": "ai-style-test",
+      "characters": 1332,
+      "affiliate": false
+    },
+    {
+      "slug": "file-size-converter",
+      "characters": 1324,
+      "affiliate": false
+    },
+    {
+      "slug": "mbti-test",
+      "characters": 1321,
+      "affiliate": false
+    },
+    {
+      "slug": "work-style-test",
+      "characters": 1321,
+      "affiliate": false
+    },
+    {
+      "slug": "qr-code-generator",
+      "characters": 1319,
+      "affiliate": false
+    },
+    {
+      "slug": "loan-calculator",
+      "characters": 1310,
+      "affiliate": false
+    },
+    {
+      "slug": "international-travel-cost-calculator",
+      "characters": 1305,
+      "affiliate": false
+    },
+    {
+      "slug": "overseas-purchase-duty-calculator",
+      "characters": 1304,
+      "affiliate": false
+    },
+    {
+      "slug": "roi-calculator",
+      "characters": 1296,
+      "affiliate": false
+    },
+    {
+      "slug": "inflation-calculator",
+      "characters": 1293,
+      "affiliate": false
+    },
+    {
+      "slug": "image-color-picker",
+      "characters": 1288,
+      "affiliate": false
+    },
+    {
+      "slug": "currency-exchange-calculator",
+      "characters": 1259,
+      "affiliate": false
+    },
+    {
+      "slug": "company-dinner-drink-calculator",
+      "characters": 1249,
+      "affiliate": false
+    },
+    {
+      "slug": "compound-interest-calculator",
+      "characters": 1246,
+      "affiliate": false
+    },
+    {
+      "slug": "color-picker",
+      "characters": 1242,
+      "affiliate": false
+    },
+    {
+      "slug": "citation-generator",
+      "characters": 1236,
+      "affiliate": false
+    },
+    {
+      "slug": "color-palette-extractor",
+      "characters": 1229,
+      "affiliate": false
+    },
+    {
+      "slug": "emoji-picker",
+      "characters": 1229,
+      "affiliate": false
+    },
+    {
+      "slug": "readability-checker",
+      "characters": 1197,
+      "affiliate": false
+    },
+    {
+      "slug": "exif-remover",
+      "characters": 1186,
+      "affiliate": false
+    },
+    {
+      "slug": "pet-treat-dehydration-calculator",
+      "characters": 1186,
+      "affiliate": true
+    },
+    {
+      "slug": "color-converter",
+      "characters": 1179,
+      "affiliate": false
+    },
+    {
+      "slug": "dice-roller",
+      "characters": 1177,
+      "affiliate": false
+    },
+    {
+      "slug": "random-team-generator",
+      "characters": 1108,
+      "affiliate": false
+    }
+  ]
+}

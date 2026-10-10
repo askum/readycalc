@@ -1,3 +1,4 @@
+import { visibility, isIndexableTool } from './search-visibility.mjs';
 import { readFile, access } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
@@ -35,11 +36,11 @@ for (const route of routes) {
   if (!/<h2>[^<]*(?:예시|사례)/.test(html) || !html.includes('주의사항') || !html.includes('사용 방법')) failures.push(`${route}: 설명 구성 누락`);
   const articleText = (html.match(/<article[\s\S]*?<\/article>/)?.[0] || '').replace(/<[^>]+>/g, '').replace(/\s+/g, '');
   if (articleText.length < 800) failures.push(`${route}: 본문 설명 ${articleText.length}자 (800자 미만)`);
-  if (!sitemap.includes(`https://readytools.kr/${route}/`)) failures.push(`${route}: sitemap 누락`);
+  if (sitemap.includes(`https://readytools.kr/${route}/`) !== isIndexableTool(route)) failures.push(`${route}: sitemap 누락`);
   if (!redirects.includes(`/${route}/ /calculator/${route}/ 200`)) failures.push(`${route}: rewrite 누락`);
-  if ((sitemap.match(new RegExp(`https://readytools\\.kr/${route}/`, 'g')) || []).length !== 1) failures.push(`${route}: sitemap URL 중복`);
+  if ((sitemap.match(new RegExp(`https://readytools\\.kr/${route}/`, 'g')) || []).length !== (isIndexableTool(route) ? 1 : 0)) failures.push(`${route}: sitemap URL 개수 오류`);
   if ((redirects.match(new RegExp(`^/${route}/ /calculator/${route}/ 200$`, 'gm')) || []).length !== 1) failures.push(`${route}: rewrite 중복`);
-  if (!home.includes(`href="/${route}/"`)) failures.push(`${route}: 메인 내부 링크 누락`);
+  if (home.includes(`href="/${route}/"`) !== isIndexableTool(route)) failures.push(`${route}: 메인 내부 링크 누락`);
   const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
   for (const label of html.matchAll(/<label[^>]*for="([^"]+)"/g)) if (!ids.has(label[1])) failures.push(`${route}: label 대상 #${label[1]} 누락`);
   for (const input of html.matchAll(/<(?:input|select|textarea)\b[^>]*\sid="([^"]+)"[^>]*>/g)) {
@@ -48,7 +49,7 @@ for (const route of routes) {
 }
 
 const cardCount = (home.match(/data-tool-card/g) || []).length;
-if (cardCount !== 71) failures.push(`메인 카드 수 ${cardCount}개 (기대 71개)`);
+if (cardCount !== visibility.indexable.length) failures.push(`메인 카드 수 ${cardCount}개 (기대 ${visibility.indexable.length}개)`);
 if (failures.length) {
   console.error(failures.join('\n'));
   process.exitCode = 1;

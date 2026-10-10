@@ -1,3 +1,4 @@
+import { applySearchVisibility } from './search-visibility.mjs';
 import { withContentExamples } from './content-examples.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -211,6 +212,6 @@ await mkdir(hubDir, { recursive:true });
 for (const tool of tools) {
   const directory = resolve(hubDir, tool.slug);
   await mkdir(directory, { recursive:true });
-  await writeFile(resolve(directory, 'index.html'), withContentExamples(page(tool), `developer/${tool.slug}`));
+  await writeFile(resolve(directory, 'index.html'), applySearchVisibility(withContentExamples(page(tool), `developer/${tool.slug}`), `developer/${tool.slug}`));
 }
 console.log(`독립 개발 도구 ${tools.length}개 페이지를 생성했습니다.`);

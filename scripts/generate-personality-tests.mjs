@@ -1,3 +1,4 @@
+import { applySearchVisibility } from './search-visibility.mjs';
 import { withContentExamples } from './content-examples.mjs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -324,7 +325,7 @@ const pageHtml = (test) => `<!doctype html>
 for (const test of tests) {
   const directory = resolve(root, 'calculator', test.slug);
   await mkdir(directory, { recursive: true });
-  await writeFile(resolve(directory, 'index.html'), withContentExamples(pageHtml(test), test.slug));
+  await writeFile(resolve(directory, 'index.html'), applySearchVisibility(withContentExamples(pageHtml(test), test.slug), test.slug));
 }
 
 console.log(`${tests.length}개 테스트 페이지를 생성했습니다.`);
