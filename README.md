@@ -352,16 +352,14 @@ sitemap.xml
 
 계산기 HTML의 실제 위치는 `calculator/` 아래이지만 공개 URL은 기존과 동일합니다. 예를 들어 `calculator/meat-calculator/index.html`은 Cloudflare Pages에서 `/meat-calculator/`로 제공됩니다. 새 계산기를 추가할 때는 `calculator/`에 페이지를 만든 뒤 `_redirects`, 메인 목록, `sitemap.xml`, `scripts/sync-site-url.mjs`의 경로 목록을 함께 갱신하세요.
 
-## 임시 검색 노출 축소 (2026-10-10)
+## 공개 범위 선정 기록 (2026-10-10)
 
-` scripts/search-visibility.json `에 선정 당시 본문 길이와 제휴 링크 여부, 공개 10개·검색 제외 61개 목록을 기록했습니다. 제외 도구는 정적 HTML에 `noindex, follow`를 적용하고 메인·소개·관련 도구 링크 및 사이트맵에서 제외합니다. robots.txt는 크롤링을 허용하여 Google이 noindex를 확인하도록 유지합니다. 파일과 공개 URL은 삭제하지 않았습니다.
-
-페이지 생성 후에는 `node scripts/apply-search-visibility.mjs`와 `node scripts/audit-search-visibility.mjs`를 실행하세요. 개발 도구·성향 테스트 생성기에도 노출 정책이 적용됩니다. 전체 복구 시 이 변경 커밋의 HTML·사이트맵·노출 관리 변경을 되돌려 메인 카드와 관련 링크도 함께 복원해야 합니다. noindex 삭제만으로 메뉴 링크가 복구되지는 않습니다.
+`scripts/search-visibility.json`에 10개 공개 페이지를 선정할 때의 본문 길이와 제휴 링크 여부를 기록했습니다. 현재 61개 제외 도구의 HTML·공유 이미지는 배포 트리에서 제거했고, 메인·소개·관련 도구 링크 및 사이트맵에서도 제외했습니다. `_worker.js`가 공개되지 않은 직접 주소와 내부 파일 요청에 404를 반환합니다.
 
 ## 비공개 전환 — 본문 제공 중단
 
-61개 제외 도구의 HTML은 배포 트리에서 제거했습니다. `_worker.js`는 공개 10개 도구·정책 페이지·필수 정적 자원만 허용하며, 나머지 경로(도구의 직접 경로와 `/scripts/` 포함)는 사용자와 봇에 동일하게 본문 없는 404를 제공합니다. `_routes.json`은 모든 요청에 이 정책을 적용합니다.
+61개 제외 도구의 HTML과 공유 이미지는 배포 트리에서 제거했습니다. `_worker.js`는 공개 10개 도구·정책 페이지·필수 정적 자원만 허용하며, 나머지 경로(도구의 직접 경로와 `/scripts/` 포함)는 사용자와 봇에 동일하게 본문 없는 404를 제공합니다. `_routes.json`은 모든 요청에 이 정책을 적용합니다.
 
-복구 원본 커밋: `f5aa6fdc68320a5bb6ed6f20c7686ba70b7d8b74`. 원본 파일은 `git show <커밋>:calculator/<slug>/index.html`로 확인할 수 있습니다. 복구 시 원본 HTML, 공개 목록, Worker 허용 경로, redirects, 사이트맵, 메인·관련 링크를 함께 갱신해야 합니다. 예전 전체 메뉴 원본은 `269b68a`에 있습니다. 단순 noindex 해제로 복구되지 않습니다.
+복구 원본 커밋: `f5aa6fdc68320a5bb6ed6f20c7686ba70b7d8b74`. 원본 파일은 `git show <커밋>:calculator/<slug>/index.html`로 확인할 수 있습니다. 복구 시 원본 HTML과 공유 이미지, 공개 목록, Worker 허용 경로, redirects, 사이트맵, 메인·관련 링크를 함께 갱신해야 합니다. 예전 전체 메뉴 원본은 `269b68a`에 있습니다. 단순 noindex 해제로 복구되지 않습니다.
 
 검사: `node scripts/audit-withdrawn-tools.mjs`. 이 검사는 61개 파일 부재와 주소 변형·사용자/봇별 404, 공개 도구·정책 페이지 허용을 확인합니다.

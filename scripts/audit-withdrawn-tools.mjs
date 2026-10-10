@@ -10,6 +10,7 @@ const env={ASSETS:{fetch:async()=>{calls++;return new Response('public');}}};
 let cases=0;
 for (const slug of visibility.excluded) {
  await assert.rejects(access(resolve(root,`calculator/${slug}/index.html`)),slug);
+ await assert.rejects(access(resolve(root,`assets/og/${slug.replaceAll('/','-')}.png`)),`${slug}: old share image still public`);
  for(const path of [`/${slug}`,`/${slug}/`,`/${slug}/index.html`,`/calculator/${slug}/`,`/calculator/${slug}/index.html`]) {
   for(const ua of ['Googlebot','Mozilla/5.0']) {
    const before=calls;
