@@ -19,6 +19,7 @@ const home = await readFile(resolve(root, 'index.html'), 'utf8');
 const script = await readFile(resolve(root, 'assets', 'developer-suite.js'), 'utf8');
 
 for (const route of routes) {
+  if (visibility.mode === 'withdrawn' && !isIndexableTool('developer/' + route)) continue;
   const file = resolve(root, 'calculator', 'developer', route, 'index.html');
   await access(file);
   const html = await readFile(file, 'utf8');
@@ -56,5 +57,5 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exitCode = 1;
 } else {
-  console.log('개발 도구 ' + routes.length + '개 페이지의 기능·SEO·콘텐츠·접근성·공개 경로 검사 통과');
+  console.log('현재 공개된 개발 도구 페이지의 기능·SEO·콘텐츠·접근성·공개 경로 검사 통과');
 }

@@ -1,4 +1,4 @@
-import { applySearchVisibility } from './search-visibility.mjs';
+import { isIndexableTool, applySearchVisibility } from './search-visibility.mjs';
 import { withContentExamples } from './content-examples.mjs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -323,6 +323,7 @@ const pageHtml = (test) => `<!doctype html>
 </div></main><div data-site-footer></div><script type="application/json" data-test-config>${jsonForHtml(test)}</script></body></html>`;
 
 for (const test of tests) {
+  if (!isIndexableTool(test.slug)) continue;
   const directory = resolve(root, 'calculator', test.slug);
   await mkdir(directory, { recursive: true });
   await writeFile(resolve(directory, 'index.html'), applySearchVisibility(withContentExamples(pageHtml(test), test.slug), test.slug));

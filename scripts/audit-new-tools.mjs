@@ -18,6 +18,7 @@ const redirects = await readFile(resolve(root, '_redirects'), 'utf8');
 const home = await readFile(resolve(root, 'index.html'), 'utf8');
 
 for (const route of routes) {
+  if (visibility.mode === 'withdrawn' && !isIndexableTool(route)) continue;
   const file = resolve(root, 'calculator', route, 'index.html');
   await access(file);
   const html = await readFile(file, 'utf8');
@@ -54,5 +55,5 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exitCode = 1;
 } else {
-  console.log(`신규 ${routes.length}개 페이지, 메인 ${cardCount}개 카드, SEO·FAQ·label·공개 경로 검사 통과`);
+  console.log(`현재 공개된 신규 페이지, 메인 ${cardCount}개 카드, SEO·FAQ·label·공개 경로 검사 통과`);
 }

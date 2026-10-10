@@ -21,6 +21,7 @@ const extractConfig = (html) => {
 };
 
 for (const slug of slugs) {
+  if (visibility.mode === 'withdrawn' && !isIndexableTool(slug)) continue;
   const path = resolve(root, 'calculator', slug, 'index.html');
   let html;
   try { html = await readFile(path, 'utf8'); } catch { failures.push(`${slug}: 페이지 파일 누락`); continue; }
@@ -95,5 +96,5 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exitCode = 1;
 } else {
-  console.log('테스트 콘텐츠 점검 통과: 6개 테스트의 공개 설정과 SEO, 공유, 개인정보 조건을 확인했습니다.');
+  console.log('테스트 콘텐츠 점검 통과: 테스트 공개 설정과 공개 페이지 SEO, 공유, 개인정보 조건을 확인했습니다.');
 }

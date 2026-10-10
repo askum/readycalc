@@ -1,4 +1,4 @@
-import { applySearchVisibility } from './search-visibility.mjs';
+import { isIndexableTool, applySearchVisibility } from './search-visibility.mjs';
 import { withContentExamples } from './content-examples.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -210,6 +210,7 @@ const hub = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta na
 const hubDir = resolve(root, 'calculator', 'developer');
 await mkdir(hubDir, { recursive:true });
 for (const tool of tools) {
+  if (!isIndexableTool(`developer/${tool.slug}`)) continue;
   const directory = resolve(hubDir, tool.slug);
   await mkdir(directory, { recursive:true });
   await writeFile(resolve(directory, 'index.html'), applySearchVisibility(withContentExamples(page(tool), `developer/${tool.slug}`), `developer/${tool.slug}`));

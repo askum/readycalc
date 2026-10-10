@@ -12,6 +12,11 @@ assert.equal(visibility.excluded.length,61);
 assert.equal((home.match(/data-tool-card/g)||[]).length,10);
 assert.equal((sitemap.match(/<url>/g)||[]).length,17);
 for(const slug of [...visibility.indexable,...visibility.excluded]) {
+ if(visibility.mode==='withdrawn' && visibility.excluded.includes(slug)) {
+  await assert.rejects(read(`calculator/${slug}/index.html`));
+  assert.ok(!sitemap.includes(`<loc>https://readytools.kr/${slug}/</loc>`));
+  continue;
+ }
  const html=await read(`calculator/${slug}/index.html`);
  const indexable=visibility.indexable.includes(slug);
  assert.equal(/<meta name="robots" content="noindex, follow">/.test(html),!indexable,slug);
@@ -29,4 +34,4 @@ for(const route of ['', 'about','privacy','terms','contact','methodology','discl
 const categories=new Set([...home.matchAll(/data-tool-card data-category="([^"]+)"/g)].flatMap(m=>m[1].split(' ')));
 for(const m of home.matchAll(/data-category-filter="([^"]+)"/g)) assert.ok(m[1]==='all'||categories.has(m[1]),`Empty category ${m[1]}`);
 assert.ok(!(await read('robots.txt')).includes('Disallow: /'),'Crawlers must read noindex');
-console.log('Verified: 10 indexable tools, 61 noindex tools, 17 sitemap URLs; no excluded links or empty categories on public pages.');
+console.log('Verified: 10 indexable tools, 61 excluded tools, 17 sitemap URLs; no excluded links or empty categories on public pages.');

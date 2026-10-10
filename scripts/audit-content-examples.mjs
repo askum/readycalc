@@ -1,3 +1,4 @@
+import { visibility } from './search-visibility.mjs';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
@@ -25,5 +26,5 @@ for (const path of await pages(resolve(root, 'calculator'))) {
   minimum = Math.min(minimum, length);
   count++;
 }
-assert.equal(count, 71);
+assert.equal(count, visibility.mode === 'withdrawn' ? visibility.indexable.length : 71);
 console.log(`${count}개 페이지: 공백 제외 본문 최소 ${minimum}자, 예시 각 3개, FAQ 각 5개 이상, 생성 원본 일치 확인`);
