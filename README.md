@@ -76,7 +76,7 @@
 - `assets/document-tools.js`: 견적서·청구서, 참고문헌과 한글·영문 가독성 분석
 - `assets/developer-suite.js`: JSON Diff, 데이터 변환, Regex, URL, 네트워크·보안 값 분석 로직
 - `assets/home.js`: 메인 카테고리 필터, 실시간 검색과 검색 결과 안내
-- `index.html`: 최신 도구, 개발 도구와 성향·재미 테스트를 포함한 71개 계산기·온라인 도구 카드 검색 UI
+- `index.html`: 공개된 15개 계산기·온라인 도구 카드 검색 UI
 - `assets/styles.css`: 모바일 터치 영역, 긴 결과, 카드·표·버튼 반응형 처리
 - `assets/favicon.svg`, `assets/head.js`: 공통 파비콘과 브라우저 테마 색상 적용
 - `_headers`: 파일명 고정 CSS·JavaScript가 이전 버전으로 남지 않도록 재검증 캐시 정책 적용
@@ -352,14 +352,14 @@ sitemap.xml
 
 계산기 HTML의 실제 위치는 `calculator/` 아래이지만 공개 URL은 기존과 동일합니다. 예를 들어 `calculator/meat-calculator/index.html`은 Cloudflare Pages에서 `/meat-calculator/`로 제공됩니다. 새 계산기를 추가할 때는 `calculator/`에 페이지를 만든 뒤 `_redirects`, 메인 목록, `sitemap.xml`, `scripts/sync-site-url.mjs`의 경로 목록을 함께 갱신하세요.
 
-## 공개 범위 선정 기록 (2026-10-10)
+## 공개 범위 선정 기록 (2026-10-14)
 
-`scripts/search-visibility.json`에 10개 공개 페이지를 선정할 때의 본문 길이와 제휴 링크 여부를 기록했습니다. 현재 61개 제외 도구의 HTML·공유 이미지는 배포 트리에서 제거했고, 메인·소개·관련 도구 링크 및 사이트맵에서도 제외했습니다. `_worker.js`가 공개되지 않은 직접 주소와 내부 파일 요청에 404를 반환합니다.
+`scripts/search-visibility.json`에 공개 범위와 최초 선정 때의 본문 길이·제휴 링크 여부를 기록했습니다. 현재 15개 도구를 공개하며, 각 공개 페이지의 설명 본문은 공백을 제외하고 1,500자 이상입니다. 나머지 56개 도구의 HTML·공유 이미지는 배포 트리에서 제거했고, 메인·소개·관련 도구 링크 및 사이트맵에서도 제외했습니다. `_worker.js`가 공개되지 않은 직접 주소와 내부 파일 요청에 404를 반환합니다.
 
 ## 비공개 전환 — 본문 제공 중단
 
-61개 제외 도구의 HTML과 공유 이미지는 배포 트리에서 제거했습니다. `_worker.js`는 공개 10개 도구·정책 페이지·필수 정적 자원만 허용하며, 나머지 경로(도구의 직접 경로와 `/scripts/` 포함)는 사용자와 봇에 동일하게 본문 없는 404를 제공합니다. `_routes.json`은 모든 요청에 이 정책을 적용합니다.
+56개 제외 도구의 HTML과 공유 이미지는 배포 트리에서 제거했습니다. `_worker.js`는 공개 15개 도구·정책 페이지·필수 정적 자원만 허용하며, 나머지 경로(도구의 직접 경로와 `/scripts/` 포함)는 사용자와 봇에 동일하게 본문 없는 404를 제공합니다. `_routes.json`은 모든 요청에 이 정책을 적용합니다.
 
 복구 원본 커밋: `f5aa6fdc68320a5bb6ed6f20c7686ba70b7d8b74`. 원본 파일은 `git show <커밋>:calculator/<slug>/index.html`로 확인할 수 있습니다. 복구 시 원본 HTML과 공유 이미지, 공개 목록, Worker 허용 경로, redirects, 사이트맵, 메인·관련 링크를 함께 갱신해야 합니다. 예전 전체 메뉴 원본은 `269b68a`에 있습니다. 단순 noindex 해제로 복구되지 않습니다.
 
-검사: `node scripts/audit-withdrawn-tools.mjs`. 이 검사는 61개 파일 부재와 주소 변형·사용자/봇별 404, 공개 도구·정책 페이지 허용을 확인합니다.
+검사: `node scripts/audit-search-visibility.mjs`와 `node scripts/audit-withdrawn-tools.mjs`. 공개 페이지의 설명 분량·메뉴·사이트맵 일치 여부와 56개 파일 부재, 주소 변형·사용자/봇별 404를 확인합니다.

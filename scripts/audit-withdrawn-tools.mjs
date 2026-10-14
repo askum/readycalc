@@ -28,5 +28,5 @@ for(const slug of visibility.indexable) {
  for(const path of [`/${slug}/`,`/calculator/${slug}/index.html`])assert.equal((await worker.fetch(new Request('https://readytools.kr'+path),env)).status,200);
 }
 for(const path of ['/','/about/','/privacy/','/terms/','/contact/','/methodology/','/disclaimer/','/robots.txt','/sitemap.xml','/assets/styles.css','/assets/calculators.js'])assert.equal((await worker.fetch(new Request('https://readytools.kr'+path),env)).status,200,path);
-const site=await readFile(resolve(root,'sitemap.xml'),'utf8');assert.equal((site.match(/<url>/g)||[]).length,17);
-console.log(`${cases} blocked-route checks passed; 61 original HTML files absent; 10 tools and policy pages accessible.`);
+const site=await readFile(resolve(root,'sitemap.xml'),'utf8');assert.equal((site.match(/<url>/g)||[]).length,22);
+console.log(`${cases} blocked-route checks passed; 56 original HTML files absent; 15 tools and policy pages accessible.`);

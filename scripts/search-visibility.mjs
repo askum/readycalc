@@ -6,6 +6,8 @@ export function applySearchVisibility(html, slug) {
   if (visibility.excluded.includes(slug)) {
     html = html.replace(/<meta\b[^>]*name=["'](?:robots|googlebot)["'][^>]*>\n?/gi, '');
     html = html.replace('</head>', '<meta name="robots" content="noindex, follow">\n</head>');
+  } else if (visibility.indexable.includes(slug)) {
+    html = html.replace(/<meta\b[^>]*name=["'](?:robots|googlebot)["'][^>]*>\n?/gi, '');
   }
   html = html.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/g, (anchor, attrs, content) => {
     const href = attrs.match(/href="([^"]+)"/)?.[1];

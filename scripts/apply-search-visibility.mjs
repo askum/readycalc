@@ -14,7 +14,7 @@ for (const path of await walk(root)) {
     const categories = new Set([...html.matchAll(/data-tool-card data-category="([^"]+)"/g)].flatMap(m=>m[1].split(' ')));
     html = html.replace(/<button\b[^>]*data-category-filter="([^"]+)"[^>]*>[\s\S]*?<\/button>/g,(button,cat)=>cat==='all'||categories.has(cat)?button:'');
   }
-  if(path===resolve(root,'about/index.html')) html=html.replaceAll('71개','10개');
+  if(path===resolve(root,'about/index.html')) html=html.replaceAll('71개',`${visibility.indexable.length}개`);
   if(html!==original) await writeFile(path,html);
 }
 const file=resolve(root,'sitemap.xml');
