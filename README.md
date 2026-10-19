@@ -229,13 +229,15 @@ AdSense 승인 검토 중에는 빈 광고 자리가 미완성 영역처럼 보�
 
 ## 로컬 테스트 방법
 
-Cloudflare Pages의 `_redirects` rewrite까지 포함해 기존 공개 URL을 테스트하려면 Wrangler 개발 서버를 사용합니다.
+현재 공개 URL을 로컬에서 확인하려면 저장소의 미리보기 서버를 사용합니다. `_redirects`의 경로 변환과 `_worker.js`의 공개 경로 제한을 함께 적용합니다.
 
 ```bash
-npx wrangler pages dev . --port 8787
+node scripts/dev-server.mjs 8001
 ```
 
-브라우저에서 `http://localhost:8787/meat-calculator/`처럼 기존 공개 URL을 엽니다. 단순 정적 파일 확인만 필요하면 `python3 -m http.server 8080`을 실행하고 `/calculator/meat-calculator/` 같은 실제 폴더 경로로 접근할 수 있습니다.
+브라우저에서 `http://127.0.0.1:8001/magazine/` 또는 `http://127.0.0.1:8001/password-generator/`를 엽니다. 단순 `python3 -m http.server`는 `_redirects`를 읽지 않으므로 `/password-generator/` 같은 공개 주소가 404가 됩니다. 실제 폴더 주소인 `/calculator/password-generator/`는 단순 정적 서버에서도 열리지만 공개 경로 정책을 재현하지는 않습니다. Cloudflare Pages 자체 동작을 확인하려면 `npx wrangler pages dev . --port 8787`을 사용할 수 있습니다.
+
+매거진 글은 `content/magazine.json`, `content/magazine-more.json`, `content/magazine-more-2.json`, `content/magazine-life.json`의 로컬 데이터로 관리합니다. 수정한 뒤 `node scripts/generate-magazine.mjs`로 정적 HTML을 다시 생성합니다. 새 글의 공개 경로는 `_worker.js`와 `sitemap.xml`에도 등록하고 `node scripts/sync-calculator-redirects.mjs`를 실행합니다. `node scripts/audit-magazine.mjs`로 본문·링크·사이트맵을 확인할 수 있습니다.
 
 기본 정적 검사는 다음과 같이 실행할 수 있습니다.
 
@@ -363,3 +365,9 @@ sitemap.xml
 복구 원본 커밋: `f5aa6fdc68320a5bb6ed6f20c7686ba70b7d8b74`. 원본 파일은 `git show <커밋>:calculator/<slug>/index.html`로 확인할 수 있습니다. 복구 시 원본 HTML과 공유 이미지, 공개 목록, Worker 허용 경로, redirects, 사이트맵, 메인·관련 링크를 함께 갱신해야 합니다. 예전 전체 메뉴 원본은 `269b68a`에 있습니다. 단순 noindex 해제로 복구되지 않습니다.
 
 검사: `node scripts/audit-search-visibility.mjs`와 `node scripts/audit-withdrawn-tools.mjs`. 공개 페이지의 설명 분량·메뉴·사이트맵 일치 여부와 56개 파일 부재, 주소 변형·사용자/봇별 404를 확인합니다.
+
+## 결과 영수증과 시각화
+
+공개 도구 14개의 결과 화면은 `assets/result-receipts.js`와 `assets/result-receipts.css`로 영수증 형태의 요약과 PNG 저장·이미지 복사를 제공합니다. 여행 예산, 여행 경비 정산, 구독료, 취득세, 중개보수 결과에는 금액 구성비 도넛 차트가 추가됩니다. 날짜·텍스트 등 비율이 의미 없는 결과에는 차트를 표시하지 않습니다. 비밀번호 생성 결과는 이미지 저장으로 비밀번호가 파일이나 클립보드에 남지 않도록 제외했습니다. 이미지 생성은 브라우저 안에서 실행되며 서버로 결과를 업로드하지 않습니다.
+
+Chart.js 4.5.1과 html2canvas 1.4.1은 `assets/vendor/`에 고정 버전으로 포함되며, 결과 계산 또는 저장 시에만 로드됩니다. 각 라이선스는 같은 폴더의 `CHART-LICENSE.md`, `HTML2CANVAS-LICENSE`에서 확인할 수 있습니다.

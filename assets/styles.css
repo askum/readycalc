@@ -221,6 +221,45 @@ input[type="range"]:disabled { cursor: not-allowed; opacity: .58; }
 .guide-steps li { padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
 .guide-steps h3 { margin: 0 0 7px; font-size: 1rem; }
 .guide-steps p { margin: 0; color: var(--muted); }
+.magazine-shell { padding-bottom: 64px; }
+.magazine-index-header { max-width: 760px; padding: 26px 0 46px; }
+.magazine-index-header > p:last-child, .magazine-deck { color: var(--muted); font-size: 1.1rem; }
+.magazine-grid { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 1000px; }
+.magazine-card { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.magazine-card:first-child { border-top: 1px solid var(--line); }
+.magazine-card-image { display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; background: var(--surface-2); }
+.magazine-card-image img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .2s ease; }
+.magazine-card:hover .magazine-card-image img { transform: scale(1.025); }
+.magazine-card-body { display: grid; align-content: start; gap: 8px; min-width: 0; }
+.magazine-category { margin: 0; color: var(--primary-dark); font-size: .78rem; font-weight: 900; }
+.magazine-card h2 { margin: 0; font-size: 1.28rem; line-height: 1.4; }
+.magazine-card h2 a { color: var(--text); text-decoration: none; }
+.magazine-card h2 a:hover { color: var(--primary-dark); text-decoration: underline; }
+.magazine-card-body > p:not(.magazine-category) { margin: 0; color: var(--muted); }
+.magazine-card time, .magazine-byline { color: var(--muted); font-size: .85rem; }
+.magazine-article-header { max-width: 840px; margin: 36px auto 34px; }
+.magazine-article-header h1 { max-width: none; }
+.magazine-deck { max-width: 720px; margin: 18px 0 12px; }
+.magazine-article { max-width: 840px; margin-inline: auto; }
+.magazine-cover { margin: 0 0 42px; overflow: hidden; border-radius: var(--radius); background: var(--surface-2); }
+.magazine-cover img { display: block; width: 100%; height: auto; }
+.magazine-article > section { margin-block: 42px; }
+.magazine-article h2 { margin-bottom: 18px; }
+.magazine-article > section p { color: var(--muted); font-size: 1.04rem; line-height: 1.85; }
+.magazine-points { display: grid; gap: 10px; padding: 0; margin: 24px 0; list-style: none; }
+.magazine-points li { padding: 18px 20px; border-left: 4px solid var(--primary); border-radius: 10px; background: var(--surface-2); }
+.magazine-points h3 { margin: 0 0 5px; }
+.magazine-points p { margin: 0; }
+.magazine-sources ul { margin: 0; padding-left: 22px; }
+.magazine-faq details { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.magazine-faq summary { cursor: pointer; font-weight: 750; }
+.magazine-faq details p { margin: 12px 0 0; }
+.magazine-tool-cta { margin-top: 50px; padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-2); }
+.magazine-tool-cta h2 { margin-bottom: 8px; font-size: 1.45rem; }
+.magazine-tool-cta p { margin: 0 0 18px; color: var(--muted); }
+.magazine-back { max-width: 840px; margin: 28px auto 0; }
+.magazine-related { max-width: 840px; margin: 56px auto 0; padding-top: 24px; border-top: 1px solid var(--line); }
+.magazine-related ul { display: grid; gap: 10px; margin: 0; padding-left: 22px; }
 .prose h2 { margin-top: 42px; }
 .prose p, .prose li { color: var(--muted); }
 .contact-box { padding: 24px; border-radius: var(--radius); background: var(--surface-2); }
@@ -310,6 +349,13 @@ th, td { padding: 10px; overflow-wrap: anywhere; }
   .field-action { grid-template-columns: 1fr; }
   .field-action .icon-button { width: 100%; }
   .footer-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 12px; }
+}
+
+@media (max-width: 619px) {
+  .magazine-card { grid-template-columns: 104px minmax(0, 1fr); gap: 14px; padding: 18px 0; }
+  .magazine-card-image { aspect-ratio: 4 / 3; }
+  .magazine-card h2 { font-size: 1.03rem; }
+  .magazine-card-body > p:not(.magazine-category) { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: .86rem; }
 }
 
 @media (min-width: 620px) {

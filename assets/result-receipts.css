@@ -1,0 +1,35 @@
+.result-content.receipt-card {
+  padding: 20px;
+  border: 1px solid #d7e4dd;
+  border-radius: 16px;
+  background: #fff;
+  color: #183228;
+  box-shadow: 0 8px 24px rgba(20, 60, 42, .08);
+}
+.receipt-header { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-bottom: 12px; border-bottom: 2px solid #187b5e; font-size: .84rem; }
+.receipt-header strong { font-size: 1rem; color: #12674e; }
+.receipt-header strong span { font-size: .74rem; font-weight: 600; }
+.receipt-header > span, .receipt-tool-title, .receipt-stamp, .receipt-footer { color: #577367; }
+.receipt-tool-title { margin: 18px 0 12px; font-size: .93rem; font-weight: 750; }
+.receipt-card .result-kicker { color: #577367; }
+.receipt-card .result-value { color: #12674e; font-size: clamp(1.55rem, 6vw, 2.7rem); }
+.receipt-card .result-list li { border-bottom-color: #d7e4dd; }
+.receipt-card .notice { background: #f3f8f5; color: #4e6b5d; }
+.receipt-stamp { margin: 24px 0 7px; text-align: right; font-size: .78rem; }
+.receipt-footer { margin: 0; padding: 12px 0 0; border-top: 1px dashed #a9c2b4; text-align: center; font-size: .78rem; }
+.receipt-actions { margin-top: 20px; padding-top: 16px; border-top: 1px solid #d7e4dd; }
+.receipt-actions .button { flex: 1 1 145px; }
+.receipt-chart { margin: 22px 0; padding: 16px 0; border-block: 1px dashed #a9c2b4; }
+.receipt-chart h2 { margin: 0 0 16px; color: #183228; font-size: 1rem; }
+.receipt-chart-layout { display: grid; grid-template-columns: minmax(0, 180px) minmax(0, 1fr); align-items: center; gap: 18px; }
+.receipt-chart-canvas { position: relative; width: 180px; height: 180px; max-width: 100%; }
+.receipt-chart-legend { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.receipt-chart-legend li { display: grid; grid-template-columns: 10px minmax(0, 1fr); gap: 3px 8px; align-items: center; font-size: .82rem; }
+.receipt-chart-legend i { grid-row: 1 / span 2; width: 10px; height: 10px; border-radius: 50%; }
+.receipt-chart-legend strong { grid-column: 2; font-size: .78rem; font-weight: 650; color: #577367; }
+.receipt-output { overflow-wrap: anywhere; white-space: pre-wrap; font: .78rem/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; }
+@media (max-width: 619px) {
+  .result-content.receipt-card { padding: 16px; }
+  .receipt-chart-layout { grid-template-columns: 1fr; justify-items: center; }
+  .receipt-chart-legend { width: 100%; }
+}

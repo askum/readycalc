@@ -1,7 +1,9 @@
-import { access, readdir, writeFile } from 'node:fs/promises';
+import { access, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { loadMagazineArticles } from './magazine-data.mjs';
 
 const root = resolve(import.meta.dirname, '..');
+const articles = await loadMagazineArticles();
 const calculatorRoot = resolve(root, 'calculator');
 const hasPage = async (directory, name) => access(resolve(directory, name, 'index.html')).then(() => true, () => false);
 const routes = (await readdir(calculatorRoot, { withFileTypes: true }))
@@ -21,6 +23,9 @@ const lines = [
   '/tests / 301',
   '/tests/ / 301'
 ];
+
+lines.push('/magazine /magazine/ 301');
+for (const { slug } of articles) lines.push(`/magazine/${slug} /magazine/${slug}/ 301`);
 
 for (const route of publishedRoutes) {
   lines.push(`/${route} /${route}/ 301`);

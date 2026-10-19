@@ -2,7 +2,9 @@ import { readFile, access } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
 import { visibility } from './search-visibility.mjs';
+import { loadMagazineArticles } from './magazine-data.mjs';
 const root=resolve(import.meta.dirname,'..');
+const magazineArticles=await loadMagazineArticles();
 const source=await readFile(resolve(root,'_worker.js'),'utf8');
 const {default:worker}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 let calls=0;
@@ -27,6 +29,6 @@ for(const slug of visibility.indexable) {
  await access(resolve(root,`calculator/${slug}/index.html`));
  for(const path of [`/${slug}/`,`/calculator/${slug}/index.html`])assert.equal((await worker.fetch(new Request('https://readytools.kr'+path),env)).status,200);
 }
-for(const path of ['/','/about/','/privacy/','/terms/','/contact/','/methodology/','/disclaimer/','/robots.txt','/sitemap.xml','/assets/styles.css','/assets/calculators.js'])assert.equal((await worker.fetch(new Request('https://readytools.kr'+path),env)).status,200,path);
-const site=await readFile(resolve(root,'sitemap.xml'),'utf8');assert.equal((site.match(/<url>/g)||[]).length,22);
+for(const path of ['/','/about/','/privacy/','/terms/','/contact/','/methodology/','/disclaimer/','/magazine/',...magazineArticles.map(({slug})=>`/magazine/${slug}/`),'/robots.txt','/sitemap.xml','/assets/styles.css','/assets/calculators.js'])assert.equal((await worker.fetch(new Request('https://readytools.kr'+path),env)).status,200,path);
+const site=await readFile(resolve(root,'sitemap.xml'),'utf8');assert.equal((site.match(/<url>/g)||[]).length,23+magazineArticles.length);
 console.log(`${cases} blocked-route checks passed; 56 original HTML files absent; 15 tools and policy pages accessible.`);
