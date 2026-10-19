@@ -30,6 +30,7 @@ for(const slug of [...visibility.indexable,...visibility.excluded]) {
   assert.ok(article,`${slug}: explanatory article missing`);
   const characters=Array.from(article.replace(/<[^>]*>/g,'').replace(/&(?:amp|lt|gt|quot|#39);/g,' ').replace(/\s+/g,'')).length;
   assert.ok(characters>=1500,`${slug}: explanatory article has only ${characters} non-whitespace characters`);
+  assert.ok(/<h2>[^<]*(?:사용 방법|사용법|사용 가이드|입력 방법)[^<]*<\/h2>/.test(article),`${slug}: step-by-step usage guide missing`);
  }
  // Generators must retain the same search policy when pages are rebuilt.
  assert.equal(applySearchVisibility(html,slug),html,`${slug}: not idempotent`);
