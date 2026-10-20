@@ -371,3 +371,9 @@ sitemap.xml
 공개 도구 14개의 결과 화면은 `assets/result-receipts.js`와 `assets/result-receipts.css`로 영수증 형태의 요약과 PNG 저장·이미지 복사를 제공합니다. 여행 예산, 여행 경비 정산, 구독료, 취득세, 중개보수 결과에는 금액 구성비 도넛 차트가 추가됩니다. 날짜·텍스트 등 비율이 의미 없는 결과에는 차트를 표시하지 않습니다. 비밀번호 생성 결과는 이미지 저장으로 비밀번호가 파일이나 클립보드에 남지 않도록 제외했습니다. 이미지 생성은 브라우저 안에서 실행되며 서버로 결과를 업로드하지 않습니다.
 
 Chart.js 4.5.1과 html2canvas 1.4.1은 `assets/vendor/`에 고정 버전으로 포함되며, 결과 계산 또는 저장 시에만 로드됩니다. 각 라이선스는 같은 폴더의 `CHART-LICENSE.md`, `HTML2CANVAS-LICENSE`에서 확인할 수 있습니다.
+
+### 비공개 도구의 결과 화면 준비
+
+`content/withdrawn-calculators/`에는 비공개 도구 56개의 HTML 보관본이 있습니다. 각 보관본은 결과 영수증 CSS·JS를 연결한 상태지만, 공개 `calculator/` 경로에는 없고 Worker가 보관본 경로와 원래 공개 경로 모두 404로 차단합니다. 보관본은 `node scripts/prepare-withdrawn-results.mjs`로 원본 Git 커밋에서 다시 만들 수 있으며, `node scripts/audit-withdrawn-results.mjs`로 56개 연결 상태와 차단 여부를 검사합니다.
+
+복구 요청이 오면 먼저 해당 보관본을 `calculator/<slug>/index.html`로 옮기고, 최신 계산 기준·본문·제휴 링크와 결과 UI를 검토해야 합니다. 이어서 공개 목록, Worker 허용 경로, redirects, 메인 메뉴·관련 링크, 사이트맵을 갱신하고 비공개 상태의 `noindex`를 제거해야 합니다. 영수증과 이미지 저장은 전 도구에 준비했고, 도넛 차트는 금액·조각·박스 수·점수처럼 합산 가능한 항목이 두 개 이상일 때만 표시합니다.

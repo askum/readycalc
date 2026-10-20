@@ -1,4 +1,4 @@
-.result-content.receipt-card {
+.receipt-card {
   padding: 20px;
   border: 1px solid #d7e4dd;
   border-radius: 16px;
@@ -29,7 +29,7 @@
 .receipt-chart-legend strong { grid-column: 2; font-size: .78rem; font-weight: 650; color: #577367; }
 .receipt-output { overflow-wrap: anywhere; white-space: pre-wrap; font: .78rem/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; }
 @media (max-width: 619px) {
-  .result-content.receipt-card { padding: 16px; }
+  .receipt-card { padding: 16px; }
   .receipt-chart-layout { grid-template-columns: 1fr; justify-items: center; }
   .receipt-chart-legend { width: 100%; }
 }
