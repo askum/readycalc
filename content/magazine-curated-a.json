@@ -85,7 +85,7 @@
       "category": "생활 측정",
       "title": "평·근·인치 변환에서 숫자보다 단위를 먼저 읽어야 하는 이유",
       "summary": "생활 단위를 변환할 때 정의·기준점·반올림을 확인하고 원문 단위와 변환값을 함께 기록하는 방법입니다.",
-      "date": "2026-11-07",
+      "date": "2026-11-06",
       "thumbnail": "/assets/og/unit-converter.png",
       "tool": {
         "href": "/unit-converter/",
@@ -165,7 +165,7 @@
       "category": "여행 교통",
       "title": "자동차 여행 주유비를 나누기 전에 확인할 거리·연비·유가",
       "summary": "지도 거리와 실제 주행거리, 제원 연비와 평균연비를 구분하고 통행료까지 같은 기준으로 정산하는 방법입니다.",
-      "date": "2026-11-07",
+      "date": "2026-11-05",
       "thumbnail": "/assets/og/fuel-cost-calculator.png",
       "tool": {
         "href": "/fuel-cost-calculator/",
@@ -240,7 +240,7 @@
       "category": "여행 준비",
       "title": "여행 짐 체크리스트를 만들고도 빠뜨리는 세 가지 확인",
       "summary": "자동 준비물 목록에 개인 의약품·항공 반입 규정·예약과 충전 같은 할 일을 더해 출발 전 점검표를 완성하는 방법입니다.",
-      "date": "2026-11-07",
+      "date": "2026-11-04",
       "thumbnail": "/assets/og/travel-packing-checklist.png",
       "tool": {
         "href": "/travel-packing-checklist/",
@@ -321,7 +321,7 @@
       "category": "포장·배송",
       "title": "택배 박스는 물건이 아니라 포장 완료 상태로 재야 합니다",
       "summary": "완충재와 빈 공간을 포함한 외부 치수·무게를 측정하고 박스 호수와 예상 운임을 실제 택배사 기준으로 다시 확인하는 순서입니다.",
-      "date": "2026-11-07",
+      "date": "2026-11-03",
       "thumbnail": "/assets/og/parcel-box-calculator.png",
       "tool": {
         "href": "/parcel-box-calculator/",
