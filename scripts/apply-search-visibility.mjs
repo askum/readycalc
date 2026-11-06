@@ -4,7 +4,7 @@ import { visibility, applySearchVisibility } from './search-visibility.mjs';
 const root = resolve(import.meta.dirname, '..');
 async function walk(dir) {
   const entries = await readdir(dir, {withFileTypes:true});
-  return (await Promise.all(entries.filter(e=>!e.name.startsWith('.') && !['node_modules','scripts'].includes(e.name)).map(e=>e.isDirectory()?walk(resolve(dir,e.name)):e.name.endsWith('.html')?[resolve(dir,e.name)]:[]))).flat();
+  return (await Promise.all(entries.filter(e=>!e.name.startsWith('.') && !['node_modules','scripts','content'].includes(e.name)).map(e=>e.isDirectory()?walk(resolve(dir,e.name)):e.name.endsWith('.html')?[resolve(dir,e.name)]:[]))).flat();
 }
 for (const path of await walk(root)) {
   const slug = path.startsWith(resolve(root,'calculator')+'/') ? path.slice(resolve(root,'calculator').length+1).replace(/\/index\.html$/,'') : '';

@@ -1,4 +1,4 @@
-import { writeFile, mkdir, access } from 'node:fs/promises';
+import { writeFile, mkdir, access, readdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { visibility } from './search-visibility.mjs';
 import { loadMagazineArticles } from './magazine-data.mjs';
@@ -61,11 +61,14 @@ await mkdir(magazineRoot, { recursive: true });
 const latest = [...articles].sort((a, b) => b.date.localeCompare(a.date));
 const indexUrl = `${baseUrl}/magazine/`;
 const indexSchema = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: '생활계산소 매거진', description: '생활 계산과 디지털 도구를 더 잘 쓰기 위한 읽을거리', url: indexUrl, inLanguage: 'ko-KR' };
-const index = `<!doctype html><html lang="ko">${head({ title: '매거진', description: '여행 예산, 사진 용량과 계정 보안처럼 생활 도구를 더 잘 쓰기 위한 설명을 읽어보세요.', url: indexUrl, image: '/assets/og/home.png', schema: indexSchema, type: 'website' })}<body><div data-site-header></div><main id="main"><div class="container magazine-shell"><nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li aria-current="page">매거진</li></ol></nav><header class="magazine-index-header"><p class="eyebrow">ReadyTools Magazine</p><h1>생활계산소 매거진</h1><p>계산기를 사용하기 전에 알아두면 좋은 기준과 실제 활용 방법을 차근차근 설명합니다.</p></header><section aria-labelledby="magazine-latest-title"><div class="section-heading"><h2 id="magazine-latest-title">최근 글</h2><p>도구가 계산한 숫자를 이해하고 스스로 판단할 때 참고할 수 있는 글입니다.</p></div><div class="magazine-grid">${latest.map(card).join('')}</div></section></div></main><div data-site-footer></div></body></html>`;
+const index = `<!doctype html><html lang="ko">${head({ title: '매거진', description: '여행 예산, 주거 비용, 장보기와 행사 준비 등 생활 계산 결과를 올바르게 해석하고 활용하는 실전 안내를 제공합니다.', url: indexUrl, image: '/assets/og/home.png', schema: indexSchema, type: 'website' })}<body><div data-site-header></div><main id="main"><div class="container magazine-shell"><nav class="breadcrumb" aria-label="현재 위치"><ol><li><a href="/">생활계산소</a></li><li aria-current="page">매거진</li></ol></nav><header class="magazine-index-header"><p class="eyebrow">ReadyTools Magazine</p><h1>생활계산소 매거진</h1><p>계산하기 전에 확인할 조건, 결과의 한계와 실제 활용 방법을 생활 상황별로 설명합니다.</p></header><section aria-labelledby="magazine-latest-title"><div class="section-heading"><h2 id="magazine-latest-title">최근 글</h2><p>도구가 계산한 숫자를 이해하고 자신의 상황에 맞게 판단할 때 참고할 수 있는 글입니다.</p></div><div class="magazine-grid">${latest.map(card).join('')}</div></section></div></main><div data-site-footer></div></body></html>`;
 await writeFile(resolve(magazineRoot, 'index.html'), index);
 for (const article of articles) {
   const directory = resolve(magazineRoot, article.slug);
   await mkdir(directory, { recursive: true });
   await writeFile(resolve(directory, 'index.html'), detail(article));
+}
+for (const entry of await readdir(magazineRoot, { withFileTypes: true })) {
+  if (entry.isDirectory() && !seen.has(entry.name)) await rm(resolve(magazineRoot, entry.name), { recursive: true });
 }
 console.log(`매거진 목록과 상세 글 ${articles.length}개를 생성했습니다.`);

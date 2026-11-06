@@ -5,13 +5,19 @@ import {webcrypto} from 'node:crypto';
 let count=0;
 const check=(result,expected)=>{for(const part of expected)assert.ok(JSON.stringify(result).includes(part),`${part} missing in ${JSON.stringify(result)}`);count++;};
 const calcSource=fs.readFileSync(new URL('../assets/calculators.js', import.meta.url),'utf8');
-function calc(type,input,expected){let result;const context={num:n=>Number(input[n]),value:n=>String(input[n]),range:()=>true,invalidate:()=>{throw Error('invalid')},fmt:(n,u='')=>Number(n.toFixed(1)).toLocaleString('ko-KR')+u,won:n=>Math.round(n).toLocaleString('ko-KR')+'원',show:(...a)=>result=a,electricityPresets:{}};vm.runInNewContext(calcSource.slice(calcSource.indexOf('  const calculators = {'),calcSource.indexOf('\n  const restoreQuery'))+`\ncalculators[${JSON.stringify(type)}]();`,context);check(result,expected);}
+function calc(type,input,expected){let result;const context={num:n=>Number(input[n]),value:n=>String(input[n]),range:()=>true,invalidate:()=>{throw Error('invalid')},fmt:(n,u='')=>Number(n.toFixed(1)).toLocaleString('ko-KR')+u,won:n=>Math.round(n).toLocaleString('ko-KR')+'원',show:(...a)=>result=a,electricityPresets:{},parcelBoxes:[{label:'1호급',dimensions:[22,19,9]},{label:'2호급',dimensions:[27,18,15]},{label:'3호급',dimensions:[34,25,21]},{label:'4호급',dimensions:[41,31,28]},{label:'5호급',dimensions:[48,38,34]},{label:'6호급',dimensions:[52,48,40]}]};vm.runInNewContext(calcSource.slice(calcSource.indexOf('  const calculators = {'),calcSource.indexOf('\n  const restoreQuery'))+`\ncalculators[${JSON.stringify(type)}]();`,context);check(result,expected);}
 calc('meat',{adults:4,children:0,meals:1,appetite:1},['1kg','2팩']);
 calc('meat',{adults:3,children:3,meals:1,appetite:1.2},['1.4kg','3팩']);
 calc('meat',{adults:3,children:2,meals:2,appetite:1.2},['2.5kg','5팩']);
+calc('chicken',{adults:4,children:2,occasion:'meal',genderRatio:1,alcohol:'no'},['3마리','2.6마리','30조각']);
+calc('camping',{adults:2,children:2,nights:2,style:1},['4명 · 5끼','2.9kg','3.2kg','24L','3개']);
+calc('parcel-box',{width:30,depth:20,height:15,weight:4},['3호급','34 × 25 × 21cm','4,500원']);
+calc('boxes',{people:2,rooms:2,years:3,amount:1},['33개','12개','17개','4개']);
 for(const [distance,efficiency,price,toll,people,total,share] of [[400,12,1700,30000,4,'86,667원','21,667원'],[250,15.5,1650,10000,2,'36,613원','18,306원'],[650,9,1750,45000,5,'171,389원','34,278원']])calc('fuel',{distance,efficiency,price,toll,people},[total,share]);
 for(const [power,hours,days,quantity,duty,rate,kwh,cost] of [[1000,8,30,1,60,200,'144kWh','28,800원'],[150,24,30,1,35,200,'37.8kWh','7,560원'],[45,8,30,3,100,200,'32.4kWh','6,480원']])calc('electricity',{power,hours,days,quantity,duty,rate},[kwh,cost]);
 for(const [guests,hours,weather,liters,cans] of [[30,3,1,'22.5L','64캔'],[40,3,.9,'27L','77캔'],[20,5,1.25,'26.2L','74캔']])calc('drinks',{guests,hours,weather},[liters,cans]);
+calc('travel-budget',{people:2,days:3,nights:2,transport:100000,lodging:120000,food:50000,activities:30000,other:100000,reserve:10},['1,122,000원','561,000원','374,000원']);
+calc('expenses',{names:'가, 나',payments:'가, 120000'},['1인당 60,000원','나 → 가 60,000원']);
 const finance=fs.readFileSync(new URL('../assets/finance-tools.js', import.meta.url),'utf8');
 function fin(type,input,expected){let submit;const nodes={};const node=s=>nodes[s]??=( {textContent:'',innerHTML:'',focus(){},addEventListener(){}} );const form={dataset:{newTool:type},elements:Object.fromEntries(Object.entries(input).map(([k,v])=>[k,{value:String(v)}])),querySelectorAll:()=>[],querySelector:()=>null,addEventListener:(e,fn)=>{if(e==='submit')submit=fn;}};const document={querySelector:s=>s==='[data-new-tool]'?form:node(s)};vm.runInNewContext(finance,{document,matchMedia:()=>({matches:false})});submit({preventDefault(){}});check(nodes,expected);}
 for(const [method,first,last,int] of [['equal-payment','1,066,185','1,066,185','794,226'],['equal-principal','1,120,000','1,010,000','780,000'],['bullet','120,000','12,120,000','1,440,000']])fin('loan-calculator',{principal:12000000,rate:12,years:1,method},[first,last,int]);

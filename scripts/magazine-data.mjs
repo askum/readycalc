@@ -1,8 +1,9 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { visibility } from './search-visibility.mjs';
 
 const root = resolve(import.meta.dirname, '..');
-const files = ['magazine.json', 'magazine-more.json', 'magazine-more-2.json', 'magazine-life.json'];
+const files = ['magazine.json', 'magazine-more.json', 'magazine-more-2.json', 'magazine-life.json', 'magazine-curated-a.json', 'magazine-curated-b.json'];
 
 export async function loadMagazineArticles() {
   const groups = await Promise.all(files.map(async (file) => {
@@ -10,5 +11,5 @@ export async function loadMagazineArticles() {
     if (!Array.isArray(data.articles)) throw new Error(`${file}: articles 배열이 없습니다.`);
     return data.articles;
   }));
-  return groups.flat();
+  return groups.flat().filter((article) => visibility.indexable.some((slug) => article.tool?.href === `/${slug}/`));
 }

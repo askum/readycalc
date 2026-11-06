@@ -21,7 +21,7 @@ const palettes = [
 
 function walk(directory, output = []) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-    if (entry.name === '.git' || entry.name === 'node_modules') continue;
+    if (['.git', 'node_modules', 'content', 'scripts'].includes(entry.name)) continue;
     const fullPath = path.join(directory, entry.name);
     if (entry.isDirectory()) walk(fullPath, output);
     else if (entry.name === 'index.html') output.push(fullPath);
