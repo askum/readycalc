@@ -17,9 +17,17 @@ function head({ title, description, url, image, schema, type = 'article' }) {
   <title>${escape(title)} | 생활계산소</title>
   <meta name="description" content="${escape(description)}">
   <link rel="canonical" href="${url}">
+  <meta name="google-adsense-account" content="ca-pub-4297698834736188">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4297698834736188" crossorigin="anonymous"></script>
   <meta property="og:type" content="${type}"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="생활계산소">
   <meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${url}"><meta property="og:image" content="${baseUrl}${image}">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escape(title)}"><meta name="twitter:description" content="${escape(description)}"><meta name="twitter:image" content="${baseUrl}${image}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="${escape(title)} - 생활계산소">
+  <meta name="twitter:image:alt" content="${escape(title)} - 생활계산소">
+  <meta name="twitter:domain" content="readytools.kr">
   <link rel="stylesheet" href="/assets/styles.css?v=magazine-list-20261019">
   <script src="/assets/site-config.js"></script><script src="/assets/head.js"></script><script src="/assets/site.js?v=magazine-20261019" defer></script>
   <script type="application/ld+json">${jsonLd(schema)}</script>
