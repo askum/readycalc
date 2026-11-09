@@ -2,11 +2,11 @@
 
 한국 사용자를 위한 서버리스 생활 계산기 사이트입니다. 순수 HTML, CSS, JavaScript로 구성되며 계산과 입력 검증은 사용자의 브라우저에서 처리됩니다. 서버·데이터베이스·외부 계산 API를 사용하지 않고 Cloudflare Pages에 정적 배포합니다.
 
-## 2026-11-07 콘텐츠 큐레이션
+## 2026-11-09 콘텐츠 큐레이션
 
-AdSense 승인을 위해 페이지 수만 늘리는 방식이 아니라, 반복해서 사용할 이유가 분명하고 결과를 사용자가 검증할 수 있는 15개 도구만 공개합니다. 각 공개 도구에는 계산 원리, 입력 기준, 실제 예시 3개 이상, FAQ 5개 이상, 주의사항과 관련 글을 제공합니다.
+AdSense 승인을 위해 페이지 수만 늘리는 방식이 아니라, 반복해서 사용할 이유가 분명하고 결과를 사용자가 검증할 수 있는 20개 도구만 공개합니다. 각 공개 도구에는 계산 원리, 입력 기준, 실제 예시 3개 이상, FAQ 5개 이상, 주의사항과 관련 글을 제공합니다.
 
-### 현재 공개 도구 15개
+### 현재 공개 도구 20개
 
 - 부동산 취득세 계산기
 - 부동산 중개보수 계산기
@@ -23,17 +23,23 @@ AdSense 승인을 위해 페이지 수만 늘리는 방식이 아니라, 반복�
 - 인원별 고기량 계산기
 - 캠핑 음식량 계산기
 - 행사 음료·얼음 계산기
+- 대출 이자·월 상환금 계산기
+- 월 적립식 복리 계산기
+- 물가상승률·화폐가치 계산기
+- 견적서·청구서 생성기
+- QR 코드 생성기
 
-기존 공개 도구 중 실용성과 사이트 주제 집중도를 다시 검토한 10개 페이지는 공개 경로에서 내렸습니다. 원본은 삭제하지 않고 `content/withdrawn-calculators/`에 `noindex` 보관하여 필요할 때 다시 검토할 수 있습니다. `_worker.js`는 비공개 도구 경로를 404와 `X-Robots-Tag: noindex`로 처리합니다.
+현재 선정 기준을 충족하지 않은 나머지 51개 페이지는 공개 경로에서 제외했습니다. 원본은 삭제하지 않고 `content/withdrawn-calculators/`에 `noindex` 보관하여 필요할 때 다시 검토할 수 있습니다. `_worker.js`는 비공개 도구 경로를 404와 `X-Robots-Tag: noindex`로 처리합니다.
 
 ## 매거진
 
-`/magazine/`에는 현재 공개 도구와 직접 연결되는 16개 글만 표시합니다. 새로 큐레이션한 10편은 전기 사용량, 단위 변환, 주유비, 여행 짐, 택배 포장, 이사 포장, 모임 음식 주문, 고기 장보기, 캠핑 음식 보관, 행사 음료 준비를 다룹니다. 글마다 실제 판단 기준, 계산 결과의 한계, FAQ와 관련 도구 링크를 포함합니다.
+`/magazine/`에는 현재 공개 도구와 직접 연결되는 21개 글만 표시합니다. 전기 사용량, 단위 변환, 주유비, 여행·포장·모임 준비와 함께 대출 상환, 복리 시나리오, 물가와 구매력, 견적서 점검, QR 안전 안내를 다룹니다. 글마다 실제 판단 기준, 계산 결과의 한계, FAQ와 관련 도구 링크를 제공합니다.
 
 원본 데이터는 다음 파일에서 관리합니다.
 
 - `content/magazine*.json`: 기존 매거진 원본
-- `content/magazine-curated-a.json`, `content/magazine-curated-b.json`: 새 실용 콘텐츠 10편
+- `content/magazine-curated-a.json`, `content/magazine-curated-b.json`: 실용 콘텐츠 10편
+- `content/magazine-added-20261109.json`: 신규 금융·업무 도구 연결 글 4편
 - `scripts/magazine-data.mjs`: 공개 도구와 연결되는 글만 선택
 - `scripts/generate-magazine.mjs`: 목록·상세 HTML 생성 및 더 이상 공개하지 않는 생성 디렉터리 정리
 
@@ -42,7 +48,7 @@ AdSense 승인을 위해 페이지 수만 늘리는 방식이 아니라, 반복�
 - 기본 사이트 URL: `https://readytools.kr`
 - 공개 도구 목록: `scripts/search-visibility.json`
 - 도구 메타데이터: `scripts/curated-tools.mjs`, `scripts/tool-seo.json`
-- 사이트맵: `sitemap.xml` — 공개 URL 39개
+- 사이트맵: `sitemap.xml` — 공개 URL 49개
 - 크롤러 설정: `robots.txt`
 - Cloudflare 공개 경로: `_worker.js`
 - 계산기 공개 URL rewrite: `_redirects`

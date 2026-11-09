@@ -13,7 +13,7 @@ const targetFiles = [
   'terms/index.html'
 ];
 
-// search-visibility.json에서 공개된 15개 계산기 목록 가져오기
+// search-visibility.json에서 현재 공개 계산기 목록 가져오기
 const { indexable } = JSON.parse(fs.readFileSync(path.join(root, 'scripts/search-visibility.json'), 'utf8'));
 for (const slug of indexable) {
   targetFiles.push(`calculator/${slug}/index.html`);

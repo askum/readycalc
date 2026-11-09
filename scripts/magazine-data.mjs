@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { visibility } from './search-visibility.mjs';
 
 const root = resolve(import.meta.dirname, '..');
-const files = ['magazine.json', 'magazine-more.json', 'magazine-more-2.json', 'magazine-life.json', 'magazine-curated-a.json', 'magazine-curated-b.json'];
+const files = ['magazine.json', 'magazine-more.json', 'magazine-more-2.json', 'magazine-life.json', 'magazine-curated-a.json', 'magazine-curated-b.json', 'magazine-added-20261109.json'];
 
 export async function loadMagazineArticles() {
   const groups = await Promise.all(files.map(async (file) => {

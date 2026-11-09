@@ -37,7 +37,7 @@ for (const slug of visibility.indexable) {
 
 const sitemap = await read('sitemap.xml');
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-assert.equal(sitemapUrls.length, 39, 'sitemap count');
+assert.equal(sitemapUrls.length, publicRoutes.size, 'sitemap count');
 assert.equal(new Set(sitemapUrls).size, sitemapUrls.length, 'duplicate sitemap URL');
 for (const route of publicRoutes) assert.ok(sitemap.includes(`<loc>https://readytools.kr${route}</loc>`), `sitemap missing ${route}`);
 for (const slug of visibility.excluded) assert.ok(!sitemap.includes(`https://readytools.kr/${slug}/`), `withdrawn sitemap route ${slug}`);
@@ -51,6 +51,6 @@ assert.ok(head.includes('ca-pub-4297698834736188'), 'AdSense account missing');
 assert.ok(head.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), 'AdSense loader missing');
 assert.equal((await read('ads.txt')).trim(), 'google.com, pub-4297698834736188, DIRECT, f08c47fec0942fa0');
 assert.ok((await read('robots.txt')).includes('Sitemap: https://readytools.kr/sitemap.xml'));
-assert.equal(tools.size, 15);
-assert.equal(articles.length, 16);
-console.log('Curated release verified: 15 tools, 16 magazine articles, SEO, accessibility, local assets, AdSense connection, sitemap and worker routes.');
+assert.equal(tools.size, 20);
+assert.equal(articles.length, 21);
+console.log('Curated release verified: 20 tools, 21 magazine articles, SEO, accessibility, local assets, AdSense connection, sitemap and worker routes.');

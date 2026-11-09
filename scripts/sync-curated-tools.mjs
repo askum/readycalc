@@ -23,7 +23,8 @@ for (const slug of visibility.indexable.filter((slug) => !established.has(slug))
   const source = execFileSync('git', ['show', `${visibility.restoreCommit}:calculator/${slug}/index.html`], { cwd: root, encoding: 'utf8', maxBuffer: 8_000_000 });
   let html = source.replace(/<meta\s+name="robots"[^>]*>\s*/i, '');
   html = html.replace(/<section class="section affiliate-section"[\s\S]*?<\/section>\s*/g, '');
-  html = html.replace(/data-reviewed="[^"]+"/g, 'data-reviewed="2026-11-07"');
+  html = html.replace(/data-reviewed="[^"]+"/g, 'data-reviewed="2026-11-09"');
+  if (!html.includes('data-reviewed=')) html = html.replace(/<form class="panel form-grid"/, '<form class="panel form-grid" data-reviewed="2026-11-09"');
   html = addDepth(html, slug);
   if (!html.includes('/assets/result-receipts.css')) html = html.replace('</head>', '  <link rel="stylesheet" href="/assets/result-receipts.css?v=20261020">\n  <script src="/assets/result-receipts.js?v=20261020" defer></script>\n</head>');
   const target = resolve(root, 'calculator', slug, 'index.html');

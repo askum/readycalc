@@ -5,6 +5,7 @@
 /magazine /magazine/ 301
 /magazine/travel-budget-plan /magazine/travel-budget-plan/ 301
 /magazine/travel-expense-settlement-guide /magazine/travel-expense-settlement-guide/ 301
+/magazine/qr-code-safe-sharing /magazine/qr-code-safe-sharing/ 301
 /magazine/calendar-date-counting /magazine/calendar-date-counting/ 301
 /magazine/home-purchase-cash-checklist /magazine/home-purchase-cash-checklist/ 301
 /magazine/brokerage-fee-before-contract /magazine/brokerage-fee-before-contract/ 301
@@ -23,6 +24,8 @@
 /camping-food-calculator/ /calculator/camping-food-calculator/ 200
 /chicken-calculator /chicken-calculator/ 301
 /chicken-calculator/ /calculator/chicken-calculator/ 200
+/compound-interest-calculator /compound-interest-calculator/ 301
+/compound-interest-calculator/ /calculator/compound-interest-calculator/ 200
 /date-calculator /date-calculator/ 301
 /date-calculator/ /calculator/date-calculator/ 200
 /electricity-cost-calculator /electricity-cost-calculator/ 301
@@ -31,12 +34,20 @@
 /event-drink-calculator/ /calculator/event-drink-calculator/ 200
 /fuel-cost-calculator /fuel-cost-calculator/ 301
 /fuel-cost-calculator/ /calculator/fuel-cost-calculator/ 200
+/inflation-calculator /inflation-calculator/ 301
+/inflation-calculator/ /calculator/inflation-calculator/ 200
+/invoice-generator /invoice-generator/ 301
+/invoice-generator/ /calculator/invoice-generator/ 200
+/loan-calculator /loan-calculator/ 301
+/loan-calculator/ /calculator/loan-calculator/ 200
 /meat-calculator /meat-calculator/ 301
 /meat-calculator/ /calculator/meat-calculator/ 200
 /moving-box-calculator /moving-box-calculator/ 301
 /moving-box-calculator/ /calculator/moving-box-calculator/ 200
 /parcel-box-calculator /parcel-box-calculator/ 301
 /parcel-box-calculator/ /calculator/parcel-box-calculator/ 200
+/qr-code-generator /qr-code-generator/ 301
+/qr-code-generator/ /calculator/qr-code-generator/ 200
 /real-estate-acquisition-tax-calculator /real-estate-acquisition-tax-calculator/ 301
 /real-estate-acquisition-tax-calculator/ /calculator/real-estate-acquisition-tax-calculator/ 200
 /real-estate-brokerage-fee-calculator /real-estate-brokerage-fee-calculator/ 301

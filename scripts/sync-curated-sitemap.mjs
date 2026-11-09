@@ -7,11 +7,11 @@ const root = resolve(import.meta.dirname, '..');
 const base = 'https://readytools.kr';
 const articles = await loadMagazineArticles();
 const rows = [
-  { path: '/', date: '2026-11-07', frequency: 'weekly', priority: '1.0' },
-  ...visibility.indexable.map((slug) => ({ path: `/${slug}/`, date: '2026-11-07', frequency: 'monthly', priority: '0.9' })),
-  { path: '/magazine/', date: '2026-11-07', frequency: 'weekly', priority: '0.8' },
+  { path: '/', date: '2026-11-09', frequency: 'weekly', priority: '1.0' },
+  ...visibility.indexable.map((slug) => ({ path: `/${slug}/`, date: '2026-11-09', frequency: 'monthly', priority: '0.9' })),
+  { path: '/magazine/', date: '2026-11-09', frequency: 'weekly', priority: '0.8' },
   ...articles.map((article) => ({ path: `/magazine/${article.slug}/`, date: article.date, frequency: 'monthly', priority: '0.7' })),
-  { path: '/about/', date: '2026-11-07', frequency: 'yearly', priority: '0.5' },
+  { path: '/about/', date: '2026-11-09', frequency: 'yearly', priority: '0.5' },
   { path: '/methodology/', date: '2026-09-28', frequency: 'yearly', priority: '0.6' },
   { path: '/contact/', date: '2026-10-02', frequency: 'yearly', priority: '0.5' },
   { path: '/privacy/', date: '2026-10-02', frequency: 'yearly', priority: '0.3' },
